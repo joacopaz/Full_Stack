@@ -1,0 +1,40 @@
+/* <!-- 
+    Project created by Joaquin Paz.
+    Created a web page from scratch based on the redline jpg inside this folder
+ --> */
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	font-family: Helvetica, sans-serif;
+}
+.banner {
+	text-align: center;
+	vertical-align: center;
+	margin: 30px auto;
+	font-size: 100px;
+	font-weight: bold;
+	color: khaki;
+	padding-top: 20px;
+	background-image: url(./img/pattern.jpeg);
+}
+
+main * {
+	margin: 8px 5px;
+}
+
+main p {
+	font-size: 20px;
+}
+
+.impact {
+	font-weight: bold;
+	color: blue;
+}
+
+h2 {
+	font-size: 32px;
+	font-weight: bold;
+	color: white;
+	padding-top: 0.3rem;
+}

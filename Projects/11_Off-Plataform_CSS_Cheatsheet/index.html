@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./styles.css" />
+		<title>Tables</title>
+	</head>
+	<body>
+		<main>
+			<!-- &lt; = <,  &gt; = >   -->
+			<h1>HTML Tables</h1>
+			<p>
+				The table structure in HTML is enclosed by a
+				<span class="code">&lt;table&gt;</span> tag. The table contains a
+				header, a body and a footer.
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th scope="row">Tag</th>
+						<th>Use</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="code">&lt;table&gt</td>
+						<td>Opens a new table.</td>
+					</tr>
+					<tr>
+						<td class="code">&lt;thead&gt</td>
+						<td>Opens a table header</td>
+					</tr>
+					<tr>
+						<td class="code">&lt;tr&gt</td>
+						<td>Creates a new row.</td>
+					</tr>
+					<tr>
+						<td class="code">&lt;th&gt</td>
+						<td>
+							Adds data (column) to a row in the form of a header. A scope
+							attribue can be added (scope="row") to the first th to declare it
+							as a row header.
+						</td>
+					</tr>
+					<tr>
+						<td class="code">&lt;tbody&gt</td>
+						<td>Opens the table body.</td>
+					</tr>
+					<tr>
+						<td class="code">&lt;td&gt</td>
+						<td>
+							Table data, adds columns to already created rows. They nest inside
+							of a <span class="code">&lt;tr&gt</span> tag.
+						</td>
+					</tr>
+					<tr>
+						<td class="code">&lt;tfoot&gt</td>
+						<td>Opens the table footer.</td>
+					</tr>
+				</tbody>
+			</table>
+			<h2>Example</h2>
+			<section id="sample">
+				<span class="tag">&lt;table&gt</span>
+				<span class="tag first">&lt;thead&gt</span>
+				<span class="tag second">&lt;tr&gt</span>
+				<span class="tag third">&lt;th scope="row"&gt</span>
+				<span class="tag fourth content">Row 1, Col 1 - Header</span>
+				<span class="tag third">&lt;\th&gt</span>
+				<span class="tag third">&lt;th&gt</span>
+				<span class="tag fourth content">Row 1, Col 2 - Header</span>
+				<span class="tag third">&lt;\th&gt</span>
+				<span class="tag second">&lt;\tr&gt</span>
+				<span class="tag first">&lt;\thead&gt</span>
+				<span class="tag first">&lt;tbody&gt</span>
+				<span class="tag second">&lt;tr&gt</span>
+				<span class="tag third">&lt;td&gt</span>
+				<span class="tag fourth content">Row 2, Col 1</span>
+				<span class="tag third">&lt;\td&gt</span>
+				<span class="tag third">&lt;td&gt</span>
+				<span class="tag fourth content">Row 2, Col 2</span>
+				<span class="tag third">&lt;\td&gt</span>
+				<span class="tag second">&lt;\tr&gt</span>
+				<span class="tag first">&lt;\tbody&gt</span>
+				<span class="tag first">&lt;tfoot&gt</span>
+				<span class="tag second">&lt;tr&gt</span>
+				<span class="tag third">&lt;td&gt</span>
+				<span class="tag fourth content">Row 3, Col 1 - Footer</span>
+				<span class="tag third">&lt;\td&gt</span>
+				<span class="tag third">&lt;td&gt</span>
+				<span class="tag fourth content">Row 3, Col 2 - Footer</span>
+				<span class="tag third">&lt;\td&gt</span>
+				<span class="tag second">&lt;\tr&gt</span>
+				<span class="tag first">&lt;\tfoot&gt</span>
+				<span class="tag">&lt;/table&gt</span>
+			</section>
+			<h2>Result</h2>
+			<table id="result">
+				<thead>
+					<tr>
+						<th scope="row">Row 1, Col 1 - Header</th>
+						<th>Row 1, Col 1 - Header</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Row 2, Col 1</td>
+						<td>Row 2, Col 2</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td>Row 3, Col 1 - Footer</td>
+						<td>Row 3, Col 2 - Footer</td>
+					</tr>
+				</tfoot>
+			</table>
+		</main>
+	</body>
+</html>

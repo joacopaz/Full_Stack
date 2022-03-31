@@ -1,0 +1,92 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+}
+html {
+	background: url("https://images.saymedia-content.com/.image/t_share/MTc4NzM1OTc4MzE0MzQzOTM1/how-to-create-cool-website-backgrounds-the-ultimate-guide.png");
+	background-size: cover;
+}
+
+p {
+	margin: 10px;
+}
+table {
+	color: white;
+	max-width: 850px;
+	margin: 0 auto;
+	/* if I would not want the white lines in between: border-collapse: collapse; */
+}
+th {
+	background-color: #5442f2bd;
+}
+tr {
+	background-color: #67a1ee;
+}
+.code,
+.tag {
+	background-color: rgba(225, 220, 220, 0.857);
+	color: black;
+	font-family: monospace;
+}
+.tag {
+	display: block;
+	position: relative;
+	width: fit-content;
+}
+.first {
+	left: 90px;
+}
+.second {
+	left: 170px;
+}
+.third {
+	left: 220px;
+}
+.fourth {
+	left: 330px;
+}
+.content {
+	background-color: transparent;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 15px;
+}
+#sample {
+	margin: 0 auto;
+	max-width: 600px;
+	padding: 10px;
+	position: relative;
+	border: lightgray solid 1px;
+	box-shadow: 5px 5px 5px 5px lightgray;
+	overflow: scroll;
+}
+td.code {
+	background-color: #67a1ee;
+	color: white;
+}
+h1 {
+	margin-top: 20px;
+}
+h2 {
+	margin: 30px auto 15px auto;
+}
+main {
+	position: absolute;
+	z-index: -1;
+	background-color: beige;
+	height: min-content;
+	width: 100%;
+	max-width: 900px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+#result {
+	min-width: 70%;
+	margin: 0px auto 20px auto;
+}
+#result th {
+	font-weight: lighter;
+}

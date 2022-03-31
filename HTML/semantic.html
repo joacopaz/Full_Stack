@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Semantics</title>
+	</head>
+	<body>
+		<!-- contains the whole display of contents -->
+		<header>
+			<!-- top info/navigation -->
+			<nav></nav>
+		</header>
+		<!-- main section of the information -->
+		<main>
+			<!-- sections about related topic -->
+			<section>
+				<!-- stand alone articles -->
+				<article>
+					<!-- we encapsulate img in figure -->
+					<figure>
+						<img src="" alt="" />
+						<figcaption>caption of image</figcaption>
+					</figure>
+
+					<!-- audio elements -->
+					<audio controls>
+						<source
+							src="https://content.codecademy.com/courses/SemanticHTML/dogBarking.mp3"
+							type="audio/mp3"
+						/>
+						audio not supported
+					</audio>
+
+					<!-- video elements -->
+					<video
+						style="width: 450px; height: 300px"
+						src="https://content.codecademy.com/courses/SemanticHTML/dog-video.mp4"
+						controls
+					>
+						video not supported
+					</video>
+
+					<!-- embeded elements -->
+					<embed
+						style="width: 450px; height: 300px"
+						src="https://content.codecademy.com/courses/SemanticHTML/dog-on-beach.gif"
+					/>
+				</article>
+
+				<!-- asides expand on a subject but are not relevant generally -->
+				<aside></aside>
+			</section>
+		</main>
+		<!-- footers with contact information, support, etc -->
+
+		<footer></footer>
+	</body>
+</html>
+<!-- A document has head, header, nav, main, body footer. They could all be divs (except head) but it's semantically correct to write them as their original semantics -->

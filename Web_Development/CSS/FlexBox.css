@@ -1,0 +1,50 @@
+/* Parent containers should contain display: flex (if we want them to be block elements), otherwise inline-flex */
+/* justify-content distributes the elements across the container */
+/* align-items orders them the other way. Baseline aligns the bottom of each element, stretch enlarges the height.  */
+/* flex-wrap moves content up or down if shrinked */
+/* align-content organizes multiple rows of content (while items only 1 row). Stretch needs min-height value */
+/* flex-direction orients the flexbox */
+/* flex-flow can be used to determine flex-wrap and flex-direction */
+
+.parent-container {
+	display: flex;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
+
+	flex-wrap: wrap;
+	flex-direction: column;
+	flex-flow: column wrap;
+	
+	/* first flex-dir, second flex-wrap */
+}
+
+/* flex-grow specifies if items should grow as the parent container grows, and also to which proportion regarding others (1 is a relative value, if the other has 2, the 2 will grow twice as more space is allowed)*/
+/* flex-shrink functions as grow but for shrinking, default value is 1 */
+/* flex-basis determines the width before stretching or shrinking */
+/* flex can be used to specify grow, shrink and basis -> flex: flex-grow,flex-shrink,basis*/
+
+.child {
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: 100px;
+
+	flex: 1 0 100px;
+	flex: 2 1;
+	flex: 1 20px;
+	
+	/* SUMMARY */
+
+    /* display: flex changes an element to a block-level container with flex items inside of it.
+    display: inline-flex allows multiple flex containers to appear inline with each other.
+    justify-content is used to space items along the main axis.
+    align-items is used to space items along the cross axis.
+    flex-grow is used to specify how much space (and in what proportions) flex items absorb along the main axis.
+    flex-shrink is used to specify how much flex items shrink and in what proportions along the main axis.
+    flex-basis is used to specify the initial size of an element styled with flex-grow and/or flex-shrink.
+    flex is used to specify flex-grow, flex-shrink, and flex-basis in one declaration.
+    flex-wrap specifies that elements should shift along the cross axis if the flex container is not large enough.
+    align-content is used to space rows along the cross axis.
+    flex-direction is used to specify the main and cross axes.
+    flex-flow is used to specify flex-wrap and flex-direction in one declaration.
+    Flex containers can be nested inside of each other by declaring display: flex or display: inline-flex for children of flex containers. */

@@ -1,0 +1,171 @@
+/* Resetting */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+/* Universal styles */
+
+html {
+	font-family: "Ubuntu", sans-serif;
+}
+
+body {
+	width: 80%;
+	max-width: 900px;
+	min-width: 50px;
+	margin: 0 auto;
+}
+
+/* Header */
+
+header {
+	text-align: center;
+	margin: 1rem;
+	color: #8a2be2;
+}
+
+/* Main */
+
+h2 {
+	font-weight: 500;
+	margin: 10px auto;
+	color: #8a2be2;
+	margin: 10px;
+}
+section p {
+	text-align: center;
+	margin: 10px;
+	font-size: 0.8rem;
+	width: 100%;
+	color: #255ee4;
+}
+section {
+	margin: 10px;
+	border-radius: 20px;
+	border: #fa80724c 1px solid;
+	box-shadow: 2px 2px 2px 2px #fa80724c;
+	padding: 10px;
+}
+.color {
+	width: 140px;
+	height: 140px;
+	margin: 10px;
+	display: flex;
+	border: 1px solid;
+	text-align: center;
+	margin: 10px auto;
+	color: white;
+	align-items: center;
+	justify-content: space-around;
+	line-height: 1.7rem;
+	border-radius: 50%;
+}
+.color span {
+	display: block;
+	text-align: center;
+}
+.salmon {
+	background-color: #fa8072;
+}
+.blue {
+	background-color: #255ee4;
+}
+.container {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	width: 200px;
+	margin: 10px;
+	border: 1px rgba(211, 211, 211, 0.229) solid;
+}
+
+.colors {
+	display: flex;
+	flex-flow: wrap;
+	justify-content: space-around;
+}
+.violet {
+	background-color: #8a2be2;
+}
+.fonts p {
+	text-align: left;
+	font-size: 1rem;
+}
+#s1 {
+	text-decoration: underline;
+}
+#s2 {
+	font-weight: bold;
+}
+#s3 {
+	font-style: italic;
+}
+#s4 {
+	font-weight: 500;
+}
+.fonts {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	margin: 10px;
+}
+#font {
+	margin: 20px 0 5px 30px;
+	font-size: 0.97rem;
+	color: #8a2be2;
+}
+.style {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	width: 300px;
+	height: 100px;
+	border: rgba(128, 128, 128, 0.252) solid 1px;
+	border-radius: 30px;
+	box-shadow: 10px 5px;
+	padding: 10px;
+}
+.fonts > p.style {
+	text-align: center;
+}
+
+.styles {
+	color: #255ee4;
+	text-align: left;
+	padding-left: 40px;
+	line-height: 30px;
+	display: flex;
+	flex-flow: wrap;
+	justify-content: center;
+	align-items: center;
+}
+.styles h1 {
+	margin: 0;
+}
+.styles h2 {
+	margin: 0;
+	color: #255ee4;
+}
+.styles h3 {
+	margin: 0;
+	color: #255ee4;
+}
+.styles p {
+	margin: 0;
+	color: #255ee4;
+	text-align: left;
+}
+.styles ul {
+	font-size: 0.9rem;
+}
+ul {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	margin: 25px;
+	min-width: 250px;
+	width: 250px;
+}

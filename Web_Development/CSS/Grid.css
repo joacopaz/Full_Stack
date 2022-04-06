@@ -1,0 +1,35 @@
+/* To set up a grid you need container and items. Display: grid or inline-grid, the default contains 1 column */
+/* To determine columns you use grid-template-columns. If you use a % it would be base off the grid's width */
+/* To determine rows you use grid-template-row. If you use a % it would be base off the grid's height */
+/* You can use grid-template to determine rows / columns */
+/* The measure fr divides into fractions of the available space */
+/* You can use the function repeat to save code */
+/* minmax(value, value) makes an element have a minimum and maximum val */
+/* Gap can set row and column gaps */
+
+.container {
+	display: grid;
+	width: x;
+	height: y;
+
+	grid-template-columns: 100px 200px 10%;
+	grid-template-rows: 100px 200px 10%;
+	grid-template: 100px 200px 10% / 100px 200px 10%;
+	grid-template: 1fr 2fr 1fr / 3fr 1fr 2fr;
+	/* 3 1fr columns */
+	grid-template-columns: repeat(3, 1fr);
+	/* 6: 1fr, 2fr, 1fr, 2fr, 1fr, 2fr columns */
+	grid-template: repeat(3, 1fr 2fr) / 2fr 3fr;
+	/* second column will never be less than 100 or larger than 500. This only works if we have variable widths or heights (not fixed) */
+	grid-template-columns: 1fr minmax(100px, 500px) 1fr;
+
+	gap: 20px 10px; /* row and column */
+}
+
+.items {
+	/* to determine how much space an element occupies. In this case the element occupies row 1 and 2 (3 not included) */
+	grid-row: 1 / 3;
+	/* You can use span to tell that it has to occupy the total of a value you want to occupy */
+	grid-column: 4 / span 2; /* occupies columns 4 and 5 */
+	grid-area: 6 / 8 / span3 / span1; /* grid-area allows for grid-row-start, grid-column-sart, grid-row-end, grid-column-end */
+}

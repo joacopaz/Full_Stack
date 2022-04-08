@@ -1,10 +1,10 @@
 /* You can target attributes by using [] to target them */
-/* This targets any img containing winter inside */
 img[src*="winter"] {
+	/* This targets any img containing winter inside */
 	height: 50px;
 }
-/* this targets any element containing href */
 [href] {
+	/* this targets any element containing href */
 	color: magenta;
 }
 
@@ -14,14 +14,13 @@ p:hover {
 }
 
 /* chaining */
-/* targets the h1 that contain the class special */
 h1 .special {
+	/* targets the h1 that contain the class special */
 }
 
-/* targets h1, h2, h3 and p */
 h1,
 h2,
-h3,
+h3, /* targets h1, h2, h3 and p */
 p {
 }
 
@@ -40,15 +39,12 @@ p {
 }
 
 /* Using margin to center content */
-
 div {
 	width: 400px;
-	margin: 0 auto;
-	/* 0 margin on the top and bottom and auto on the sides centers it */
+	margin: 0 auto; /* 0 margin on the top and bottom and auto on the sides centers it */
 }
 
 /* min/max width height */
-
 p {
 	min-width: none;
 	max-width: none;
@@ -57,59 +53,46 @@ p {
 }
 
 /* overflow (exceeds parent container): hidden hides excess, scroll adds a scrollbar, visible (default value)*/
-/* you can use overflow-x or overflow-y and this applies to the children */
-
 p {
-	overflow: auto;
+	overflow: auto; /* you can use overflow-x or overflow-y and this applies to the children */
 }
 
 /* to reset values you can use and change the box type to border-box so its values include the borders */
-
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
-/* visibility can be set to hidden, visible or collapse */
 ul {
-	visibility: hidden;
-}
-/* display none instead makes it disappear, hiddne leaves an empty spot */
-ul {
-	display: none;
+	visibility: hidden; /* visibility can be set to hidden, visible or collapse */
+	display: none; /* display none instead makes it disappear, hiddne leaves an empty spot */
 }
 
 /* display inline (transforms into inline element), inline-block (transforms inline and allows width and height like a box) and block allows for it to take up the whole block */
-
 /* float allows to move an element as far right or left as possible, there must be a width specified or it will assume the full width of its parent */
-
 /* clear specificies how the element behaves when it bumps to each other, can be left (left side wont touch any other element within the same container) right both or none */
-
 /* You can add custom fonts with files with @font-face, you SHOULD DEFINE IT AT THE TOP OF THE SHEET. */
 
 @font-face {
 	font-family: "TheNameIPlease";
 	src: url("./CSS\ MDN.txt") format("woff2"),
-		url("anotherURL") format("anotherFormat");
-	/* url should be the font file, the format can be woff2 (the most progressive), woff, ttf or otf */
+		/* url should be the font file, the format can be woff2 (the most progressive), woff, ttf or otf */
+			url("anotherURL") format("anotherFormat");
 }
 p {
 	font-family: "TheNameIPlease", sans-serif;
 }
 
-/* Hover is great for links being hovered, or any element */
-/* Cursor determines what happens to the cursor, it should be added to general tags (a) not :hover */
 a {
 	color: blue;
-	cursor: pointer;
+	cursor: pointer; /* Cursor determines what happens to the cursor, it should be added to general tags (a) not :hover */
 }
 a:hover {
-	color: red;
+	color: red; /* Hover is great for links being hovered, or any element */
 }
 
 /* Links have a couple of pseudo-classes: :link (unvisited), :visited, :hover, :active (clicked). Order matters, you should place them in the order one would interact with the link */
-
 a:link,
 a:visited,
 a:hover,
@@ -118,7 +101,6 @@ a:active {
 }
 
 /* Example of a realistic button */
-
 .realistic-button {
 	border: 1px solid #466995;
 	border-radius: 10px;

@@ -55,7 +55,7 @@ p {
 /* overflow (exceeds parent container): hidden hides excess, scroll adds a scrollbar, visible (default value)*/
 p {
 	overflow: auto; /* you can use overflow-x or overflow-y and this applies to the children */
-}
+} /* setting overflow: hidden makes it not show if it exceeds, good for responsive web design for videos or images */
 
 /* to reset values you can use and change the box type to border-box so its values include the borders */
 * {
@@ -176,3 +176,31 @@ a:active {
 	border-left-color: blue;
 }
 /* #endregion */
+
+/* Responsibe Web Design Notes
+
+When using relative sizing, ems and rems should be used to size text and dimensions on the page related to text size (i.e. 
+padding around text). This creates a consistent layout based on text size. Otherwise, percentages should be used.
+
+Setting a height to auto makes it scale automatically according to the size of parent (an image enlarges or shrinks) you could also set
+max-height to 100% to avoid it stretching. Also setting image to display: block helps it having trouble align.*/
+
+/* RECOMMENDED IMAGE RULES */
+.container {
+	width: 50%;
+	height: 200px;
+	overflow: hidden; /* hides the portion that exceeds */
+}
+.container img {
+	max-width: 100%; /* this will ensure all the image is always displayed */
+	height: auto; /* this guarantees the image remains in proportion when resizing */
+	display: block; /* this guarantees it has less issues scaling */
+}
+
+/* RECOMMENDED BACKGROUND IMAGE RULES */
+body {
+	background-image: url("#");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}

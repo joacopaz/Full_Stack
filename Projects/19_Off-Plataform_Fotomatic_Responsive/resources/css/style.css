@@ -376,15 +376,23 @@ header .tablet {
 @media only screen and (min-width: 1500px) /* pc */ {
 	.feature {
 		background: white;
+		padding: 0;
+	}
+	.feature .image-container {
+		width: 100%;
+		padding: 2rem;
+		padding-bottom: 2.5rem;
 	}
 
 	.feature .image-container img {
 		max-width: 100%;
-		height: auto;
 	}
 	.feature .content {
-		padding-top: 2rem;
 		text-align: center;
+		padding-bottom: 2.5rem;
+	}
+	#features-section {
+		padding-bottom: 2.875rem;
 	}
 }
 
@@ -469,7 +477,22 @@ header .tablet {
 		padding-bottom: 0;
 	}
 }
-
+@media only screen and (min-width: 1500px) /* pc */ {
+	#filters-section {
+	}
+	#filters-section .content {
+	}
+	#filters-section .images-container {
+		display: flex;
+	}
+	#filters-section .image-container {
+		width: 25%;
+	}
+	#filters-section .image-container img {
+		max-width: 100%;
+		height: auto;
+	}
+}
 /* Quotes Section */
 
 #quotes-section {
@@ -513,26 +536,29 @@ header .tablet {
 
 @media only screen and (max-width: 1500px) and (min-width: 760px) /* tablet */ {
 	#quotes-section {
-		display: flex;
 		width: 100%;
 		height: 12rem;
-		overflow: hidden;
+		border: blue solid 5px;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
 	}
 	#quotes-section .content {
 		display: flex;
+		flex-direction: row;
+		padding: 0;
+		margin: 0;
 		align-items: center;
-		justify-items: space-between;
+		justify-content: flex-start;
 	}
 	#quotes-section .quote {
-		font-size: 2.2rem;
-		text-align: left;
-		padding: 0 2rem;
-		padding-right: 0;
+		font-size: 1.5rem;
+		line-height: 1.4;
 	}
 	#quotes-section .quote-citation {
-		width: 20rem;
-		height: auto;
-		margin: 2rem;
+		display: block;
+		margin: auto;
+		height: 10%;
 	}
 }
 

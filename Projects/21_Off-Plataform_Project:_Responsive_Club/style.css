@@ -1,0 +1,383 @@
+/* Universal Styles */
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+
+:root {
+	--color: rgb(233, 172, 122);
+	--background: #008080;
+	--main-color: #2e91e2;
+}
+
+/* Header */
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: grey solid 1px;
+	background-color: var(--background);
+	height: 5rem;
+	font-family: Montserrat, sans-serif;
+}
+header ul {
+	list-style: none;
+	display: flex;
+	position: relative;
+	top: 0.5rem;
+	text-align: center;
+}
+header ul li {
+	margin: 1rem;
+	font-size: 1.3rem;
+}
+header h2 {
+	margin-left: 2rem;
+	color: var(--color);
+	position: relative;
+	top: 0.5rem;
+	text-align: center;
+}
+header a {
+	color: var(--color);
+}
+@media screen and (min-width: 1200px) {
+	header ul li {
+		padding: 0 1.4rem;
+	}
+}
+@media screen and (max-width: 525px) {
+	header h2 {
+		font-size: 1.2rem;
+		margin-left: 0;
+		top: 0.3rem;
+	}
+}
+
+/* Main - intro */
+body {
+	background-image: url(./background-main.jpg);
+	background-size: cover;
+	background-position: center;
+}
+#intro {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	font-family: Montserrat, sans-serif;
+}
+#intro h1 {
+	margin: 0 auto;
+	color: var(--main-color);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+	font-size: 5rem;
+	text-align: center;
+	width: 100%;
+	background-color: beige;
+}
+#intro p {
+	margin: 1rem;
+	padding: 0.2rem 1rem;
+	color: rgb(0, 76, 255);
+	font-size: 2rem;
+	text-align: center;
+	border-radius: 20px;
+	background-color: rgb(255, 255, 255);
+}
+#intro .container {
+	display: flex;
+	width: 100%;
+	justify-content: space-evenly;
+	align-content: center;
+	flex-wrap: wrap;
+	padding: 0;
+}
+#intro .container img {
+	height: auto;
+	max-width: 100%;
+	width: 17rem;
+	padding: 0.2rem 0;
+}
+
+#intro h2 {
+	font-size: 3rem;
+	text-align: center;
+	color: var(--main-color);
+	background-color: beige;
+	width: fit-content;
+	align-self: center;
+	padding: 0.2rem 1rem;
+	border-radius: 20px;
+}
+#intro a {
+	color: yellowgreen;
+	transition: color 0.3s;
+}
+#intro a:hover {
+	transition: 0.3s;
+	color: goldenrod;
+}
+
+@media screen and (min-width: 700px) {
+	#intro .container {
+		width: 100%;
+	}
+	#intro .container img {
+		padding: 0.5rem;
+	}
+}
+@media screen and (max-width: 544px) {
+	#intro .container img {
+		padding: 0.2rem 0;
+		width: 100%;
+	}
+	#intro p {
+		font-size: 1.5rem;
+	}
+	#intro h2 {
+		font-size: 1.6rem;
+	}
+}
+@media screen and (max-width: 800px) {
+	#intro h1 {
+		font-size: 3rem;
+		width: 100%;
+		align-self: center;
+	}
+}
+
+/* Main - Sports */
+
+#sports {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+#sports h2 {
+	color: var(--main-color);
+	font-size: 3rem;
+	text-align: center;
+	background-color: beige;
+	margin-top: 2rem;
+	border-radius: 25px;
+	padding: 0.1rem 4rem;
+}
+#sports h3 {
+	margin: 1rem;
+	align-self: center;
+	color: rgb(0, 115, 255);
+	padding: 0.4rem;
+	border-radius: 20px;
+	text-align: center;
+	background-color: rgb(255, 255, 255);
+}
+#sports-container {
+	color: yellow;
+	background-color: rgb(4, 124, 245);
+	display: flex;
+	flex-direction: column;
+	border: white solid 3px;
+	text-align: center;
+	margin: 1rem;
+	box-shadow: 10px 10px rgba(0, 0, 0, 0.25);
+	width: fit-content;
+}
+
+#sports-container a {
+	color: gold;
+}
+#sports-container div {
+	display: flex;
+	padding: 0.2rem;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+#sports-container div.sport + div.sport {
+	border-top: white solid 3px;
+}
+
+#sports-container p {
+	padding: 1rem;
+}
+#sports-container .info {
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	flex-grow: 1;
+	padding: 1rem;
+	min-width: 130px;
+}
+#sports-container .image-container {
+	width: 50%;
+}
+#sports-container .image-container img {
+	max-width: 100%;
+	width: 90%;
+	max-height: 12rem;
+	border-radius: 20px;
+}
+@media screen and (max-width: 750px) {
+	#sports-container .image-container {
+		width: 205px;
+		height: 137px;
+		flex-shrink: 0;
+	}
+}
+@media screen and (max-width: 400px) {
+	html {
+		font-size: 12px;
+	}
+	#sports-container {
+		font-size: 1.2rem;
+		width: 100%;
+	}
+	#sports-container .image-container img {
+		position: relative;
+		right: 1rem;
+	}
+}
+
+/* Main - Staff */
+
+#staff {
+	width: 100%;
+}
+#staff-container {
+	display: flex;
+	flex-flow: row wrap;
+	flex-wrap: wrap;
+	margin: 0 auto;
+	justify-content: space-evenly;
+	align-items: center;
+}
+.staff {
+	display: flex;
+	flex-flow: column nowrap;
+	width: 15rem;
+	color: rgb(0, 255, 119);
+	font-style: italic;
+	text-align: center;
+	margin: 1rem;
+	width: max-content;
+}
+.staff h2 {
+	background-color: darkblue;
+	padding: 0.3rem;
+	margin-top: 0.4rem;
+	border-radius: 20px 20px 0 0;
+}
+.staff span {
+	background-color: darkblue;
+	padding: 0.3rem;
+	border-radius: 0 0 20px 20px;
+}
+.staff img {
+	max-width: 100%;
+	border-radius: 50%;
+	width: 15rem;
+	height: 15rem;
+	object-fit: cover;
+	border-radius: 50%;
+	margin: 0 auto;
+}
+#Yacob img {
+	object-position: 0 0%;
+}
+#Fabrizzio img {
+	object-position: 50% 0;
+}
+#Joanna img {
+	object-position: 0% 0%;
+}
+#staff > h2 {
+	color: var(--main-color);
+	font-size: 3rem;
+	text-align: center;
+	background-color: beige;
+	margin: 1rem auto;
+	border-radius: 25px;
+	padding: 0.1rem 4rem;
+	width: fit-content;
+}
+
+/* Main - Join */
+#join > h2 {
+	color: var(--main-color);
+	font-size: 3rem;
+	text-align: center;
+	background-color: beige;
+	margin: 1rem auto;
+	border-radius: 25px;
+	padding: 0.1rem 4rem;
+	width: fit-content;
+}
+#join p {
+	margin: 1rem;
+	padding: 0.2rem 1rem;
+	color: rgb(0, 76, 255);
+	font-size: 1.2rem;
+	text-align: center;
+	border-radius: 20px;
+	background-color: rgb(255, 255, 255);
+}
+
+#join form {
+	display: flex;
+	flex-flow: column;
+	max-width: 10rem;
+	align-items: center;
+	justify-content: space-around;
+	color: white;
+	margin: 0 auto;
+}
+#join [type="submit"] {
+	padding: 0.2rem 1rem;
+	margin: 1rem;
+	box-shadow: 2px 2px grey;
+}
+
+#join [type="submit"]:active {
+	position: relative;
+	left: 2px;
+	top: 2px;
+	box-shadow: none;
+}
+
+#join label {
+	margin: 0.5rem;
+	position: relative;
+	right: 3.6rem;
+}
+
+label[for="sport"] {
+	left: -2.1rem;
+}
+@media screen and (max-width: 400px) {
+	#join label {
+		right: 5.7rem;
+	}
+	label[for="sport"] {
+		left: -4.2rem;
+	}
+}
+/* Footer */
+footer {
+	display: flex;
+	justify-content: space-between;
+	text-align: center;
+}
+footer h2,
+footer span {
+	color: rgb(89, 18, 202);
+	padding: 0.5rem;
+	font-size: 1.3rem;
+	margin: 0.2rem;
+	font-weight: 300;
+}

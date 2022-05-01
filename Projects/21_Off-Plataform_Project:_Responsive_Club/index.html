@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<link
+			href="https://fonts.googleapis.com/css?family=Montserrat"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<title>Olivos Tennis Club</title>
+	</head>
+	<body>
+		<header>
+			<h2>Olivos Tennis Club</h2>
+			<nav>
+				<ul>
+					<a href="#intro">
+						<li>About Us</li>
+					</a>
+					<a href="#sports">
+						<li>Sports</li>
+					</a>
+					<a href="#staff">
+						<li>Staff</li>
+					</a>
+					<a href="#join">
+						<li>Join Us</li>
+					</a>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<section id="intro">
+				<h1>Welcome to our club</h1>
+				<p>
+					Olivos Tennis Club was first founded in 1920 by John and Erika Wilkins
+					with the objective of promoting excellence and sportsmanship in
+					high-end competitive tennis.
+				</p>
+				<div class="container">
+					<img src="./training.jpg" alt="" />
+					<img src="./training2.jpg" alt="" />
+					<img src="./training3.jpg" alt="" />
+				</div>
+				<p>
+					With 20 original members, the club grew steadily up to 2000 members in
+					2022, with 5 new subsidiaries and cutting-edge training grounds we
+					strive to bring the best out of our members.
+				</p>
+				<h2>You can <a href="#join">become one</a> too!</h2>
+			</section>
+			<section id="sports">
+				<h2>Our sports</h2>
+				<h3>Over the years the Club has grown to include various activities</h3>
+				<article id="sports-container">
+					<div class="sport">
+						<div class="info">
+							<h3>Basket</h3>
+							<p>
+								Our Nashville compound hosts one of the best teams in the state.
+							</p>
+							<a href="#">More Info</a>
+						</div>
+						<div class="image-container"><img src="./basket.jpg" alt="" /></div>
+					</div>
+					<div class="sport">
+						<div class="info">
+							<h3>Volleyball</h3>
+							<p>
+								In the last 5 years we've trained a twice winning National
+								Championship Volleyball team.
+							</p>
+							<a href="#">More Info</a>
+						</div>
+						<div class="image-container"><img src="./volley.jpg" alt="" /></div>
+					</div>
+					<div class="sport">
+						<div class="info">
+							<h3>Rugby</h3>
+							<p>
+								Last year we started the new Rugby Olivos team, we are currently
+								on the lookout for new talents.
+							</p>
+							<a href="#">More Info</a>
+						</div>
+						<div class="image-container"><img src="./rugby.jpg" alt="" /></div>
+					</div>
+					<div class="sport">
+						<div class="info">
+							<h3>Soccer</h3>
+							<p>
+								Olivos soccer players have competed across the whole world and
+								have been booked for teams world wide.
+							</p>
+							<a href="#">More Info</a>
+						</div>
+						<div class="image-container"><img src="./soccer.jpg" alt="" /></div>
+					</div>
+					<div class="sport">
+						<div class="info">
+							<h3>Tennis</h3>
+							<p>
+								The sport the club originally focused on. We have 8 world
+								champions.
+							</p>
+							Director
+							<a href="#">More Info</a>
+						</div>
+						<div class="image-container"><img src="./tennis.jpg" alt="" /></div>
+					</div>
+				</article>
+			</section>
+			<section id="staff">
+				<h2>Staff</h2>
+				<div id="staff-container">
+					<article id="Yacob" class="staff">
+						<img src="./yacob.jpg" alt="" />
+						<h2>Yacob Marrow</h2>
+						<span>General Director and CEO</span>
+					</article>
+					<article id="Fabrizzio" class="staff">
+						<img src="./fabrizzio.jpg" alt="" />
+						<h2>Fabrizzio Hastio</h2>
+						<span>HR Talent and Acquisitions Director</span>
+					</article>
+					<article id="Joanna" class="staff">
+						<img src="./joanna.jpg" alt="" />
+						<h2>Joanna Liu</h2>
+						<span>Marketing Director</span>
+					</article>
+				</div>
+			</section>
+			<section id="join">
+				<h2>Join Us</h2>
+				<p>
+					Leave us your information and we will contact you as soon as possible
+				</p>
+				<form action="#">
+					<label for="fname">First name:</label>
+					<input type="text" id="fname" name="fname" />
+					<label for="lname">Last name:</label>
+					<input type="text" id="lname" name="lname" />
+					<label for="sport">Sport of interest:</label>
+
+					<select name="sport" id="sport">
+						<option value="basket">Basket</option>
+						<option value="volleyball">Volleyball</option>
+						<option value="rugby">Rugby</option>
+						<option value="soccer">Soccer</option>
+						<option value="tennis" selected="selected">Tennis</option>
+					</select>
+					<input type="submit" value="Submit" />
+				</form>
+			</section>
+		</main>
+		<footer>
+			<span>Olivos Tennis Club</span>
+			<h2>Designed by Joaquín Paz</h2>
+		</footer>
+	</body>
+</html>

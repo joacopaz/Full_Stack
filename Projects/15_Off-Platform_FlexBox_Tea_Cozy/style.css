@@ -78,7 +78,7 @@ main {
 	display: flex;
 	flex-flow: row wrap;
 	max-width: 1000px;
-	justify-content: space-around;
+	justify-content: center;
 }
 
 #teaOfTheMonth .container .child {

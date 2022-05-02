@@ -42,3 +42,38 @@ console.log('typeof myNum = ' + typeof myNum);
 // Template Literals:
 const myPet = 'dog';
 console.log(`Template Literals: I own a pet ${myPet}.`); // in between `` and variables ${}
+
+/* 
+Conditional statements:
+if (conditionIsTrue) {execute this code} else if (anotherConditionIsTrue) {execute this code} (...any amount of else if you want...) else {execute this code if none of the before options are true}.
+
+Comparison operators:
+Less than <, greater than >, less or equal <=, greater or equal >=, absolutely equal ===, not absolutely equal !==
+
+Logical Operators:
+&& (and), || (or) and ! (not).
+
+Truthy and falsy:
+Every non falsy value is truthy, and falsy values are:
+0, empty strings (''), null, undefined, NaN(not a number)
+Example truthy/falsy use in website: */
+
+let username = ''; // If left empty it will assign the second || option
+let defaultName = username || 'Stranger'; // This is called short-circuit evaluation
+
+console.log(defaultName); // Prints: Stranger. JavaScript assigns the truthy value if a || is presented.
+
+// Ternary operators:
+defaultName === 'Stranger' ? /*we evaluate if defaultName is stranger, if true:*/ console.log('You don\'t have a username!') : /* if false: */ console.log('You have a username!');
+
+// Switch statements:
+switch (defaultName) {
+    case 'Stranger':
+        console.log('The case is Stranger.');
+        break;
+    case '':
+        console.log('The case is defaultName is empty.')
+    default:
+        console.log('You actually have a username!')
+        break;
+}

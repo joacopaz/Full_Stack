@@ -1,0 +1,206 @@
+<!-- 
+	Owner: Joaquín Paz
+	Year: 2022
+	Description: HTML/CSS/FlexBox/JS project created completely from scratch. Fully responsive and original design for a landing page of a furniture company.
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="styles.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Updock&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Square+Peg&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cookie&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<title>Yacob's</title>
+	</head>
+	<body>
+		<div class="loader-container">
+			<h3>Loading</h3>
+			<span class="loader"><span class="loader-inner"></span></span>
+		</div>
+		<div class="content">
+			<header>
+				<h1>Yacob's</h1>
+				<span>You dream it, we build it</span>
+				<nav>
+					<ul>
+						<li><a href="#about">About Us</a></li>
+						<li><a href="#products">Products</a></li>
+						<li><a href="#staff">Staff</a></li>
+						<li><a href="#contact">Contact Us</a></li>
+					</ul>
+				</nav>
+			</header>
+			<main>
+				<section id="about">
+					<h2>Who are we?</h2>
+					<p>
+						At <span id="brand">Yacob's</span> we turn ideas into furniture.
+						With our main goal being to achieve excellence through craftsmanship.
+						Every piece tells a story and will enrich someone's life, so we
+						strive to provide a soul to each and every hand-crafted piece. We
+						really mean it when we say:
+					</p>
+					<h2 id="slogan">You dream it, we build it</h2>
+					<a id="next" href="#products"
+						><img src="./arrow-down.png" alt="next section"
+					/></a>
+				</section>
+				<section id="products">
+					<h2>Our Crafts</h2>
+					<div class="container">
+						<div class="child">
+							<h3>Scandinavian Sets</h3>
+							<img src="./scandinavian-set.jpg" alt="scandinavian sets" />
+						</div>
+						<div class="child">
+							<h3>Sculptures</h3>
+							<img src="./sculpture-product.jpg" alt="japanese sculpture" />
+						</div>
+						<div class="child">
+							<h3>Housing</h3>
+							<img src="./housing-product.jpg" alt="wooden cabin" />
+						</div>
+					</div>
+					<a id="next" href="#staff"
+						><img src="./arrow-down.png" alt="next section"
+					/></a>
+				</section>
+				<section id="staff">
+					<h2>Staff</h2>
+					<div class="container">
+						<div class="child">
+							<h3>Joaquín Paz</h3>
+							<p>Head craftsman</p>
+							<img
+								class="employee"
+								id="paz"
+								src="./Staff1.png"
+								alt="Joaquin Paz picture"
+							/>
+							<p class="bio">
+								Passionate wood worker with 20 years of experience, founder of
+								Yacob's.
+							</p>
+						</div>
+						<div class="child">
+							<h3>Neil O'Higgins</h3>
+							<p>Logistics</p>
+							<img
+								class="employee"
+								id="neil"
+								src="./staff2.jpg"
+								alt="Joaquin Paz picture"
+							/>
+							<p class="bio">
+								With 15 years in the transport business, assuring the premium
+								care of our crafts is his top priority.
+							</p>
+						</div>
+						<div class="child">
+							<h3>Omar Wilkins</h3>
+							<p>Assistant Craftsman</p>
+							<img
+								class="employee"
+								id="omar"
+								src="./staff3.jpg"
+								alt="Joaquin Paz picture"
+							/>
+							<p class="bio">
+								Since the beginning of Yacob's Omar is to thank for the finer
+								details and finishes in all our products.
+							</p>
+						</div>
+					</div>
+					<a id="next" href="#contact"
+						><img src="./arrow-down.png" alt="next section"
+					/></a>
+				</section>
+				<footer>
+					<section id="contact">
+						<h2>Contact Us</h2>
+						<div class="container">
+							<div class="child">
+								<h3>Main Workshop</h3>
+								<p>Austin, Texas</p>
+								<a
+									href="mailto: enquiry@yacobs.com?subject=Business Enquiry&body=Message"
+									><img class="iconMail" src="./mail.png" alt="mail" />
+									enquiry@yacobs.com</a
+								>
+								<a href="tel:1525550180"
+									><img
+										class="iconPhone austin"
+										src="./phone.png"
+										alt="mail"
+									/>+1-512-555-0180</a
+								>
+							</div>
+							<div class="child">
+								<h3>Distribution Department</h3>
+								<p>Bay Shore, NY</p>
+								<a
+									href="mailto: distribution@yacobs.com?subject=Distribution Enquiry&body=Message"
+									><img class="iconMail" src="./mail.png" alt="mail" />
+									distribution@yacobs.com</a
+								>
+								<a href="tel:+1-631-555-0166"
+									><img
+										class="iconPhone distribution"
+										src="./phone.png"
+										alt="mail"
+									/>+1-631-555-0166</a
+								>
+							</div>
+							<div class="child">
+								<h3>E-Shop Support</h3>
+								<p>Albany, NY</p>
+								<a
+									href="mailto: eshop@yacobs.com?subject=E-Shop Support&body=Message"
+									><img class="iconMail" src="./mail.png" alt="mail" />
+									eshop@yacobs.com</a
+								>
+								<a href="tel:+1-518-555-0193 "
+									><img
+										class="iconPhone"
+										src="./phone.png"
+										alt="mail"
+									/>+1-518-555-0193</a
+								>
+							</div>
+						</div>
+						<h4>
+							Give us a call! Because some dreams are truly worth pursuing.
+						</h4>
+						<h1>Yacob's</h1>
+					</section>
+				</footer>
+			</main>
+		</div>
+		<script>
+			$(window).on("load", function () {
+				$(".loader-container").hide();
+			});
+			$(window).ready(function () {
+				$(".content").fadeIn(1000);
+			});
+		</script>
+	</body>
+</html>

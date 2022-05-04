@@ -9,20 +9,18 @@ Early adults receive a race number at or above 1000.
 All others receive a number below 1000.
 
 Start time:
-Adult registrants run at 9: 30 am or 11: 00 am.
 Early adults run at 9: 30 am.
 Late adults run at 11: 00 am.
 Youth registrants run at 12: 30 pm(regardless of registration).
-
-But we didn’t plan for runners that are exactly 18! We’ ll handle that by the end of the project. */
+18 year old runners have to see the registration desk for further instruction */
 
 // randomly assigned race number
 let raceNumber = Math.floor(Math.random() * 1000);
 
-// boolean that will be assigned once time is verified
+// boolean that will be assigned once time is verified on registration
 let isEarly;
 
-// runner's age
+// runner's age (number) will be inputted on registration
 let age;
 
 // if it's an adult that registered early we will add 1000 to their race number and log their starting race time and race number

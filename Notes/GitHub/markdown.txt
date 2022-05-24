@@ -1,0 +1,22 @@
+extension is .markdown or .md
+
+# h1
+##h2
+###h3
+
+* bullet point
+* italics *
+** bold **
+~ strikethrough
+
+*/+/- unordered list
+1. ordered list
+> quote format
+`` code format ``
+  line break (double space)
+
+img ![custom img name](relative path)
+
+![Tux, the Linux mascot](/assets/images/tux.png)
+
+links: My favorite search engine is [Duck Duck Go](https://duckduckgo.com). []()

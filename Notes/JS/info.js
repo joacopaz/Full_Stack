@@ -17,6 +17,21 @@ UpperCase = string.toUpperCase() returns stringToUpper
 StartsWith = string.startsWith(string) returns bool
 Trim = string.trim() removes whitespace
 
+Array Methods:
+array.length returns length (total i's + 1)
+array.push(item1, item2, itemN) pushes the item(s) last
+array.pop() removes the last item and returns it
+array.join() concatenates all array elements into a single string, a parameter may be passed as a divisor (-) ele1-ele2-eleN 
+array.slice(i) returns a shallow copy of an array from index i to the end, or slice(i,n) from i to n (n not included), if negative value it takes it as the array.length - the value
+array.splice(iToAdd,0,value) adds or replaces an item in the array, splice(start, deleteCount, item1, item2, itemN)
+array.shift() the shift() method removes the first element from an array and returns that removed element.
+array.unshift(ele1,ele2,eleN) the unshift() method adds one or more elements to the beginning of an array and returns the new length of the array 
+array1.concat(array2) the concat() method is used to merge two or more arrays. This method does not change the existing arrays, but instead returns a new array. 
+You may use array.concat() without parameters to return a shallow copy
+array.indexOf(value) the indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present. 
+indexOf(searchElement) or indexOf(searchElement, fromIndex)
+
+
 Built-In-Objects:
 console, Math, Number, String, Array, etc
 
@@ -78,34 +93,35 @@ switch (defaultName) {
         break;
 }
 
-/* Functions:
- They are declared as: function name (parameters) {code return (if needed)} and can then be called function(argument) to run.
- They can also be expressions: const calculateArea = function(width,height){return width*height}
- They can be declared as arrow functions: const arrowFunction = (parameters) => {code to run}
-Default arguments can be declared: function test(name = 'Yacob'){console.log('Testing '+name);}. Name will be Yacob if not declared. */
+// Loops: The for ... of loop example. Useful when no indexes are needed.
 
-// Test function
-function testFunction(stringToLog) {
-    console.log(stringToLog);
+const hobbies = ['singing', 'eating', 'quidditch', 'writing'];
+
+for (const hobby of hobbies) {
+    console.log(`I enjoy ${hobby}.`);
 }
-testFunction('This is printed by testFunction.')
 
-// Arrow function
-const testArrowFunction = (width, height) => {
-    let area = width * height;
-    return area;
-};
-// Arrow function with concise body:
-const testConciseArrow = oneParameter => oneParameter + ' added string'; // no return needed if it's a one liner, no () if it's only 1 parameter
-const testConciseArrowTwo = (oneParameter, nParameters) => oneParameter + nParameters + ' added string'; // () needed because multiple params.
+const name = 'Yacob';
+for (const char of name) {
+    console.log(char)
+}
 
-// Helper functions are functions that help in other functions:
-function multiplyByNineFifths(number) { // helper
-    return number * (9 / 5);
-};
+// You can use break and continue to reclaim some control, break stops the loop and continue skips that occurrence
 
-function getFahrenheit(celsius) {
-    return multiplyByNineFifths(celsius) + 32; // running helper inside main function
-};
+const strangeBirds = ['Shoebill', 'Cockatrice', 'Basan', 'Cow', 'Terrorbird', 'Parotia', 'Kakapo'];
 
-console.log(getFahrenheit(15)); // logs 59
+for (const bird of strangeBirds) {
+    if (bird === 'Cow') {
+        continue;
+    }
+    console.log(bird);
+}
+
+// Forin loops are used for Objects, see Objects.js for more info
+
+/*
+Debugging
+Syntax error: typo error
+Reference error: Try to use a variable that doesn't exist.
+Type error: Try to perform an operation on a value of the wrong type
+*/

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<!-- defer makes it load after the whole html has been parsed -->
+		<script src="#" defer></script>
+
+		<!-- async makes it load in parallel without waiting for anything else, more optimized for speed but not if it requires variables or DOM -->
+		<script src="#" async></script>
+		<script>
+			// The DOM is not HTML, it can be represented by html but DOM is the underlying data structure, DOM can be seen by a Tree, Inspect Element (in dev tools), Source code.
+
+			// DOM is the link between scripting and HTML
+
+			// creating and inserting elements: createElement and appendChild
+			let paragraph = document.createElement("p"); // created element
+			paragraph.id = "info"; // add id
+			paragraph.textContent = "The text inside the paragraph"; // add text
+			document.body.appendChild(paragraph); // we append (add to the end) as a child the paragraph into de document
+
+			// deleting elements: removeChild
+			document.body.removeChild(paragraph);
+			// you can hide an element with hidden
+			document.paragraph.hidden = true;
+
+			// EVENTS
+			paragraph.onclick = function () {
+				element.style.backgroundColor = "blue";
+			};
+			// or adding function name
+			paragraph.onclick = functionName; // without ()
+
+			// addEventListener to listen for specific events, event target is the listener and the handler is the code to run
+
+			let eventTarget = document.getElementById("targetElement");
+
+			eventTarget.addEventListener("click", function () {
+				// this block of code will run when click event happens on eventTarget element
+			});
+			// another way is setting the event with 'on' first
+			eventTarget.onEVENT = eventHandlerFunction;
+			eventTarget.onclick = eventFunction;
+
+			// Removing listeners: removeEventListener('eventType',handlerFunction())
+			eventTarget.removeEventListener("click", eventHandlerFunction);
+
+			// Event properties - event.Property
+			function eventHandlerFunction(event) {
+				console.log(event.timeStamp);
+			}
+			eventTarget.addEventListener("click", eventHandlerFunction);
+			// .target (element that the event is registered to), .type (name of the event), .timeStamp (ms that passed since the document loaded and the event was triggered)
+			let sharePhoto = function (event) {
+				event.target.style.display = "none"; // the event target's display is none. We use event.target to get the element
+			};
+			// some mouse events
+			paragraph.onmouseover;
+			paragraph.onmouseleave;
+			paragraph.onmouseup;
+			document.onkeydown = function () {};
+		</script>
+	</body>
+</html>

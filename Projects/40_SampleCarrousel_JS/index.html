@@ -1,0 +1,33 @@
+<!-- 
+	Owner: Joaquín Paz
+	Year: 2022
+	Description: Custom carrousel using advanced JS query functions and datasets
+ -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Carrousel</title>
+	</head>
+	<body>
+		<section class="carrousel" data-carrousel>
+			<button data-carrousel-button="prev" class="carrousel-button prev">
+				&#8592;
+			</button>
+			<button data-carrousel-button="next" class="carrousel-button next">
+				&#8594;
+			</button>
+
+			<ul class="slides" data-slides>
+				<li class="slide" data-active><img src="./img1.jpg" alt="img1" /></li>
+				<li class="slide"><img src="./img2.jpg" alt="img2" /></li>
+				<li class="slide"><img src="./img3.jpg" alt="img3" /></li>
+				<li class="slide"><img src="./img4.jpg" alt="img4" /></li>
+			</ul>
+		</section>
+		<script src="script.js"></script>
+	</body>
+</html>

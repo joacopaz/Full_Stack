@@ -1,0 +1,118 @@
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: midnightblue;
+}
+
+.carrousel {
+	height: 100vh;
+	border: grey solid 1px;
+	width: 100vw;
+	overflow-x: hidden;
+	position: relative;
+}
+.slide {
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10rem;
+	left: 0;
+	opacity: 0;
+	animation-duration: 200ms;
+	animation-fill-mode: forwards;
+	transition: opacity 200ms, left 200ms;
+	transition-delay: 200ms;
+	caret-color: transparent;
+	z-index: -1;
+}
+
+.slide > img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: 50% 50%;
+	z-index: -1;
+}
+
+.slide[data-active] {
+	transition-delay: 0ms;
+	opacity: 100%;
+	left: 0;
+}
+
+.carrousel-button {
+	position: absolute;
+	color: rgba(255, 255, 255, 0.5);
+	z-index: 2;
+	top: 50%;
+	border: none;
+	transform: translateY(-50%);
+	padding: 0 0.5rem;
+	font-size: 2rem;
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.4);
+	border-radius: 0.25rem;
+	caret-color: transparent;
+}
+
+.carrousel-button:hover,
+.carrousel-button:focus {
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+}
+.carrousel-button:focus {
+	outline: 1px solid black;
+}
+
+.next {
+	right: 1rem;
+}
+.prev {
+	left: 1rem;
+}
+
+@keyframes exitLeft {
+	from {
+		left: 0;
+	}
+	to {
+		left: -100%;
+	}
+}
+
+@keyframes exitRight {
+	from {
+		left: 0;
+	}
+	to {
+		left: 100%;
+	}
+}
+@keyframes enterLeft {
+	from {
+		left: 100%;
+	}
+	to {
+		left: 0%;
+	}
+}
+
+@keyframes enterRight {
+	from {
+		left: -100%;
+	}
+	to {
+		left: 0%;
+	}
+}

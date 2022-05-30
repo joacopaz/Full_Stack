@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Forms</title>
+	</head>
+	<body>
+		<!-- Regular expressions allow us to specify patterns for the computer to recognize.
+			Client-side validation occurs in the form structure without back-end interactions. 
+		 !!IMPORTANT without Name no info will be sent -->
+		<form action="/anotherPage.html" method="post">
+			<input type="text" name="mustHave" />
+		</form>
+		<!-- If we submit the text 'testing' the form will send mustHave=testing to anotherPage.html
+				the info sent is name=value
+				input.value = the thing written inside.
+				input type password hides the text
+				-->
+
+		<!-- action determines where the info is sent and method is the http type of request -->
+		<form action="/anotherPage.html" method="post"></form>
+
+		<!-- Labels -->
+		<!-- Labels use the for attribute to match the id of the input they are labels for -->
+		<label for="an-input">Label for an input</label>
+		<input
+			type="text"
+			id="an-input"
+			name="name-of-what-will-be-submitted"
+			value="an input"
+		/>
+
+		<!-- Properties 
+			required is a mandatory input
+			minlength specifies min length
+			maxlength specifies max length
+			type specifies the type of data to be accepted
+			min is the minimum number
+			max is the max number
+			value is the prefilled value
+			step is the ammount a number increases or decreases per clicking/sliding the modifier
+			pattern allows a regular expression to validate the pattern 
+			tabindex is the index of tabbing for moving through the form
+			placeholder is the grey text that shows when nothing has been written
+		-->
+
+		<!-- Input Types -->
+		<!-- textbox that accepts codecademy or Codecademy -->
+		<input
+			type="text"
+			required
+			minlength="3"
+			maxlength="8"
+			value="prefilled"
+			pattern="[cC]odecademy"
+		/>
+		<!-- Number -->
+		<input type="number" required min="1" max="99" step="2" />
+		<!-- Slider 
+			with min max and steps (how much the slider advances per tick) -->
+		<input type="range" name="slider" value="-1" min="1" max="100" step="1" />
+		<!-- Password -->
+		<input type="password" />
+
+		<!-- Checkboxes -->
+		<!-- name relates the checkboxes, id and value can be the same for simplicity, id is for label & value is for info sent -->
+		<br />
+		<input type="checkbox" name="preferences" id="chbx1" value="mustard" />
+		<label for="chbx1">Mustard</label>
+		<input type="checkbox" name="preferences" id="chbx2" value="mayo" />
+		<label for="chbx2">Mayo</label> <br />
+
+		<!-- Radio: joint by name, id joins to label and value is usually same as id for simplicity (sent value to form) -->
+		<input type="radio" name="jointByName" id="unqId" value="unqId" />
+
+		<!-- Dropdown list - value is what gets sent to the form, the textContent is just for show. We send 'dropdown=argentina' -->
+		<select name="dropdown" id="country">
+			<option value="argentina">Argentina</option>
+			<option value="brasil">Brasil</option>
+		</select>
+		<br />
+
+		<!-- Datalist: a list that accepts text to find what you're looking for ideal for searches
+		datalist uses a normal textbox but adds the list attribute (that has to match the id of the datalist)
+		-->
+		<label for="city">Ideal city to visit?</label>
+		<input type="text" list="cities" id="city" name="city" />
+		<datalist id="cities">
+			<option value="New York City"></option>
+			<option value="Tokyo"></option>
+		</datalist>
+
+		<!-- Textarea -->
+		<textarea name="blog" id="blog" cols="30" rows="5">
+Default text value</textarea
+		>
+
+		<!-- Submit button -->
+		<input type="submit" value="submit button" />
+	</body>
+</html>

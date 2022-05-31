@@ -1,0 +1,208 @@
+@font-face {
+    font-family: 'Biotif';
+    src: url('Biotif/Biotif-Bold.eot');
+    src: url('Biotif/Biotif-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-Bold.woff2') format('woff2'),
+        url('Biotif/Biotif-Bold.woff') format('woff'),
+        url('Biotif/Biotif-Bold.ttf') format('truetype'),
+        url('Biotif/Biotif-Bold.svg#Biotif-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif';
+    src: url('Biotif/Biotif-BlackItalic.eot');
+    src: url('Biotif/Biotif-BlackItalic.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-BlackItalic.woff2') format('woff2'),
+        url('Biotif/Biotif-BlackItalic.woff') format('woff'),
+        url('Biotif/Biotif-BlackItalic.ttf') format('truetype'),
+        url('Biotif/Biotif-BlackItalic.svg#Biotif-BlackItalic') format('svg');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif';
+    src: url('Biotif/Biotif-Black.eot');
+    src: url('Biotif/Biotif-Black.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-Black.woff2') format('woff2'),
+        url('Biotif/Biotif-Black.woff') format('woff'),
+        url('Biotif/Biotif-Black.ttf') format('truetype'),
+        url('Biotif/Biotif-Black.svg#Biotif-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif';
+    src: url('Biotif/Biotif-BoldItalic.eot');
+    src: url('Biotif/Biotif-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-BoldItalic.woff2') format('woff2'),
+        url('Biotif/Biotif-BoldItalic.woff') format('woff'),
+        url('Biotif/Biotif-BoldItalic.ttf') format('truetype'),
+        url('Biotif/Biotif-BoldItalic.svg#Biotif-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif Book';
+    src: url('Biotif/Biotif-Book.eot');
+    src: url('Biotif/Biotif-Book.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-Book.woff2') format('woff2'),
+        url('Biotif/Biotif-Book.woff') format('woff'),
+        url('Biotif/Biotif-Book.ttf') format('truetype'),
+        url('Biotif/Biotif-Book.svg#Biotif-Book') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif Extra';
+    src: url('Biotif/Biotif-ExtraBold.eot');
+    src: url('Biotif/Biotif-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-ExtraBold.woff2') format('woff2'),
+        url('Biotif/Biotif-ExtraBold.woff') format('woff'),
+        url('Biotif/Biotif-ExtraBold.ttf') format('truetype'),
+        url('Biotif/Biotif-ExtraBold.svg#Biotif-ExtraBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif Extra';
+    src: url('Biotif/Biotif-ExtraBoldItalic.eot');
+    src: url('Biotif/Biotif-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-ExtraBoldItalic.woff2') format('woff2'),
+        url('Biotif/Biotif-ExtraBoldItalic.woff') format('woff'),
+        url('Biotif/Biotif-ExtraBoldItalic.ttf') format('truetype'),
+        url('Biotif/Biotif-ExtraBoldItalic.svg#Biotif-ExtraBoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif Book';
+    src: url('Biotif/Biotif-BookItalic.eot');
+    src: url('Biotif/Biotif-BookItalic.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-BookItalic.woff2') format('woff2'),
+        url('Biotif/Biotif-BookItalic.woff') format('woff'),
+        url('Biotif/Biotif-BookItalic.ttf') format('truetype'),
+        url('Biotif/Biotif-BookItalic.svg#Biotif-BookItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif';
+    src: url('Biotif/Biotif-Medium.eot');
+    src: url('Biotif/Biotif-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-Medium.woff2') format('woff2'),
+        url('Biotif/Biotif-Medium.woff') format('woff'),
+        url('Biotif/Biotif-Medium.ttf') format('truetype'),
+        url('Biotif/Biotif-Medium.svg#Biotif-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif';
+    src: url('Biotif/Biotif-LightItalic.eot');
+    src: url('Biotif/Biotif-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-LightItalic.woff2') format('woff2'),
+        url('Biotif/Biotif-LightItalic.woff') format('woff'),
+        url('Biotif/Biotif-LightItalic.ttf') format('truetype'),
+        url('Biotif/Biotif-LightItalic.svg#Biotif-LightItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif';
+    src: url('Biotif/Biotif-Light.eot');
+    src: url('Biotif/Biotif-Light.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-Light.woff2') format('woff2'),
+        url('Biotif/Biotif-Light.woff') format('woff'),
+        url('Biotif/Biotif-Light.ttf') format('truetype'),
+        url('Biotif/Biotif-Light.svg#Biotif-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif';
+    src: url('Biotif/Biotif-Regular.eot');
+    src: url('Biotif/Biotif-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-Regular.woff2') format('woff2'),
+        url('Biotif/Biotif-Regular.woff') format('woff'),
+        url('Biotif/Biotif-Regular.ttf') format('truetype'),
+        url('Biotif/Biotif-Regular.svg#Biotif-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif';
+    src: url('Biotif/Biotif-MediumItalic.eot');
+    src: url('Biotif/Biotif-MediumItalic.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-MediumItalic.woff2') format('woff2'),
+        url('Biotif/Biotif-MediumItalic.woff') format('woff'),
+        url('Biotif/Biotif-MediumItalic.ttf') format('truetype'),
+        url('Biotif/Biotif-MediumItalic.svg#Biotif-MediumItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif';
+    src: url('Biotif/Biotif-RegularItalic.eot');
+    src: url('Biotif/Biotif-RegularItalic.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-RegularItalic.woff2') format('woff2'),
+        url('Biotif/Biotif-RegularItalic.woff') format('woff'),
+        url('Biotif/Biotif-RegularItalic.ttf') format('truetype'),
+        url('Biotif/Biotif-RegularItalic.svg#Biotif-RegularItalic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif Semi';
+    src: url('Biotif/Biotif-SemiBoldItalic.eot');
+    src: url('Biotif/Biotif-SemiBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-SemiBoldItalic.woff2') format('woff2'),
+        url('Biotif/Biotif-SemiBoldItalic.woff') format('woff'),
+        url('Biotif/Biotif-SemiBoldItalic.ttf') format('truetype'),
+        url('Biotif/Biotif-SemiBoldItalic.svg#Biotif-SemiBoldItalic') format('svg');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Biotif Semi';
+    src: url('Biotif/Biotif-SemiBold.eot');
+    src: url('Biotif/Biotif-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('Biotif/Biotif-SemiBold.woff2') format('woff2'),
+        url('Biotif/Biotif-SemiBold.woff') format('woff'),
+        url('Biotif/Biotif-SemiBold.ttf') format('truetype'),
+        url('Biotif/Biotif-SemiBold.svg#Biotif-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+

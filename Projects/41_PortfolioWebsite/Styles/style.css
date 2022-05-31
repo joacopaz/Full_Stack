@@ -1,0 +1,245 @@
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Biotif", sans-serif;
+	background: #e2d2bb;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.background {
+	background-color: #2d2d2c;
+	top: 0;
+	box-shadow: rgba(0, 0, 0, 0.224) 20px 20px;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+/* Header */
+
+nav h1 {
+	color: white;
+	width: max-content;
+	position: relative;
+	right: 6.5rem;
+	text-align: center;
+	font-family: "Bogart trial", sans-serif;
+}
+nav {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	width: 100%;
+	max-width: 1000px;
+	position: relative;
+	padding-top: 1.5rem;
+	margin-top: 2rem;
+}
+
+.nav {
+	list-style: none;
+	display: flex;
+	position: relative;
+	width: 100%;
+}
+
+.nav > * {
+	margin: 0 1rem;
+	text-decoration: none;
+	color: white;
+}
+
+.nav a {
+	background: linear-gradient(45deg, #ede664, #f1a708);
+	background-size: 200% 200%;
+	animation: rainbow 2s ease-in-out infinite;
+	background-clip: text;
+	-webkit-background-clip: text;
+	text-align: center;
+	transition: color 0.2s ease-in-out;
+}
+
+.nav a:hover {
+	color: rgba(0, 0, 0, 0);
+}
+
+@keyframes rainbow {
+	0% {
+		background-position: left;
+	}
+	50% {
+		background-position: right;
+	}
+	100% {
+		background-position: left;
+	}
+}
+
+.underline {
+	background: linear-gradient(to right, purple, rgb(65, 62, 62));
+	height: 2px;
+	width: 100%;
+	position: absolute;
+	top: 30px;
+	left: 0px;
+	transition: width 200ms 200ms, left 200ms 200ms;
+}
+
+.nav a:hover:nth-child(1) ~ .underline {
+	width: 71px;
+}
+.nav a:hover:nth-child(2) ~ .underline {
+	width: 57px;
+	left: 6.35rem;
+}
+.nav a:hover:nth-child(3) ~ .underline {
+	width: 33px;
+	left: 11.99rem;
+}
+.nav a:hover:nth-child(4) ~ .underline {
+	width: 57px;
+	left: 16.3rem;
+}
+
+/* Line effects on hover */
+
+.animated {
+	position: relative;
+}
+.animation {
+	position: absolute;
+	background-color: #ede664;
+	transition: width 200ms, height 200ms;
+}
+.animation.l1 {
+	right: -10px;
+	bottom: 0;
+	width: 1px;
+	height: 0%;
+}
+.animation.l2 {
+	right: -10px;
+	top: 0;
+	width: 0px;
+	height: 1px;
+	transition-delay: 200ms;
+}
+.animation.l3 {
+	left: -10px;
+	top: 0;
+	width: 1px;
+	height: 0%;
+	transition-delay: 400ms;
+}
+.animation.l4 {
+	left: -10px;
+	bottom: 0;
+	width: 0px;
+	height: 1px;
+	transition-delay: 600ms;
+}
+.animated:hover .animation.l1 {
+	height: 100%;
+}
+.animated:hover .animation.l2 {
+	width: calc(100% + 20px);
+}
+.animated:hover .animation.l3 {
+	height: 100%;
+}
+.animated:hover .animation.l4 {
+	width: calc(100% + 20px);
+}
+
+/* Main */
+
+main {
+	margin: 4rem auto;
+	position: relative;
+	min-width: 940px;
+	padding-bottom: 4rem;
+	cursor: default;
+}
+main h2,
+h3 {
+	margin: 2rem;
+	color: white;
+	font-family: "Bogart trial", sans-serif;
+	font-weight: 600;
+	width: fit-content;
+}
+h3 {
+	font-size: 1.5rem;
+	font-weight: 500;
+	font-family: "Bogart Trial", sans-serif;
+}
+main p {
+	padding: 1rem 2rem;
+	color: white;
+	font-family: "Bogart trial", sans-serif;
+	font-size: 1.4rem;
+	max-width: 630px;
+}
+.image-container {
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	right: 2rem;
+	top: 0;
+}
+img[alt="Joaquin's Picture"] {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+	object-position: 50% 43%;
+	border-radius: 50%;
+	box-shadow: rgba(0, 0, 0, 0.224) 20px 20px;
+}
+
+.spread {
+	max-width: 100%;
+}
+
+[data-projects] {
+	transition: color 100ms;
+	position: relative;
+	text-decoration: underline;
+}
+[data-projects]:hover {
+	color: #f1a708;
+	text-decoration: none;
+}
+[data-projects]::before {
+	content: "";
+	position: absolute;
+	pointer-events: none;
+	width: 100%;
+	height: 100%;
+	padding: 1rem;
+	border: white 1px solid;
+	transform: scale(2);
+	opacity: 0;
+	transition: border 200ms, transform 200ms, opacity 200ms;
+}
+
+[data-projects]:hover::before {
+	transform: scale(1.2);
+	border: #f1a708 1px solid;
+	opacity: 100%;
+}
+
+[data-bubble] {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+}

@@ -1,0 +1,234 @@
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-BlackItalic.eot');
+    src: url('Bogart/BogartTrial-BlackItalic.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-BlackItalic.woff2') format('woff2'),
+        url('Bogart/BogartTrial-BlackItalic.woff') format('woff'),
+        url('Bogart/BogartTrial-BlackItalic.ttf') format('truetype'),
+        url('Bogart/BogartTrial-BlackItalic.svg#BogartTrial-BlackItalic') format('svg');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-BoldItalic.eot');
+    src: url('Bogart/BogartTrial-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-BoldItalic.woff2') format('woff2'),
+        url('Bogart/BogartTrial-BoldItalic.woff') format('woff'),
+        url('Bogart/BogartTrial-BoldItalic.ttf') format('truetype'),
+        url('Bogart/BogartTrial-BoldItalic.svg#BogartTrial-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-Bold.eot');
+    src: url('Bogart/BogartTrial-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-Bold.woff2') format('woff2'),
+        url('Bogart/BogartTrial-Bold.woff') format('woff'),
+        url('Bogart/BogartTrial-Bold.ttf') format('truetype'),
+        url('Bogart/BogartTrial-Bold.svg#BogartTrial-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-Black.eot');
+    src: url('Bogart/BogartTrial-Black.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-Black.woff2') format('woff2'),
+        url('Bogart/BogartTrial-Black.woff') format('woff'),
+        url('Bogart/BogartTrial-Black.ttf') format('truetype'),
+        url('Bogart/BogartTrial-Black.svg#BogartTrial-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-ExtraboldItalic.eot');
+    src: url('Bogart/BogartTrial-ExtraboldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-ExtraboldItalic.woff2') format('woff2'),
+        url('Bogart/BogartTrial-ExtraboldItalic.woff') format('woff'),
+        url('Bogart/BogartTrial-ExtraboldItalic.ttf') format('truetype'),
+        url('Bogart/BogartTrial-ExtraboldItalic.svg#BogartTrial-ExtraboldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-ExtralightItalic.eot');
+    src: url('Bogart/BogartTrial-ExtralightItalic.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-ExtralightItalic.woff2') format('woff2'),
+        url('Bogart/BogartTrial-ExtralightItalic.woff') format('woff'),
+        url('Bogart/BogartTrial-ExtralightItalic.ttf') format('truetype'),
+        url('Bogart/BogartTrial-ExtralightItalic.svg#BogartTrial-ExtralightItalic') format('svg');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-Extrabold.eot');
+    src: url('Bogart/BogartTrial-Extrabold.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-Extrabold.woff2') format('woff2'),
+        url('Bogart/BogartTrial-Extrabold.woff') format('woff'),
+        url('Bogart/BogartTrial-Extrabold.ttf') format('truetype'),
+        url('Bogart/BogartTrial-Extrabold.svg#BogartTrial-Extrabold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-Extralight.eot');
+    src: url('Bogart/BogartTrial-Extralight.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-Extralight.woff2') format('woff2'),
+        url('Bogart/BogartTrial-Extralight.woff') format('woff'),
+        url('Bogart/BogartTrial-Extralight.ttf') format('truetype'),
+        url('Bogart/BogartTrial-Extralight.svg#BogartTrial-Extralight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-LightItalic.eot');
+    src: url('Bogart/BogartTrial-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-LightItalic.woff2') format('woff2'),
+        url('Bogart/BogartTrial-LightItalic.woff') format('woff'),
+        url('Bogart/BogartTrial-LightItalic.ttf') format('truetype'),
+        url('Bogart/BogartTrial-LightItalic.svg#BogartTrial-LightItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-Light.eot');
+    src: url('Bogart/BogartTrial-Light.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-Light.woff2') format('woff2'),
+        url('Bogart/BogartTrial-Light.woff') format('woff'),
+        url('Bogart/BogartTrial-Light.ttf') format('truetype'),
+        url('Bogart/BogartTrial-Light.svg#BogartTrial-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-Italic.eot');
+    src: url('Bogart/BogartTrial-Italic.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-Italic.woff2') format('woff2'),
+        url('Bogart/BogartTrial-Italic.woff') format('woff'),
+        url('Bogart/BogartTrial-Italic.ttf') format('truetype'),
+        url('Bogart/BogartTrial-Italic.svg#BogartTrial-Italic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-Medium.eot');
+    src: url('Bogart/BogartTrial-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-Medium.woff2') format('woff2'),
+        url('Bogart/BogartTrial-Medium.woff') format('woff'),
+        url('Bogart/BogartTrial-Medium.ttf') format('truetype'),
+        url('Bogart/BogartTrial-Medium.svg#BogartTrial-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-Regular.eot');
+    src: url('Bogart/BogartTrial-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-Regular.woff2') format('woff2'),
+        url('Bogart/BogartTrial-Regular.woff') format('woff'),
+        url('Bogart/BogartTrial-Regular.ttf') format('truetype'),
+        url('Bogart/BogartTrial-Regular.svg#BogartTrial-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-MediumItalic.eot');
+    src: url('Bogart/BogartTrial-MediumItalic.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-MediumItalic.woff2') format('woff2'),
+        url('Bogart/BogartTrial-MediumItalic.woff') format('woff'),
+        url('Bogart/BogartTrial-MediumItalic.ttf') format('truetype'),
+        url('Bogart/BogartTrial-MediumItalic.svg#BogartTrial-MediumItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-Semibold.eot');
+    src: url('Bogart/BogartTrial-Semibold.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-Semibold.woff2') format('woff2'),
+        url('Bogart/BogartTrial-Semibold.woff') format('woff'),
+        url('Bogart/BogartTrial-Semibold.ttf') format('truetype'),
+        url('Bogart/BogartTrial-Semibold.svg#BogartTrial-Semibold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-ThinItalic.eot');
+    src: url('Bogart/BogartTrial-ThinItalic.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-ThinItalic.woff2') format('woff2'),
+        url('Bogart/BogartTrial-ThinItalic.woff') format('woff'),
+        url('Bogart/BogartTrial-ThinItalic.ttf') format('truetype'),
+        url('Bogart/BogartTrial-ThinItalic.svg#BogartTrial-ThinItalic') format('svg');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-SemiboldItalic.eot');
+    src: url('Bogart/BogartTrial-SemiboldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-SemiboldItalic.woff2') format('woff2'),
+        url('Bogart/BogartTrial-SemiboldItalic.woff') format('woff'),
+        url('Bogart/BogartTrial-SemiboldItalic.ttf') format('truetype'),
+        url('Bogart/BogartTrial-SemiboldItalic.svg#BogartTrial-SemiboldItalic') format('svg');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bogart Trial';
+    src: url('Bogart/BogartTrial-Thin.eot');
+    src: url('Bogart/BogartTrial-Thin.eot?#iefix') format('embedded-opentype'),
+        url('Bogart/BogartTrial-Thin.woff2') format('woff2'),
+        url('Bogart/BogartTrial-Thin.woff') format('woff'),
+        url('Bogart/BogartTrial-Thin.ttf') format('truetype'),
+        url('Bogart/BogartTrial-Thin.svg#BogartTrial-Thin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+

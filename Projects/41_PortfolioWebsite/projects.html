@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="stylesheet" href="./Styles/Fonts/bogart.css" />
+	<link rel="stylesheet" href="./Styles/Fonts/biotif.css" />
+	<link rel="stylesheet" href="./Styles/style.css" />
+	<link rel="stylesheet" href="./Styles/style-projects.css" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/6def926482.js" crossorigin="anonymous"></script>
+	<script src="./Resources/script.js" defer></script>
+	<script src="./Resources/mobile.js" defer></script>
+	<script src="./Resources/carrousel.js" defer></script>
+	<script src="./Resources/swiped-events.js">
+		defer
+	</script>
+	<script src="./Resources/script-projects.js" defer></script>
+
+	<title>Joaquín Paz</title>
+</head>
+
+<body>
+	<!-- <div class="ldBar" data-value="0" data-preset="circle"></div> -->
+	<div class="background-video">
+		<video id="background-video" autoplay data-video loop muted
+			poster="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80">
+			<source src="./Resources/vid2.mp4" type="video/mp4" />
+		</video>
+	</div>
+	<div class="background-container">
+		<div class="background">
+			<header>
+				<nav>
+					<ul class="nav">
+						<a href="./index.html">
+							<li>About Me</li>
+						</a>
+						<a href="#">
+							<li>Projects</li>
+						</a>
+						<a href="./skills.html">
+							<li>Skills</li>
+						</a>
+						<a href="./contact.html">
+							<li>Contact</li>
+						</a>
+						<div class="underline"></div>
+					</ul>
+					<a href="#">
+						<h1 class="animated" data-animated>
+							Joaquin Paz
+							<div data-animation>
+								<div class="animation l1" data-animation></div>
+								<div class="animation l2" data-animation></div>
+								<div class="animation l3" data-animation></div>
+								<div class="animation l4" data-animation></div>
+							</div>
+						</h1>
+					</a>
+				</nav>
+			</header>
+			<div class="loader"><img src="./Resources/cog.png" alt="" /></div>
+			<main>
+				<h2 class="animated" data-animated>
+					Projects
+					<div data-animation>
+						<div class="animation l1" data-animation></div>
+						<div class="animation l2" data-animation></div>
+						<div class="animation l3" data-animation></div>
+						<div class="animation l4" data-animation></div>
+					</div>
+				</h2>
+				<hr />
+
+				<section class="carrousel" data-carrousel>
+					<div class="prev" data-carrousel-button="prev">
+						<i class="fa-solid fa-arrow-left"></i>
+					</div>
+					<div class="next" data-carrousel-button="next">
+						<i class="fa-solid fa-arrow-right"></i>
+					</div>
+					<ul class="slides" data-slides>
+						<li class="slide" data-active>
+							<h3>Medieval Nickname Generator</h3>
+							<img src="./Resources/Project1.png" alt="Epic Medieval Name Generator"
+								data-project-image="https://joacopaz.github.io/Epic_Medieval_Name_Generator/" />
+							<h4>Description</h4>
+							<p class="spread">
+								Random name generator based on the most common English names
+								and historical figure nicknames of all time.
+							</p>
+							<h4>Objective</h4>
+							<p class="spread">
+								Practice DOM interactions with array lists while providing
+								some epic medieval names!
+							</p>
+							<h4>Let me see it</h4>
+							<p class="spread">
+								<a href="https://joacopaz.github.io/Epic_Medieval_Name_Generator/" class="main-link"
+									target="_blank">Of course!</a>
+							</p>
+							<h4>And the Code?</h4>
+							<p class="spread">
+								<a href="https://github.com/joacopaz/Epic_Medieval_Name_Generator" class="main-link"
+									target="_blank">At the project's git hub page</a>
+							</p>
+						</li>
+						<li class="slide">
+							<h3>Rock, Paper, Scissors!</h3>
+							<img src="./Resources/Project2.png" alt="Rock, Paper, Scissors! project"
+								data-project-image="https://joacopaz.github.io/Rock_Paper_Scissors/" />
+							<h4>Description</h4>
+							<p class="spread">
+								Fun interactive Rock, Paper, Scissors game vs the AI with
+								simplistic animations and sketch-like graphics. TBD: Add PvP
+								integration.
+							</p>
+							<h4>Objective</h4>
+							<p class="spread">
+								Practice simple turn based actions with interactive animation
+								triggers in JS.
+							</p>
+							<h4>Let me see it</h4>
+							<p class="spread">
+								<a href="https://joacopaz.github.io/Rock_Paper_Scissors/" class="main-link"
+									target="_blank">Of course!</a>
+							</p>
+							<h4>And the Code?</h4>
+							<p class="spread">
+								<a href="https://github.com/joacopaz/Rock_Paper_Scissors" class="main-link"
+									target="_blank">At the project's git hub page</a>
+							</p>
+						</li>
+						<li class="slide">
+							<h3>Yacob's</h3>
+							<img src="./Resources/Project3.png" alt="Yacob's website"
+								data-project-image="https://joacopaz.github.io/Yacobs/" />
+							<h4>Description</h4>
+							<p class="spread">
+								Simple landing page for a make believe woodworking company
+								based in the US. I did tell you I was passionate about
+								woodworking &#128517;
+							</p>
+							<h4>Objective</h4>
+							<p class="spread">Make a landing page with an excellent UX.</p>
+							<h4>Let me see it</h4>
+							<p class="spread">
+								<a href="https://joacopaz.github.io/Yacobs/" class="main-link" target="_blank">Of
+									course!</a>
+							</p>
+							<h4>And the Code?</h4>
+							<p class="spread">
+								<a href="https://github.com/joacopaz/Yacobs" class="main-link" target="_blank">At the
+									project's git hub page</a>
+							</p>
+						</li>
+						<li class="slide">
+							<h3>NodeJS App: Scheduler</h3>
+							<img src="./Resources/Project4.gif" alt="Scheduler"
+								data-project-image="https://github.com/joacopaz/Scheduler/" />
+							<h4>Description</h4>
+							<p class="spread">
+								My most extensive project, a stand-alone console based
+								Scheduler application. Written in Spanish (per the clients
+								need). The client needed to in-take a simple .xlsx file and
+								output an organized schedule to be injected into a traffic and
+								automation server to automate schedule creations/upload.
+							</p>
+							<h4>Objective</h4>
+							<p class="spread">
+								Create a Scheduler that outputs the specific format needed by
+								the client, respecting certain algorithmic formulas per the
+								scheduling rules. For in-depth explanations, please see the
+								Read Me in the <a href="">project's git hub page</a>.
+							</p>
+							<h4>Let me see it</h4>
+							<p class="spread">
+								This one is going to be a tough one to see online. But you can
+								download a Demo from the
+								<a href="https://github.com/joacopaz/Scheduler/" class="main-link"
+									target="_blank">github page </a>(see readme for a step-by-step).
+							</p>
+							<h4>And the Code?</h4>
+							<p class="spread">
+								<a href="https://github.com/joacopaz/Scheduler/" class="main-link" target="_blank">At
+									the project's git hub page</a>
+							</p>
+						</li>
+						<li class="slide">
+							<h3>Music Revolution DJ</h3>
+							<img src="./Resources/Project5.png" alt="Scheduler"
+								data-project-image="https://joacopaz.github.io/MrDJ/" />
+							<h4>Description</h4>
+							<p class="spread">
+								A website migration from WordPress requested by a Spanish
+								speaking client owner of a Music and Entertainment production
+								company.
+							</p>
+							<h4>Objective</h4>
+							<p class="spread">
+								Successfully migrate a WordPress hosted site off-platform and
+								fix compatibility issues.
+							</p>
+							<h4>Let me see it</h4>
+							<p class="spread">
+								<a href="https://joacopaz.github.io/MrDJ/" class="main-link" target="_blank">Of
+									course!</a>
+							</p>
+							<h4>And the Code?</h4>
+							<p class="spread">
+								<a href="https://github.com/joacopaz/MrDJ/" class="main-link" target="_blank">At the
+									project's git hub page</a>
+							</p>
+						</li>
+						<li class="slide">
+							<h3>Java Escape Room Game</h3>
+							<img src="./Resources/Project6.gif" alt="Scheduler"
+								data-project-image="https://github.com/joacopaz/Mistery_Game" />
+							<h4>Description</h4>
+							<p class="spread">
+								A console based Java game written for an Escape Room
+								experience. It plays with eerie background music (provided by
+								the Room), while the game reproduces typewriter effects while
+								a "Ghost" character passively aggressively interrogates us
+								expecting input answers we can only find by resolving the
+								riddles in the room.
+							</p>
+							<h4>Objective</h4>
+							<p class="spread">
+								Provide a scripted game for an Escape Room per the Client's
+								request and script.
+							</p>
+							<h4>Let me see it</h4>
+							<p class="spread">
+								This one is going to be a tough one to see online. But you can
+								download a Demo from the
+								<a href="https://github.com/joacopaz/Mistery_Game" class="main-link"
+									target="_blank">github page </a>(see readme for a step-by-step).
+							</p>
+							<h4>And the Code?</h4>
+							<p class="spread">
+								<a href="https://github.com/joacopaz/Mistery_Game/" class="main-link" target="_blank">At
+									the project's git hub page</a>
+							</p>
+						</li>
+						<li class="slide">
+							<h3>Mara Real Estate</h3>
+							<img src="./Resources/Project7.png" alt="Scheduler"
+								data-project-image="https://www.maraprop.com.ar" />
+							<h4>Description</h4>
+							<p class="spread">
+								Current project for a Real Estate company (in development).
+							</p>
+							<h4>Objective</h4>
+							<p class="spread">
+								Create a fully functional site with a searchbar for properties
+								and a responsive nav menu. Awaiting metadata (images, text,
+								etc) from the client to continue. Emphasis is placed on
+								accessibility (completely functional for only keyboard users
+								and dynamic tabindex)
+							</p>
+							<h4>Let me see it</h4>
+							<p class="spread">
+								<a href="https://www.maraprop.com.ar" class="main-link" target="_blank">Of course!</a>
+							</p>
+							<h4>And the Code?</h4>
+							<p class="spread">
+								<a href="https://github.com/joacopaz/MaraProp/" class="main-link" target="_blank">At the
+									project's git hub page</a>
+							</p>
+						</li>
+						<li class="slide">
+							<h3>Olivos Tennis Club</h3>
+							<img src="./Resources/Project8.png" alt="Scheduler"
+								data-project-image="https://joacopaz.github.io/Olivos_Tennis_Club/" />
+							<h4>Description</h4>
+							<p class="spread">
+								Practice project - Landing page for a make-believe sports
+								club.
+							</p>
+							<h4>Objective</h4>
+							<p class="spread">
+								Create a landing page with a submit form for new aspiring
+								members. Focus is on form layout more than design.
+							</p>
+							<h4>Let me see it</h4>
+							<p class="spread">
+								<a href="https://joacopaz.github.io/Olivos_Tennis_Club/" class="main-link"
+									target="_blank">Of course!</a>
+							</p>
+							<h4>And the Code?</h4>
+							<p class="spread">
+								<a href="https://github.com/joacopaz/Olivos_Tennis_Club/" class="main-link"
+									target="_blank">At the project's git hub page</a>
+							</p>
+						</li>
+						<li class="slide">
+							<h3>Various</h3>
+							<img src="./Resources/Project9.png" alt="Scheduler"
+								data-project-image="https://github.com/joacopaz/Full_Stack" />
+							<h4>Description</h4>
+							<p class="spread">
+								There are a lot of miscellaneous projects that I couldn't
+								include in this space that can be found in the Full_Stack
+								repository of my GitHub.
+							</p>
+							<h4>Objective</h4>
+							<p class="spread">
+								The projects on this repository are a lot of different
+								exercises and challenges I've tried to solve over time. There
+								are also some Notes I've taken for personal use and a lot of
+								Java projects that are hard to replicate over the web.
+							</p>
+							<h4>Let me see it</h4>
+							<p class="spread">
+								<a href="https://github.com/joacopaz/Full_Stack" class="main-link" target="_blank">Of
+									course!</a>
+							</p>
+							<h4>And the Code?</h4>
+							<p class="spread">
+								<a href="https://github.com/joacopaz/Full_Stack" class="main-link" target="_blank">At
+									the project's git hub page</a>
+							</p>
+						</li>
+					</ul>
+				</section>
+			</main>
+			<footer>
+				<ul>
+					<li>
+						<div class="image-container">
+							<img src="./Resources/logo.png" alt="joacopaz" data-link-to="#" />
+						</div>
+					</li>
+					<li>
+						<div class="image-container">
+							<img src="./Resources/github.png" alt="Github logo"
+								data-link-to="https://www.github.com/joacopaz/" />
+						</div>
+					</li>
+					<li>&copy; 2022</li>
+				</ul>
+			</footer>
+		</div>
+	</div>
+	<div class="mask"></div>
+</body>
+
+</html>

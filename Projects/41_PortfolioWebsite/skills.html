@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="./Styles/Fonts/bogart.css" />
+	<link rel="stylesheet" href="./Styles/Fonts/biotif.css" />
+	<link rel="stylesheet" href="./Resources/loading-bar.css">
+	<link rel="stylesheet" href="./Styles/style.css" />
+	<link rel="stylesheet" href="./Styles/style-skills.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="./Resources/script.js" defer></script>
+	<script src="./Resources/mobile.js" defer></script>
+	<script src="./Resources/loading-bar.js" defer></script>
+	<script src="./Resources/script-skills.js" defer></script>
+	<script src="https://kit.fontawesome.com/6def926482.js" crossorigin="anonymous"></script>
+	<title>Joaquín Paz</title>
+</head>
+
+<body>
+	<div class="background-video">
+		<video id="background-video" data-video autoplay onload="this.play()" loop muted
+			poster="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80">
+			<source src="./Resources/vid3.mp4" type="video/mp4" />
+		</video>
+	</div>
+	<div class="background-container">
+		<div class="background">
+			<header>
+				<nav>
+					<ul class="nav">
+						<a href="./index.html">
+							<li>About Me</li>
+						</a>
+						<a href="./projects.html">
+							<li>Projects</li>
+						</a>
+						<a href="#">
+							<li>Skills</li>
+						</a>
+						<a href="./contact.html">
+							<li>Contact</li>
+						</a>
+						<div class="underline"></div>
+					</ul>
+					<a href="#">
+						<h1 class="animated" data-animated>
+							Joaquin Paz
+							<div data-animation>
+								<div class="animation l1" data-animation></div>
+								<div class="animation l2" data-animation></div>
+								<div class="animation l3" data-animation></div>
+								<div class="animation l4" data-animation></div>
+							</div>
+						</h1>
+					</a>
+				</nav>
+			</header>
+			<div class="loader"><img src="./Resources/cog.png" alt=""></div>
+			<main>
+				<h2 class="animated" data-animated>
+					Skills
+					<div data-animation>
+						<div class="animation l1" data-animation></div>
+						<div class="animation l2" data-animation></div>
+						<div class="animation l3" data-animation></div>
+						<div class="animation l4" data-animation></div>
+					</div>
+				</h2>
+				<hr>
+				<p class="spread">I am continuously learning, as all Developers should, reading documentation and
+					staying up to date with new releases and technologies.</p>
+				<p class="spread">
+					My primary goal is to perform as a Full-Stack engineer. I'm enthusiastic about learning new
+					languages, frameworks and libraries.
+				</p>
+				<section class="level">
+					<div class="skill-header">
+						<h3>Skill Levels</h3> <button class="expand-button-skill" data-expanded="false"><i
+								class="fa-solid fa-square-plus"></i></button>
+					</div>
+					<div class="all-skills">
+						<article>
+							<div class="skill">
+								<div class="skill-img-container"><img src="./Resources/skills/html5.png" alt="HTML5">
+								</div>
+								<h4>HTML</h4>
+								<div class="ldBar label-center" data-preset="fan" data-to-value="90"
+									data-stroke-trail-width="4" data-stroke-width="5" data-set="false"></div>
+								<button class="expand-button" data-expanded="false"><i
+										class="fa-solid fa-square-plus"></i></button>
+							</div>
+							<aside data-aside>
+								<span> <strong>Strengths</strong>
+									Responsive web building, appropriate SEO tag usage and accessibility
+									practices. Dataset use. Emmet.</span>
+								<span><strong>To Improve</strong> Aria roles and canvas</span>
+							</aside>
+						</article>
+						<article>
+							<div class="skill">
+								<div class="skill-img-container"><img src="./Resources/skills/css.png" alt="CSS"></div>
+								<h4>CSS</h4>
+								<div class="ldBar label-center" data-preset="fan" data-to-value="85"
+									data-stroke-trail-width="4" data-stroke-width="5" data-set="false"></div>
+								<button class="expand-button" data-expanded="false"><i
+										class="fa-solid fa-square-plus"></i></button>
+							</div>
+							<aside data-aside>
+								<span> <strong>Strengths</strong>
+									Media queries, advanced selectors, pseudo-elements/pseudo-selectors, interactive
+									elements (animations)</span>
+								<span><strong>To Improve</strong> Advanced animations and svg pathing, vector drawing in
+									general</span>
+							</aside>
+						</article>
+						<article>
+							<div class="skill">
+								<div class="skill-img-container"><img src="./Resources/skills/nodejs.png" alt="NodeJS">
+								</div>
+								<h4>Node JS</h4>
+								<div class="ldBar label-center" data-preset="fan" data-to-value="80"
+									data-stroke-trail-width="4" data-stroke-width="5" data-set="false"></div>
+								<button class="expand-button" data-expanded="false"><i
+										class="fa-solid fa-square-plus"></i></button>
+							</div>
+							<aside data-aside>
+								<span> <strong>Strengths</strong>
+									Coding best practices, DOM manipulation and module implementation.</span>
+								<span><strong>To Improve</strong> Async/AJAX requests, Promise manipulation </span>
+							</aside>
+						</article>
+						<article>
+							<div class="skill">
+								<div class="skill-img-container"><img src="./Resources/skills/git.png" alt="Git"></div>
+								<h4>Git</h4>
+								<div class="ldBar label-center" data-preset="fan" data-to-value="90"
+									data-stroke-trail-width="4" data-stroke-width="5" data-set="false"></div>
+								<button class="expand-button" data-expanded="false"><i
+										class="fa-solid fa-square-plus"></i></button>
+							</div>
+							<aside data-aside>
+								<span> <strong>Strengths</strong>
+									Repository management, branching, cooperative coding (VS Code Live Share)</span>
+								<span><strong>To Improve</strong> Pull request practice and git merge conflicts </span>
+							</aside>
+						</article>
+						<article>
+							<div class="skill">
+								<div class="skill-img-container"><img src="./Resources/skills/java.png" alt="Java">
+								</div>
+								<h4>Java</h4>
+								<div class="ldBar label-center" data-preset="fan" data-to-value="50"
+									data-stroke-trail-width="4" data-stroke-width="5" data-set="false"></div>
+								<button class="expand-button" data-expanded="false"><i
+										class="fa-solid fa-square-plus"></i></button>
+							</div>
+							<aside data-aside>
+								<span> <strong>Strengths</strong> Access scope, inheritance and polymorphism, string
+									methods.
+								</span>
+								<span><strong>To Improve</strong> Library knowledge, more coding hours </span>
+							</aside>
+						</article>
+						<article>
+							<div class="skill">
+								<div class="skill-img-container"><img src="./Resources/skills/bash.png" alt="Bash">
+								</div>
+								<h4>Bash / Linux</h4>
+								<div class="ldBar label-center" data-preset="fan" data-to-value="65"
+									data-stroke-trail-width="4" data-stroke-width="5" data-set="false"></div>
+								<button class="expand-button" data-expanded="false"><i
+										class="fa-solid fa-square-plus"></i></button>
+							</div>
+							<aside data-aside>
+								<span> <strong>Strengths</strong> Simple scripts, command line usage, file hierarchy
+									structure
+								</span>
+								<span><strong>To Improve</strong> Advance scripting </span>
+							</aside>
+						</article>
+						<article>
+							<div class="skill">
+								<div class="skill-img-container"><img src="./Resources/skills/sql.png" alt="SQL"></div>
+								<h4>SQL</h4>
+								<div class="ldBar label-center" data-preset="fan" data-to-value="70"
+									data-stroke-trail-width="4" data-stroke-width="5" data-set="false"></div>
+								<button class="expand-button" data-expanded="false"><i
+										class="fa-solid fa-square-plus"></i></button>
+							</div>
+							<aside data-aside>
+								<span> <strong>Strengths</strong> Manage complex queries, variable usage, general
+									security
+									practices
+								</span>
+								<span><strong>To Improve</strong> PHP integration and coding hours </span>
+							</aside>
+						</article>
+						<article>
+							<div class="skill">
+								<div class="skill-img-container"><img src="./Resources/skills/php.png" alt="PHP"></div>
+								<h4>PHP</h4>
+								<div class="ldBar label-center" data-preset="fan" data-to-value="40"
+									data-stroke-trail-width="4" data-stroke-width="5" data-set="false"></div>
+								<button class="expand-button" data-expanded="false"><i
+										class="fa-solid fa-square-plus"></i></button>
+							</div>
+							<aside data-aside>
+								<span> <strong>Strengths</strong> Implement database interactions
+								</span>
+								<span><strong>To Improve</strong> Develop the database interactions from scratch, coding
+									hours </span>
+							</aside>
+						</article>
+						<article>
+							<div class="skill">
+								<div class="skill-img-container"><img src="./Resources/skills/jira.png" alt="Jira">
+								</div>
+								<h4>Agile Work Flow</h4>
+								<div class="ldBar label-center" data-preset="fan" data-to-value="80"
+									data-stroke-trail-width="4" data-stroke-width="5" data-set="false"></div>
+								<button class="expand-button" data-expanded="false"><i
+										class="fa-solid fa-square-plus"></i></button>
+							</div>
+							<aside data-aside>
+								<span> <strong>Strengths</strong> Experience working in agile environments and tools
+									(like Jira and Kanban)
+								</span>
+								<span><strong>To Improve</strong> Experience in large teams </span>
+							</aside>
+						</article>
+						<p class="disclaimer"><strong>Disclaimer</strong>I'm reluctant to proclaim <span>100%</span>
+							knowledge of any skill although I feel I can handle most reasonable challenges in it
+							primarily because a developer never finishes knowing a subject, there will always be
+							modifications, new releases and new frameworks that evolve the environment.</p>
+					</div>
+				</section>
+				<section class="roadmap">
+					<div class="roadmap-header">
+						<h3>Road Map</h3>
+						<button class="expand-button-roadmap" data-expanded="false"><i
+								class="fa-solid fa-square-plus"></i></button>
+					</div>
+					<aside>
+						Last updated: June 6th 2022
+					</aside>
+					<p class="spread">I would love to learn all the languages, but for the sake of organizing my
+						progress here is a detailed exposition of my learning road map for the next year (this is an
+						estimation and can vary according to challenges that may arise demanding urgent
+						libraries/frameworks/languages to be learnt)</p>
+					<div class="roadmap-implementation">
+						<article>
+							<div class="container">
+								<img src="./Resources/map.png" alt="Road Map">
+								<div class="roadmap-element">
+									<div class="destination"><i class="fa-solid fa-location-dot fa-beat"
+											dataset-active="false"></i></div>
+									<div class="tooltip">
+										<p><strong>APIs and Testing</strong> <i>June-2022</i>
+											<span>Mocha framework and advanced testing</span>
+										</p>
+									</div>
+								</div>
+								<div class="roadmap-element">
+									<div class="destination"><i class="fa-solid fa-location-dot"
+											dataset-active="false"></i></div>
+									<div class="tooltip">
+										<p><strong>Web Apps and React</strong> <i>July-2022</i>
+											<span>JSX, Component Interaction and Jest testing</span>
+										</p>
+									</div>
+								</div>
+								<div class="roadmap-element">
+									<div class="destination"><i class="fa-solid fa-location-dot"
+											dataset-active="false"></i></div>
+									<div class="tooltip">
+										<p><strong>Redux and Express.js</strong> <i>August-2022</i>
+											<span>Async, Middleware, Backend and Testing with TDD</span>
+										</p>
+									</div>
+								</div>
+								<div class="roadmap-element">
+									<div class="destination"><i class="fa-solid fa-location-dot"
+											dataset-active="false"></i></div>
+									<div class="tooltip">
+										<p><strong>Advanced PostgreSQL</strong> <i>October-2022</i>
+											<span>Node and Express implementation, SQL, Query Builders and ORMs</span>
+										</p>
+									</div>
+								</div>
+								<div class="roadmap-element">
+									<div class="destination"><i class="fa-solid fa-location-dot"
+											dataset-active="false"></i></div>
+									<div class="tooltip">
+										<p><strong>API Development with Swagger and OpenAPI</strong>
+											<i>November-2022</i>
+											<span>Development, design, documentation and front/back connections</span>
+										</p>
+									</div>
+								</div>
+								<div class="roadmap-element">
+									<div class="destination"><i class="fa-solid fa-location-dot"
+											dataset-active="false"></i></div>
+									<div class="tooltip">
+										<p><strong>Deploying Web Apps and Internet Security</strong>
+											<i>December-2022</i>
+											<span>Deploying a PERN App with Heroku, Web and Data Security</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</article>
+					</div>
+				</section>
+			</main>
+			<footer>
+				<ul>
+					<li>
+						<div class="image-container"><img src="./Resources/logo.png" alt="joacopaz" data-link-to="#">
+						</div>
+					</li>
+					<li>
+						<div class="image-container"><img src="./Resources/github.png" alt="Github logo"
+								data-link-to="https://www.github.com/joacopaz/"></div>
+					</li>
+					<li class="copyright">&copy; 2022</li>
+				</ul>
+			</footer>
+		</div>
+	</div>
+
+	</div>
+	</div>
+	<div class="mask"></div>
+</body>
+
+</html>
+
+</html>

@@ -1,0 +1,145 @@
+main hr {
+	margin-bottom: 0;
+}
+
+main {
+	overflow-y: scroll;
+}
+
+main h2 {
+	margin-top: 0;
+}
+
+.grid {
+	display: grid;
+	margin-top: 1rem;
+	grid-template: auto auto / minmax(200px, 1.5fr) 6fr;
+	align-items: flex-start;
+	justify-items: left;
+	grid-auto-rows: 1fr;
+}
+
+.grid-one {
+	grid-column: 1 / span 1;
+}
+
+.grid-one p {
+	padding-right: 0;
+}
+
+.grid-two {
+	grid-column: 2 / span 1;
+	width: 100%;
+	height: 100%;
+	border-radius: 25px;
+}
+
+.grid-three-four {
+	grid-column: 1 / span 2;
+}
+
+.contact-info {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 473.6px;
+	height: 112px;
+	justify-self: center;
+	gap: 20px;
+}
+
+.resume {
+	width: 20%;
+	flex-direction: column;
+	margin: 0;
+	padding: 0 .5rem;
+	gap: .5rem;
+	border-radius: 25px;
+	caret-color: transparent;
+}
+
+.resume span {
+	border-radius: 25px;
+	caret-color: transparent;
+}
+
+.grid .image-container {
+	position: relative;
+	right: unset;
+	top: unset;
+	width: 20%;
+	height: 90px;
+	min-width: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 25px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.grid .image-container img {
+	height: 100%;
+	width: 100%;
+	display: block;
+	object-fit: cover;
+	filter: invert(0%);
+	transition: filter 200ms;
+}
+
+.grid .image-container:nth-child(4) {
+	width: 19%;
+}
+
+.grid .image-container:hover img {
+	filter: invert(30%);
+}
+
+.mail {
+	color: white;
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, 0.664);
+	width: fit-content;
+	border-radius: 25px;
+	position: absolute;
+	display: none;
+}
+
+@media screen and (max-width: 722px) {
+	.grid-one {
+		justify-self: left;
+		grid-column: 1 / span 2;
+	}
+
+	.grid-two {
+		grid-column: 1 / span 2;
+		grid-row: 3;
+	}
+
+	.contact-info {
+		margin: 1rem 0;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	main h2 {
+		margin-top: 1rem;
+	}
+}
+
+@media screen and (max-width: 472px) {
+	.contact-info {
+		width: 100%;
+		justify-content: space-evenly;
+		gap: 0px;
+	}
+
+	.contact-info p {
+		font-size: .8rem;
+	}
+
+	.contact-info .image-container {
+		height: 75px;
+		width: 20%;
+	}
+}

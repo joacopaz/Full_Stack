@@ -1,0 +1,218 @@
+/* Main */
+
+.background-container {
+	margin-top: 1.5rem;
+}
+
+.background {
+	padding-bottom: 0;
+}
+
+
+main hr {
+	margin-bottom: 0.2rem;
+}
+
+/* Carrousel  */
+
+.carrousel {
+	min-width: 320px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+}
+
+.carrousel .slide {
+	width: 100%;
+	height: 100%;
+	/* min-height: 70vh; */
+	background-color: inherit;
+	display: none;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	color: white;
+	justify-content: flex-start;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	animation-duration: 200ms;
+	animation-fill-mode: forwards;
+	transition: opacity 200ms, left 200ms;
+	transition-delay: 200ms;
+	caret-color: transparent;
+	z-index: -1;
+	flex-direction: column;
+}
+
+.slide>p {
+	align-self: flex-start;
+	font-size: 1rem;
+	padding-top: 0.5rem;
+	padding-right: 2rem
+}
+
+.slide>h4 {
+	align-self: flex-start;
+	margin: 1rem 2rem 0;
+}
+
+.slide>h3 {
+	margin: 1rem 0;
+	min-width: max-content;
+	font-size: 1.2rem;
+}
+
+.slide>img {
+	display: block;
+	width: 100%;
+	max-width: 700px;
+	height: auto;
+	cursor: pointer;
+	transition: filter 200ms;
+}
+
+.slide>img:hover {
+	filter: invert(10%);
+}
+
+.slide a {
+	padding: 1px;
+}
+
+.slide[data-active] {
+	transition-delay: 0ms;
+	opacity: 100%;
+	left: 0;
+	z-index: 1;
+	position: relative;
+	height: fit-content;
+}
+
+.carrousel [data-carrousel-button] {
+	position: absolute;
+	color: rgba(255, 255, 255, 0.5);
+	z-index: 2;
+	top: 2rem;
+	border: none;
+	transform: translateY(-50%);
+	padding: 0.5rem;
+	font-size: 1rem;
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.4);
+	border-radius: 0.25rem;
+	caret-color: transparent;
+	transition: background-color 200ms, color 200ms;
+}
+
+.prev {
+	left: 1rem;
+}
+
+.next {
+	right: 1rem;
+}
+
+@media screen and (max-width: 690px) {
+	.background-container {
+		margin: 0;
+		min-height: 100%;
+		overflow: hidden;
+	}
+}
+
+@media screen and (min-width: 690px) {
+	main {
+		overflow-y: scroll;
+		height: 700px;
+		margin: 0;
+		padding: 0;
+		max-width: 800px;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.slide>h4 {
+		margin-left: 1rem;
+	}
+}
+
+@media screen and (max-width: 475px) {
+
+	.prev {
+		left: 0.5rem;
+	}
+
+	.next {
+		right: 0.5rem;
+	}
+
+	main h2 {
+		padding: 0;
+		margin-top: 2rem;
+	}
+
+	main hr {
+		margin: 0;
+		margin-left: 0.5rem;
+	}
+}
+
+[data-carrousel-button]:hover,
+[data-carrousel-button]:focus {
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+}
+
+[data-carrousel-button]:focus {
+	outline: 1px solid black;
+}
+
+@keyframes exitLeft {
+	from {
+		left: 0;
+	}
+
+	to {
+		left: -100%;
+	}
+}
+
+@keyframes exitRight {
+	from {
+		left: 0;
+	}
+
+	to {
+		left: 100%;
+	}
+}
+
+@keyframes enterLeft {
+	from {
+		left: 100%;
+	}
+
+	to {
+		left: 0%;
+	}
+}
+
+@keyframes enterRight {
+	from {
+		left: -100%;
+	}
+
+	to {
+		left: 0%;
+	}
+}
+
+@media screen and (max-width: 375px) {
+	.next {
+		right: 0.5rem;
+	}
+}

@@ -1,0 +1,546 @@
+/* Main */
+
+main hr {
+	margin-bottom: .5rem;
+}
+
+main h3 {
+	margin: 0;
+	width: 150px;
+}
+
+[alt="Skills"] {
+	height: 200px;
+	width: 200px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+/* Skills */
+.all-skills {
+	position: relative;
+}
+
+.skill-img-container {
+	position: relative;
+	overflow: hidden;
+	width: 50px;
+	height: 50px;
+}
+
+.skill-img-container img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.level h2 {
+	margin: 1rem 1.5rem;
+	display: inline;
+	margin-right: 0;
+}
+
+.skill-header,
+.roadmap-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	width: 180px;
+	padding: 0;
+	margin: 1.5rem;
+}
+
+.level article {
+	display: flex;
+	margin: 1rem auto;
+	justify-content: flex-start;
+	background-color: rgba(0, 0, 0, 0.187);
+	overflow-x: hidden;
+}
+
+.skill {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5rem 0 0.5rem 1rem;
+	color: white;
+	gap: 30px;
+	width: 400px;
+}
+
+.skill h4 {
+	font-family: "Bogart trial";
+	width: 20px;
+	margin-right: 2rem;
+}
+
+.ldBar {
+	color: white;
+	position: relative;
+	right: 0.9rem;
+}
+
+.level article aside {
+	font-size: 0.8rem;
+	margin: 0.5rem;
+	padding: 0;
+	font-family: "Bogart", sans-serif;
+	display: flex;
+	justify-content: center;
+	display: none;
+	text-align: center;
+}
+
+.level aside strong {
+	display: block;
+	padding: 0.2rem;
+	margin-top: 0.4rem;
+}
+
+.level aside span {
+	padding: 0.1rem;
+	width: 200px;
+}
+
+.expand-button,
+.expand-button-skill,
+.expand-button-roadmap {
+	background: none;
+	border: none;
+	font-size: 1.1rem;
+	color: white;
+	width: fit-content;
+	height: fit-content;
+	cursor: pointer;
+	pointer-events: none;
+	caret-color: transparent;
+}
+
+.expand-button i,
+.expand-button-skill i,
+.expand-button-roadmap i {
+	cursor: pointer;
+	caret-color: transparent;
+	pointer-events: all;
+}
+
+.expand-button:focus,
+.expand-button-skill:focus,
+.expand-button-roadmap:focus {
+	outline: none;
+}
+
+.disclaimer {
+	margin: 0 auto;
+	background-color: rgba(0, 0, 0, 0.449);
+	text-align: center;
+	font-size: 0.8rem;
+	max-width: 700px;
+	margin-bottom: 2rem;
+}
+
+.disclaimer span {
+	font-family: sans-serif;
+}
+
+.disclaimer strong {
+	display: block;
+	font-size: 0.9rem;
+}
+
+/* Road Map */
+
+.roadmap aside {
+	padding: 0;
+	font-family: "Biotif trial", sans-serif;
+	padding: 0;
+	margin-left: 2rem;
+	color: white;
+	font-size: 0.8rem;
+	font-style: italic;
+}
+
+.roadmap-implementation .container {
+	height: auto;
+	width: 95%;
+	position: relative;
+	overflow: hidden;
+	display: block;
+	margin: 0 auto 2rem auto;
+	border: rgb(172, 196, 201) 1px solid;
+	border-radius: 25px;
+	padding: 1rem;
+}
+
+.roadmap-implementation .container img {
+	height: 100%;
+	width: 100%;
+	display: block;
+}
+
+.roadmap-element {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	caret-color: transparent;
+}
+
+.destination {
+	position: absolute;
+	color: red;
+	z-index: 2;
+	font-size: 2.5rem;
+	cursor: pointer;
+	caret-color: transparent;
+	transition: color 500ms;
+}
+
+.destination::before {
+	content: "";
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	left: 25%;
+	top: 16%;
+	background-color: white;
+	border-radius: 50%;
+	z-index: -1;
+}
+
+.container .tooltip {
+	position: absolute;
+	height: auto;
+	padding: 0.5rem;
+	z-index: 3;
+	border-radius: 25px;
+	background-color: rgba(0, 0, 0, 0.747);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 500ms;
+}
+
+.tooltip p {
+	padding: 0;
+	font-family: Ubuntu, sans-serif;
+}
+
+.tooltip strong {
+	display: block;
+	margin: 0.4rem;
+}
+
+.tooltip span {
+	display: block;
+	margin: 0.4rem;
+	max-width: 320px;
+}
+
+.roadmap-element:nth-child(2) .destination {
+	top: 79%;
+	left: 32%;
+	color: rgb(157, 0, 255);
+}
+
+.roadmap-element:nth-child(2) .tooltip {
+	top: 79%;
+	left: 32%;
+	transform: translate(-45%, -110%);
+}
+
+.roadmap-element:nth-child(3) .destination {
+	top: 56%;
+	left: 26.2%;
+}
+
+.roadmap-element:nth-child(3) .tooltip {
+	top: 56%;
+	left: 25%;
+	transform: translate(-45%, -110%);
+}
+
+.roadmap-element:nth-child(4) .destination {
+	top: 35%;
+	left: 32.8%;
+}
+
+.roadmap-element:nth-child(4) .tooltip {
+	top: 35%;
+	left: 32.8%;
+	transform: translate(-45%, -110%);
+}
+
+.roadmap-element:nth-child(5) .destination {
+	top: 10%;
+	left: 40%;
+}
+
+.roadmap-element:nth-child(5) .tooltip {
+	top: 10%;
+	left: 40%;
+	transform: translate(-45%, 42%);
+}
+
+.roadmap-element:nth-child(6) .destination {
+	top: 19%;
+	left: 62%;
+}
+
+.roadmap-element:nth-child(6) .tooltip {
+	top: 19%;
+	left: 62%;
+	transform: translate(-45%, 35%);
+}
+
+.roadmap-element:nth-child(7) .destination {
+	top: 11%;
+	left: 82%;
+}
+
+.roadmap-element:nth-child(7) .tooltip {
+	top: 5%;
+	left: 63%;
+	transform: translate(-2%, 65%);
+}
+
+/* Responsiveness */
+
+@media screen and (min-width: 841px) {
+	.background-container {
+		width: 840px;
+	}
+}
+
+@media screen and (max-width: 840px) {
+	.level article {
+		max-width: unset;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.skill {
+		gap: 20px;
+		width: 350px;
+		margin: 0 auto;
+	}
+
+	.skill-header,
+	.roadmap-header {
+		justify-content: center;
+		align-items: center;
+	}
+
+	.roadmap aside {
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.ldBar {
+		font-size: 0.8rem;
+	}
+
+	.level article aside {
+		margin-top: 0;
+	}
+
+	.roadmap-element .tooltip>* {
+		font-size: 0.8rem;
+		max-width: 300px;
+	}
+
+	.roadmap-element .destination>* {
+		font-size: 1.5rem;
+	}
+
+	.destination::before {
+		width: 10px;
+		height: 12px;
+		left: 25%;
+		top: 38%;
+	}
+
+	.roadmap-element:nth-child(7) .tooltip {
+		transform: translate(-2%, 50%);
+	}
+
+	.roadmap-element:nth-child(5) .tooltip {
+		transform: translate(-45%, 42%);
+	}
+
+	.roadmap-element:nth-child(2) .tooltip {
+		transform: translate(-45%, -90%);
+	}
+
+	.roadmap-element:nth-child(3) .tooltip {
+		transform: translate(-45%, -90%);
+	}
+
+	.roadmap-element:nth-child(4) .tooltip {
+		transform: translate(-48%, -90%);
+	}
+}
+
+@media screen and (max-width: 690px) {
+	main {
+		height: 100%;
+		max-height: unset;
+	}
+
+	.level article {
+		max-width: unset;
+	}
+
+	.skill {
+		gap: 20px;
+		width: 350px;
+	}
+
+	main h3 {
+		font-size: 1.2rem;
+	}
+
+	main {
+		min-height: calc(100vh - 220px);
+	}
+}
+
+@media screen and (max-width:550px) {
+	main h3 {
+		width: 110px;
+	}
+
+	.background {
+		padding: 0;
+	}
+}
+
+@media screen and (max-width: 522px) {
+	.roadmap-element .tooltip>* {
+		font-size: 0.5rem;
+	}
+
+	.roadmap-element:nth-child(7) .tooltip {
+		transform: translate(-45%, 60%);
+	}
+
+	.roadmap-element:nth-child(6) .tooltip {
+		transform: translate(-45%, 50%);
+	}
+
+	.roadmap-element:nth-child(5) .tooltip {
+		transform: translate(-45%, 55%);
+	}
+
+	.roadmap-element:nth-child(2) .tooltip {
+		transform: translate(-45%, -90%);
+	}
+
+	.roadmap-element:nth-child(3) .tooltip {
+		transform: translate(-45%, -90%);
+	}
+
+	.roadmap-element:nth-child(4) .tooltip {
+		transform: translate(-48%, -90%);
+	}
+}
+
+@media screen and (max-width: 410px) {
+	.level article aside {
+		margin: 0;
+		max-width: 310px;
+	}
+
+	main {
+		min-width: unset;
+	}
+
+	.roadmap-element:nth-child(2) .destination {
+		top: 66%;
+		left: 31.8%;
+	}
+
+	.roadmap-element:nth-child(2) .tooltip {
+		transform: translate(-45%, -130%);
+	}
+
+	.roadmap-element:nth-child(3) .destination {
+		top: 45%;
+		left: 26.8%;
+	}
+
+	.roadmap-element:nth-child(3) .tooltip {
+		transform: translate(-43%, -120%);
+	}
+
+	.roadmap-element:nth-child(4) .destination {
+		top: 24%;
+		left: 32.8%;
+	}
+
+	.roadmap-element:nth-child(4) .tooltip {
+		transform: translate(-45%, 30%);
+	}
+
+	.roadmap-element:nth-child(5) .destination {
+		top: 3%;
+		left: 45%;
+	}
+
+	.roadmap-element:nth-child(5) .tooltip {
+		transform: translate(-40%, 42%);
+	}
+
+	.roadmap-element:nth-child(6) .destination {
+		top: 11.5%;
+		left: 61%;
+	}
+
+	.roadmap-element:nth-child(6) .tooltip {
+		transform: translate(-45%, 35%);
+	}
+
+	.roadmap-element:nth-child(7) .destination {
+		top: 11%;
+		left: 81.3%;
+	}
+
+	.roadmap-element:nth-child(7) .tooltip {
+		transform: translate(-2%, 65%);
+	}
+}
+
+@media screen and (max-width: 355px) {
+	.roadmap-element:nth-child(6) .destination {
+		top: 9%;
+	}
+
+	.roadmap-element:nth-child(6) .tooltip {
+		transform: translate(-45%, 15%);
+		width: 150px;
+	}
+
+	.roadmap-element:nth-child(7) .destination {
+		top: 9%;
+		left: 80.5%;
+	}
+
+	.roadmap-element:nth-child(7) .tooltip {
+		transform: translate(-2%, 40%);
+	}
+}
+
+@media screen and (max-width: 340px) {
+	.skill {
+		padding-left: 0;
+		width: 340px;
+	}
+}

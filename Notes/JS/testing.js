@@ -1,0 +1,4 @@
+/* 
+A test suite is a collection of tests for a software application.
+You run it with npm test 
+*/

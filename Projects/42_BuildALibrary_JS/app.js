@@ -1,3 +1,8 @@
+/*
+	Owner: Joaquín Paz
+	Year: 2022
+	Description: A parent Media class extended by various sub classes to practice inheritance.
+*/
 class Media {
     constructor(title) {
         this._title = title;
@@ -72,7 +77,7 @@ class CD extends Media {
         return this._songs
     }
 }
-const testBook = new Book('Harry Pothead', 'JK Rowling', 309)
+const testBook = new Book('Harry Potter', 'JK Rowling', 309)
 const testMovie = new Movie('Terror deep', 'Michael Bay', 185)
 const testCD = new CD('Living on a prayer', 'Bon Jovi', ['you give love a bad name', 'i will always love you', 'bed of roses'])
 

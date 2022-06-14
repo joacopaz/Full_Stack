@@ -1,3 +1,9 @@
+/*
+	Owner: Joaquín Paz
+	Year: 2022
+	Description: Create a parent School class with several child classes extending it.
+*/
+
 class School {
     constructor(name, level, numberOfStudents) {
         if (level.toLowerCase() !== 'primary' && level.toLowerCase() !== 'middle' && level.toLowerCase() !== 'high') {

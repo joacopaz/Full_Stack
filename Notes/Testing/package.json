@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*",
+    "sinon": "*"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}

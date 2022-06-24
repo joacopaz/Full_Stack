@@ -25,4 +25,36 @@ A good REST paradigm is stateless, the server does not need to know anything abo
 
 > an optional message body containing data
 
+ --- Requests ---
+
+ The fetch() function:
+    Creates a request object that contains relevant information that an API needs.
+    Sends that request object to the API endpoint provided.
+    Returns a promise that ultimately resolves to a response object, which contains the status of the promise with information the API sent back.
 */
+
+// GET request
+fetch('https://api-to-call.com/endpoint').then(response => {
+    if (response.ok) {
+        return response.json();
+    }
+    throw new Error('Request failed!');
+}, networkError => console.log(networkError.message)).then(jsonResponse => {
+    // Code to execute with json response
+    console.log(jsonResponse) // we get the info and read it
+})
+
+// POST request
+fetch('https://api-to-call.com/endpoint', {
+    method: 'POST',
+    body: JSON.stringify({
+        id: '200'
+    })
+}).then(response => {
+    if (response.ok) {
+        return response.json()
+    };
+    throw new Error('Request failed!');
+}, networkError => console.log(networkError.message)).then(jsonResponse => {
+    // Code to execute with json response
+})

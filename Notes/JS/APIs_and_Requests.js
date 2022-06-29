@@ -33,6 +33,8 @@ A good REST paradigm is stateless, the server does not need to know anything abo
     Returns a promise that ultimately resolves to a response object, which contains the status of the promise with information the API sent back.
 */
 
+import fetch from "node-fetch"
+
 // GET request
 fetch('https://api-to-call.com/endpoint').then(response => {
     if (response.ok) {
@@ -43,6 +45,28 @@ fetch('https://api-to-call.com/endpoint').then(response => {
     // Code to execute with json response
     console.log(jsonResponse) // we get the info and read it
 })
+// Same GET request (using a real API) but with an async function
+const getSuggestions = async () => {
+    const wordToQuery = 'dog' // we can get the word from an input field, here I just hard code it
+    const url = 'https://api.datamuse.com/words?'
+    const queryParams = 'rel_jja='
+    const endpoint = url + queryParams + wordToQuery;
+    try {
+        const response = await fetch(endpoint, {
+            cache: 'no-cache'
+        })
+        if (response.ok) {
+            const jsonResponse = await response.json()
+            jsonResponse.forEach((result, i) => {
+                if (i < 10) console.log('Word ' + (i + 1) + ': ' +
+                    result.word) // we log the first 10 results
+            })
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+getSuggestions()
 
 // POST request
 fetch('https://api-to-call.com/endpoint', {

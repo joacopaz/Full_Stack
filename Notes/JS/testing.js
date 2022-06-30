@@ -1,1 +1,1 @@
-// See mocha environment -> test -> info.js
+// See Testing -> test -> info.js

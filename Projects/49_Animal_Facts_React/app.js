@@ -1,3 +1,9 @@
+/*
+	Owner: Joaquín Paz
+	Year: 2022
+	Description: A simple random animal fact app that displays random facts when clicking the animal's image.
+*/
+
 import { animals } from "./animals";
 import * as ReactDOM from "react-dom";
 import * as React from "react";

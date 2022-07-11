@@ -220,6 +220,8 @@ NeedsDefaultProp.defaultProps = {
 ReactDOM.render(<NeedsDefaultProp />, document.getElementById("app")); // if you would add a text property it would render that instead
 
 // --- Dynamic Information ---
+// A React component should use props to store information that can be changed, but can only be changed by a different component.
+// A React component should use state to store information that the component itself can change.
 // Components can vary through props and state, this are the only things that should change. Each component decides it's own state, unlike props which come from the outside
 // To add a state it should be passed into the constructor method
 class Example extends React.Component {
@@ -254,3 +256,47 @@ class Mood extends React.Component {
 }
 
 ReactDOM.render(<Mood />, document.getElementById("app"));
+
+// Program pattern: Changing states and props
+// Child.js -> Child defines a way to handleChange.
+export class Child extends React.Component {
+	constructor(props) {
+		super(props);
+		this.handleChange = this.handleChange.bind(this);
+	}
+	handleChange(e) {
+		const name = e.target.value;
+		this.props.onChange(name);
+	}
+	render() {
+		return (
+			<div>
+				<h1>Hey my name is {this.props.name}!</h1>
+				<select id="great-names" onChange={this.handleChange}>
+					<option value="Frarthur">Frarthur</option>
+
+					<option value="Gromulus">Gromulus</option>
+
+					<option value="Thinkpiece">Thinkpiece</option>
+				</select>
+			</div>
+		);
+	}
+}
+// Parent.js
+import { Child } from "./Child";
+class Parent extends React.Component {
+	constructor(props) {
+		super(props);
+		this.changeName = this.changeName.bind(this);
+		this.state = { name: "Frarthur" };
+	}
+	changeName(newName) {
+		this.setState({ name: newName });
+	}
+	render() {
+		return <Child name={this.state.name} onChange={this.changeName} />;
+	}
+}
+
+ReactDOM.render(<Parent />, document.getElementById("app"));

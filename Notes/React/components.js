@@ -226,7 +226,7 @@ ReactDOM.render(<NeedsDefaultProp />, document.getElementById("app")); // if you
 // To add a state it should be passed into the constructor method
 class Example extends React.Component {
 	constructor(props) {
-		super(props); // we mantain the default props building methods
+		super(props); // we maintain the default props building methods
 		this.state = { mood: "decent" }; // we add a this.state value with an object with the initial states in it
 	}
 	render() {
@@ -258,6 +258,7 @@ class Mood extends React.Component {
 ReactDOM.render(<Mood />, document.getElementById("app"));
 
 // Program pattern: Changing states and props
+// A stateful component passes a state to a stateless (child)
 // Child.js -> Child defines a way to handleChange.
 export class Child extends React.Component {
 	constructor(props) {
@@ -283,7 +284,7 @@ export class Child extends React.Component {
 		);
 	}
 }
-// Parent.js
+// Parent.js changes name by providing child a prop, which child uses to change the parent state
 import { Child } from "./Child";
 class Parent extends React.Component {
 	constructor(props) {
@@ -296,6 +297,75 @@ class Parent extends React.Component {
 	}
 	render() {
 		return <Child name={this.state.name} onChange={this.changeName} />;
+	}
+}
+
+ReactDOM.render(<Parent />, document.getElementById("app"));
+// Children should only have one job, not two, so there should be a child to change the state and another one to display the name, so you can refactor the previous exercise in this way:
+// Separating a children to display the name and another one to set it:
+// Sibling.js
+export class Sibling extends React.Component {
+	render() {
+		const name = this.props.name;
+		return (
+			<div>
+				<h1>Hey, my name is {name}!</h1>
+				<h2>Don't you think {name} is the prettiest name ever?</h2>
+				<h2>Sure am glad that my parents picked {name}!</h2>
+			</div>
+		);
+	}
+}
+// Child.js
+export class Child extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.handleChange = this.handleChange.bind(this);
+	}
+
+	handleChange(e) {
+		const name = e.target.value;
+		this.props.onChange(name);
+	}
+
+	render() {
+		return (
+			<div>
+				<select id="great-names" onChange={this.handleChange}>
+					<option value="Frarthur">Frarthur</option>
+					<option value="Gromulus">Gromulus</option>
+					<option value="Thinkpiece">Thinkpiece</option>
+				</select>
+			</div>
+		);
+	}
+}
+// Parent.js
+import { Child } from "./Child";
+import { Sibling } from "./Sibling";
+class Parent extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = { name: "Frarthur" };
+
+		this.changeName = this.changeName.bind(this);
+	}
+
+	changeName(newName) {
+		this.setState({
+			name: newName,
+		});
+	}
+
+	render() {
+		return (
+			<div>
+				<Child onChange={this.changeName} />
+				<Sibling name={this.state.name} />
+			</div>
+		);
 	}
 }
 

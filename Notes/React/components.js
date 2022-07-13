@@ -347,9 +347,7 @@ import { Sibling } from "./Sibling";
 class Parent extends React.Component {
 	constructor(props) {
 		super(props);
-
 		this.state = { name: "Frarthur" };
-
 		this.changeName = this.changeName.bind(this);
 	}
 
@@ -370,3 +368,50 @@ class Parent extends React.Component {
 }
 
 ReactDOM.render(<Parent />, document.getElementById("app"));
+
+// Life cycle methods
+/* 1 Mounting, when the component is being initialized and put into the DOM for the first time, here componentDidMount() runs
+   2 Updating, when the component updates as a result of changed state or changed props (here componentDidUpdate runs), triggered by any setState or props
+   3 Unmounting, when the component is being removed from the DOM (here componentWillUnmount will run) */
+class Clock extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { date: new Date() };
+	}
+
+	render() {
+		<div>
+			{this.props.isPrecise
+				? this.state.date.toISOString()
+				: this.state.date.toLocaleTimeString()}
+		</div>;
+	}
+	componentDidMount() {
+		// this function will run immediately after the component mounts
+		this.startInterval();
+	}
+	componentWillUnmount() {
+		// this function will run before destroying the component, so it's the time to clean up the any side effects of the component
+		clearInterval(this.intervalID);
+	}
+	componentDidUpdate(prevProps) {
+		// takes 1 param, the previous properties last time it was rendered. If there was no change, we don't want to run it, hence return
+		if (this.props.isPrecise === prevProps.isPrecise) return;
+		clearInterval(this.intervalID);
+		this.startInterval();
+	}
+	startInterval() {
+		let delay;
+		if (this.props.isPrecise) {
+			delay = 100;
+		} else {
+			delay = 1000;
+		}
+		this.intervalID = setInterval(() => {
+			// this will bind this property (which we are creating) to the instance of the object
+			this.setState({ date: new Date() });
+		}, delay);
+	}
+}
+
+ReactDOM.render(<Clock />, document.getElementById("app"));

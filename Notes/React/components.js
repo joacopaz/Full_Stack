@@ -12,7 +12,7 @@ class MyComponentClass extends React.Component {
 // A component instance can be created by name it as the component class in between </>, that's why <MyComponentClass /> renders below, react knows it's a component because of the first capital letter
 ReactDOM.render(<MyComponentClass />, document.getElementById("app"));
 
-// Quote maker example
+// Quote maker example (see statelessFunctionComponents.js for a more concise of creating components)
 class MyQuote extends React.Component {
 	render() {
 		return (

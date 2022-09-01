@@ -127,3 +127,16 @@ const listWithKeys = (
         <li key="li-03">Example3</li>
     </ul>
 )
+
+// Injecting inline styles into jsx
+
+const styles = {
+    color: 'darkcyan',
+    background: 'mintcream'
+};
+
+const injectedJsx = (
+    <ul style={{ color: 'green', textAlign: 'center' }}>
+        <li style={styles}></li>
+    </ul>
+)

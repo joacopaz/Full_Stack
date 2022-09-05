@@ -1,12 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
-	Link,
-	Outlet,
-} from "react-router-dom";
+import { Routes, Route, Link, Outlet } from "react-router-dom";
 import Landing from "./routes/landing";
 import About from "./routes/about";
 import Purchase from "./routes/purchase";

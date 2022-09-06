@@ -1,6 +1,8 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { Routes, Route, Link, Outlet } from "react-router-dom";
+import Articles from "./routes/articles";
+import Article from "./routes/article";
 import Landing from "./routes/landing";
 import About from "./routes/about";
 import Purchase from "./routes/purchase";
@@ -19,7 +21,7 @@ export default function App() {
 		if (name === "username") return setUsername(value);
 		setPassword(value);
 	};
-	const [auth, setAuth] = useState(false);
+	const [auth, setAuth] = useState(true);
 	const authenticate = (e) => {
 		e.preventDefault();
 		if (username === "admin" && password === "admin") {
@@ -56,7 +58,6 @@ export default function App() {
 			)}
 			{auth && (
 				<>
-					{" "}
 					<Link to={"about"} onClick={handleClick}>
 						About
 					</Link>
@@ -66,9 +67,18 @@ export default function App() {
 					<Link to={"contact"} onClick={handleClick}>
 						Contact
 					</Link>
+					<Link to={"articles"} onClick={handleClick}>
+						Article
+					</Link>
 					<Outlet />
 					<Routes>
 						<Route path="/" element={<Landing />} />
+						{/* Adding a NO MATCH route */}
+						<Route path="*" element={<p>No match found.</p>} />
+						{/* Adding a parameter to a route */}
+						<Route path="articles" element={<Articles />}>
+							<Route path=":id" element={<Article />} />
+						</Route>
 						<Route path="about" element={<About handleClick={handleClick} />} />
 						<Route
 							path="purchase"

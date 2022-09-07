@@ -1,7 +1,16 @@
-import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 export default function Articles(props) {
-	const [id, setId] = useState(0);
+	const navigate = useNavigate();
+	const [id, setId] = useState(1);
+	useEffect(() => {
+		if (id > 100) {
+			setId(100);
+		}
+		if (id < 1) {
+			setId(1);
+		}
+	}, [id]);
 	const handleChange = ({ target }) => {
 		if (target.value.length < 4) {
 			if (isNaN(parseInt(target.value, 10))) return;
@@ -12,24 +21,28 @@ export default function Articles(props) {
 	};
 	const search = (e) => {
 		e.preventDefault();
-		window.open(`/articles/${id}`, "_self");
+		navigate(`/articles/${id}`);
 	};
 	return (
 		<>
-			<p>This is the article page</p>
+			<p>Search article by ID</p>
 			<form onSubmit={search}>
 				<input
-					type="text"
+					type="number"
 					onChange={handleChange}
 					value={id}
-					style={{ display: "inline", margin: "1rem", width: "50px" }}></input>
+					style={{
+						display: "inline",
+						margin: "0 1rem",
+						width: "50px",
+					}}></input>
 				<button type="submit">Search</button>
 			</form>
 			<br />
-			<Outlet />
-			<Link to="/" onClick={props.handleClick}>
+			<Link to="#" onClick={() => navigate(-1)}>
 				Back
 			</Link>
+			<Outlet />
 		</>
 	);
 }

@@ -34,3 +34,5 @@ Each Route component should:
 - be rendered inside a Router.
 - have a path prop indicating the URL path that will cause the route to render.
 - wrap the component that we want to display in the event that the path prop matches.
+
+See ./testingreactrouter for more information

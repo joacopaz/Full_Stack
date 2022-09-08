@@ -1,0 +1,11 @@
+{
+	"name": "react_testing",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "jest --coverage"
+	},
+	"author": "Joaquin Paz",
+	"license": "ISC"
+}

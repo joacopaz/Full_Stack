@@ -127,6 +127,151 @@ An advance method is store.replaceReducer(nextReducer).
 
 ## Getting Started
 
+We will use createStore, although it is not the recommended method.
+
 > To install `npm install redux`.
 
 > To import redux methods `import {createStore} from 'redux'`
+
+The docs recommend to use reduxjs toolkit
+
+> ```
+> npm install @reduxjs/toolkit // redux toolkit
+> npm install react-redux // standard redux library
+> npm install --save-dev @redux-devtools/core // redux devtools
+> npx create-react-app my-app --template redux // to create react app with redux
+> ```
+>
+> To import redux methods `import {configureStore} from 'redux'`
+
+## Slices
+
+For large apps stores will manage complex states, so an object is the best way to store it.
+
+```
+// For example
+state = {
+  todos: [
+    {
+      id: 0,
+      text: 'Complete the Learn Redux course',
+      isCompleted: false
+    },
+    {
+      id: 1,
+      text: 'Build a counter app',
+      isCompleted: true
+    },
+  ],
+  visibilityFilter: 'SHOW_INCOMPLETE'
+};
+```
+
+Each property, for example `state.todos` and `state.visibilityFilter`, are known as `slices`.
+
+It is recommended to have an `initialState` declared.
+
+```
+const initialState = {
+  todos: [],
+  visibilityFilter: 'SHOW_ALL'
+};
+const todosReducer = (state = initialState, action) => {
+  // rest of todosReducer logic omitted
+};
+```
+
+It is recommended that individual actions only change one slice at a time, therefore the action type should follow the pattern `'sliceName/actionDescriptor'` for example `'todos/addTodo'`
+
+## Reducer Composition
+
+We use reducer composition to create separate reducers responsible for updating each slice of the applications state, and they are merged into a rootReducer to form a single state object.
+
+For example:
+
+```
+// Handles only `state.todos`.
+const initialTodos = [
+  { id: 0, text: 'learn redux', completed: false },
+  { id: 1, text: 'build a redux app', completed: true },
+  { id: 2, text: 'do a dance', completed: false },
+];
+const todosReducer = (todos = initialTodos, action) => {
+  switch (action.type) {
+    case 'todos/addTodo':
+      return [...todos, action.payload]
+    case 'todos/toggleTodo':
+      return todos.map(todo => {
+        return (todo.id === action.payload.id) ?
+          { ...todo, completed: !todo.completed } :
+          {...todo};
+      });
+    default:
+      return todos;
+  }
+};
+
+// Handles only `state.filter`
+const initialFilter = 'SHOW_INCOMPLETE',
+const filterReducer = (filter = initialFilter, action) => {
+  switch (action.type) {
+    case 'filter/setFilter':
+      return action.payload;
+    default:
+      return filter;
+};
+
+const rootReducer = (state = {}, action) => {
+  const nextState = {
+    todos: todosReducer(state.todos, action),
+    filter: filterReducer(state.filter, action)
+  };
+  return nextState;
+};
+
+const store = createStore(rootReducer);
+```
+
+## Combine Reducers
+
+The redux package provides the combineReducers() method to combine several reducers into one.
+
+```
+import { createStore, combineReducers } from 'redux'
+
+// todosReducer and filterReducer omitted.
+
+const reducers = {
+todos: todosReducer,
+filter: filterReducer
+};
+const rootReducer = combineReducers(reducers);
+const store = createStore(rootReducer);
+
+// or you could simply run
+
+const store = createStore(combineReducers({
+    todos: todosReducer,
+    filter: filterReducer
+}));
+
+```
+
+## File Logic
+
+Since there could be a lot of slices in the state, the recommended Redux Ducks pattern should be applied:
+
+```
+src/
+|-- index.js
+|-- app/
+    |-- store.js
+|-- components/
+    |-- ComponentA.js
+    |-- ComponentB.js
+|-- features/
+    |-- featureA/
+        |-- featureASlice.js
+    |-- featureB/
+        |-- featureBSlice.js
+```

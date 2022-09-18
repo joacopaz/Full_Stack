@@ -1,0 +1,11 @@
+{
+	"name": "60_online_store_redux",
+	"version": "1.0.0",
+	"description": "Sample online store using react and redux",
+	"main": "./src/index.js",
+	"scripts": {
+		"test": "test"
+	},
+	"author": "Joaquin Paz",
+	"license": "ISC"
+}

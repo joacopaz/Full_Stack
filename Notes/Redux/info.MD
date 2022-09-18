@@ -275,3 +275,48 @@ src/
     |-- featureB/
         |-- featureBSlice.js
 ```
+
+## Using Provider component
+
+To avoid passing the state and dispatch to the App in react, we can use a Provider imported from 'react-redux'
+
+```
+import { Provider } from 'react-redux';
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+```
+
+Then each part of the Component that needs access to the state can do it through user defined `selector functions`.
+
+Selectors are pure functions that select data from Redux's store state.
+
+A selector takes a state as an argument and returns what is needed by the component from the state.
+
+```
+/*
+Given a state with an array of objects, labeled 'todos', and a string, labeled 'filter':
+
+state = {
+  todos: [
+    {id: 1, isComplete: true, text: 'Go shopping'}
+    {id: 2, isComplete: false, text: 'Call home'}
+  ],
+  filter: 'SHOW_ALL'
+}
+*/
+
+// Select the current filter
+export const selectFilter = state => state.filter;
+
+// Select the `text` from each todo in an array.
+export const selectTodoText = state => state.todos.map(
+  todo => todo.text);
+
+// Select the id values of completed todos in an array.
+export const selectIsCompleteIDs = state => state.todos.filter(
+  todo => todo.isComplete).map(todo => todo.id)
+```

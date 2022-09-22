@@ -1,0 +1,386 @@
+## Redux Toolkit
+
+Redux toolkit seeks to simplify the verbose application of Redux.
+
+The main methods are:
+
+- createSlice()
+- configureStore()
+
+### Setting up
+
+`npm install @reduxjs/toolkit`
+
+### Slices
+
+We usually define one reducer per slice of the state.
+
+For example:
+
+```
+/* todosSlice.js  */
+const addTodo = (todo) => {
+  return {
+    type: 'todos/addTodo',
+    payload: todo
+  }
+}
+
+const toggleTodo = (todo) => {
+  return {
+    type: 'todos/toggleTodo',
+    payload: todo
+  }
+}
+
+const todos = (state = [], action) => {
+ switch (action.type) {
+   case 'todos/addTodo':
+     return [
+       ...state,
+       {
+         id: action.payload.id,
+         text: action.payload.text,
+         completed: false
+       }
+     ]
+   case 'todos/toggleTodo':
+     return state.map(todo =>
+       todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo
+     )
+   default:
+     return state
+ }
+}
+```
+
+This can be simplified with createSlice().
+
+`import {createSlice} from '@reduxjs/toolkit'`
+
+createSlice has 1 parameter, options.
+
+Options is an object with 3 keys:
+
+- name: a string that is used as the prefix for generated action types
+- initialState: the initial state value for the reducer
+- reducers: an object of methods, where the keys determine the action type strings that can update the state, and whose methods are reducers that will be executed when that action type is dispatched. These are sometimes referred to as “case reducers”, because they’re similar to a case in a switch statement.
+
+```
+/* todosSlice.js */
+const options = {
+ name: 'todos',
+ initialState: [],
+ reducers: {
+   addTodo: (state, action) => {
+     return [
+       ...state,
+       {
+         id: action.payload.id,
+         text: action.payload.text,
+         completed: false
+       }
+     ]
+   },
+   toggleTodo: (state, action) => {
+     return state.map(todo =>
+       (todo.id === action.payload.id) ? { ...todo, completed: !todo.completed } : todo
+     )
+   }
+ }
+}
+
+const todosSlice = createSlice(options);
+```
+
+### Mutating the state in createSlice()
+
+Because of the Immer library, you can mutate the state in createSlice() and the state would be properly assigned despite the mutations. So you could refactor the code above to:
+
+```
+const todosSlice = createSlice({
+  name: 'todos',
+  initialState: [],
+  reducers: {
+    addTodo: (state, action) => {
+      state.push({
+        ...action.payload,
+        completed: false
+      })
+    },
+    toggleTodo: (state, action) => {
+      const todo = state.find(todo => todo.id === action.payload.id)
+      if (todo) {
+        todo.completed = !todo.completed
+      }
+    }
+  }
+})
+```
+
+### Action generators
+
+createSlice() automatically creates action creators. When returning the createSlice() object we would see something like this:
+
+```
+/* Object returned by todosSlice */
+{
+ name: 'todos',
+ reducer: (state, action) => newState,
+ actions: {
+   addTodo: (payload) => ({type: 'todos/addTodo', payload}),
+   toggleTodo: (payload) => ({type: 'todos/toggleTodo', payload})
+ },
+}
+```
+
+To export the action creators from createSlice() using the "duck pattern"
+
+`export const { addTodo, toggleTodo } = todosSlice.actions`
+
+The reducer is exported as default
+
+`export default todosSlice.reducer`
+
+### configureStore()
+
+To apply configureStore we must
+
+```
+import { configureStore } from '@reduxjs/toolkit'
+
+import todosReducer from './features/todos/todosSlice'
+import filtersReducer from './features/filters/filtersSlice'
+
+const store = configureStore({
+ reducer: {
+   // Define a top-level state field named `todos`, handled by `todosReducer`
+   todos: todosReducer,
+   filters: filtersReducer
+ }
+})
+
+export default store
+```
+
+configureStore() automatically does the following:
+
+- Combines todosReducer and filtersReducer into the root reducer function, which will handle a root state that looks like {todos, filters}, removing the need to call combineReducers()
+- Creates a Redux store using that root reducer, removing the need to call createStore()
+- Adds the thunk middleware
+- Adds more middleware to check for common mistakes like accidentally mutating the state
+- Sets up the Redux DevTools Extension connection
+
+## Handling Async Logic with the Redux store
+
+To handle async requests redux uses middleware (software in between the request and the arrival to the redux store), `redux-thunk` is a middleware that allows this.
+
+Middleware runs after an action is dispatched and before it is passed to the reducer.
+
+To add a middleware we use applyMiddleware() from the redux library.
+
+### applyMiddleware()
+
+```
+import { createStore, applyMiddleware } from 'redux';
+import { middleware1, middleware2, middleware3 } from './exampleMiddlewares';
+import { exampleReducer } from './exampleReducer';
+import { initialState} from './initialState';
+
+const store = createStore(
+  exampleReducer,
+  initialState,
+  applyMiddleware(
+    middleware1,
+    middleware2,
+    middleware3
+  )
+);
+```
+
+Middleware must be a high order function (a function that uses callbacks)
+
+```
+const exampleMiddleware = storeAPI => next => action => {
+  // do stuff here
+  return next(action);  // pass the action on to the next middleware in the pipeline
+}
+```
+
+Each middleware has access to the storeAPI (which consists of the dispatch and getState functions), as well as the next middleware in the pipeline, and the action that is to be dispatched.
+
+Middleware example
+
+```
+import { createStore, applyMiddleware } from 'redux';
+
+const messageReducer = (state = '', action) => {
+  if (action.type === 'NEW_MESSAGE') {
+    return action.payload;
+  } else {
+    return state;
+  }
+}
+
+const logger = storeAPI => next => action => {
+  console.log(storeAPI.getState())
+ const nextState = next(action)
+ console.log(nextState)
+  return nextState;
+};
+
+const store = createStore(messageReducer, '', applyMiddleware(logger));
+store.dispatch({type:'NEW_MESSAGE',payload:"I WROTE A MIDDLEWARE"})
+```
+
+### Thunks
+
+Thunks are high order functions that wrap the computation we want to perform for later. For example
+
+```
+const add = (x,y) => {
+  return () => {
+    return x + y;
+  }
+}
+const delayedAddition = add(2,2)
+delayedAddition() // => 4
+```
+
+We need thunks to delay the call to dispatch after a promise resolves
+
+### redux-thunk
+
+Allows you to write action creators that return thunks instead of objects (which is what the store expects to be dispatched). The thunks can be used to perform async operations.
+
+```
+import { fetchUser } from './api'
+
+// Async action creator example
+
+const getUser = (id) => {
+  return async (dispatch, getState) => {
+    const payload = await fetchUser(id);
+    dispatch({type: 'users/addUser', payload: payload});
+  }
+}
+```
+
+> getUser has two key parts: the synchronous outer function (otherwise known as the thunk action creator) which returns the inner, asynchronous thunk. The thunk receives dispatch and getState as arguments, and dispatches a synchronous action after the asynchronous operation (fetchUser) completes.
+
+Redux-thunk is automatically installed when using redux toolkit configureStore()
+
+### Managing promise lifecycle actions
+
+To take into account possibilities of failure and errors we could rewrite a thunk to include them
+
+```
+import { fetchUser } from './api'
+const fetchUserById = (id) => {
+  return async (dispatch, getState) => {
+    dispatch({type: 'users/requestPending'})
+    try {
+      const payload = await fetchUser(id)
+      dispatch({type: 'users/addUser', payload: payload})
+    } catch(err) {
+      dispatch({type: 'users/error', payload: err})
+    }
+  }
+}
+```
+
+To simplify this good practice pattern we can use `createAsyncThunk()`
+
+### createAsyncThunk()
+
+We could rewrite the previous thunk
+
+```
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { fetchUser } from './api'
+const fetchUserById = createAsyncThunk(
+    'users/fetchUserById', // action type
+    async (userId, thunkAPI) => { // payload creator
+        const response = await fetchUser(userId)
+        return response.data
+    }
+)
+```
+
+In the async function, arg means the first argument to be passed to the thunk action creator. For example 7 if we would fetchUserById(7).
+
+When you pass createAsyncThunk the action type string 'users/fetchUserById', createAsyncThunk produces these three action types:
+
+- 'users/fetchUserById/pending' accessed by fetchUserById.pending
+- 'users/fetchUserById/fulfilled' accessed by fetchUserById.fulfilled
+- 'users/fetchUserById/rejected' accessed by fetchUserById.rejected
+
+If you require multiple arguments you should bundle them into an object
+
+```
+const searchUsers = createAsyncThunk(
+    'users/searchUsers',
+    async ({ firstName, lastName}, thunkAPI) => {
+        // perform the asynchronous search request here
+    }
+)
+```
+
+### Adding extra reducers to createSlice to manage actions it did not create
+
+Example of adding extraReducers to options
+
+```
+export const loadRecipes = createAsyncThunk(
+	"allRecipes/getAllRecipes",
+	async () => {
+		const data = await fetch("api/recipes?limit=10");
+		const json = await data.json();
+		return json;
+	}
+);
+
+const sliceOptions = {
+	name: "allRecipes",
+	initialState: {
+		recipes: [],
+		isLoading: false,
+		hasError: false,
+	},
+	reducers: {},
+	extraReducers: {
+		[loadRecipes.pending]: (state, action) => {
+			state.isLoading = true;
+			state.hasError = false;
+		},
+		[loadRecipes.fulfilled]: (state, action) => {
+			state.isLoading = false;
+			state.hasError = false;
+			state.recipes = action.payload;
+		},
+		[loadRecipes.rejected]: (state, action) => {
+			state.hasError = true;
+			state.isLoading = false;
+		},
+	},
+};
+
+export const allRecipesSlice = createSlice(sliceOptions);
+```
+
+The extraReducers "builder callback" notation is the recommended way of using extraReducers. The builder notation is also the only way to add matcher reducers and default case reducers to your slice.
+
+For example
+
+```
+extraReducers: (builder) => {
+	builder
+		.addCase(incrementAsync.pending, (state) => {
+			state.status = "loading";
+		})
+		.addCase(incrementAsync.fulfilled, (state, action) => {
+			state.status = "idle";
+			state.value += action.payload;
+		});
+}
+```

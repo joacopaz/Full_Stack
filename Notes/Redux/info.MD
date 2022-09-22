@@ -139,7 +139,7 @@ The docs recommend to use reduxjs toolkit
 > npm install @reduxjs/toolkit // redux toolkit
 > npm install react-redux // standard redux library
 > npm install --save-dev @redux-devtools/core // redux devtools
-> npx create-react-app my-app --template redux // to create react app with redux
+> npx create-react-app my-app --template redux --use-npm // to create react app with redux
 > ```
 >
 > To import redux methods `import {configureStore} from 'redux'`
@@ -290,6 +290,8 @@ ReactDOM.render(
 );
 ```
 
+## Selectors
+
 Then each part of the Component that needs access to the state can do it through user defined `selector functions`.
 
 Selectors are pure functions that select data from Redux's store state.
@@ -319,4 +321,69 @@ export const selectTodoText = state => state.todos.map(
 // Select the id values of completed todos in an array.
 export const selectIsCompleteIDs = state => state.todos.filter(
   todo => todo.isComplete).map(todo => todo.id)
+```
+
+## Selector functions
+
+Selectors are a way to access a slice of the App, each component should only have access to their relevant portion of the slice.
+
+- Take a state as an argument
+- Returns what is needed by the component from the state
+
+## useSelector() hook
+
+- Returns data from the store
+- subscribes a child component of `<Provider>` to changes in the store
+
+```
+// Todos.js
+import { useSelector } from 'react-redux';
+import { selectTodos } from 'todosSlice.js';
+
+export const Todos = () => {
+  const todos = useSelector(selectTodos);
+
+  return (
+    <p>{todos}</p>
+  )
+};
+```
+
+Calling useSelector() inside the component definition also subscribes the Todos component to re-render if any changes occur in the todos portion of the Redux store. This optimizes the performance of the application by only re-rendering components that have had their data change and not the entire application.
+
+### Inline useSelector can be used as such
+
+```
+export const Todo = (props) => {
+  const todo = useSelector(state => state.todos[props.id]);
+```
+
+## useDispatch() hook
+
+With the provider we can now use dispatch without having to pass it through props from one component to the other
+
+```
+import { useDispatch } from 'react-redux';
+
+// within component definition
+const dispatch = useDispatch()
+dispatch({type: 'addTodo'});
+```
+
+### Working example of using both hooks
+
+```
+import { useSelector, useDispatch } from 'react-redux';
+import { selectTodo, removeTodo } from './todoSlice.js';
+
+const Todo = () => {
+  const todo = useSelector(selectTodo);
+  const dispatch = useDispatch();
+
+  return (
+    <button onClick={() => dispatch(removeTodo(todo))}>
+      {todo}
+    </button>
+  )
+}
 ```

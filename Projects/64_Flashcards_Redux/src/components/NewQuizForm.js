@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
+import { addCard } from "../features/cards/cardsSlice";
 import { createQuiz } from "../features/quizzes/quizzesSlice";
 import { selectTopics } from "../features/topics/topicsSlice";
 
@@ -18,17 +19,26 @@ export default function NewQuizForm() {
 		if (name.length === 0) {
 			return;
 		}
-
 		const cardIds = [];
+		for (const card of cards) {
+			const uniqueId = uuidv4();
+			dispatch(
+				addCard({
+					id: uniqueId,
+					front: card.front,
+					back: card.back,
+				})
+			);
+			cardIds.push(uniqueId);
+		}
 
-		// create the new cards here and add each card's id to cardIds
 		const uniqueId = uuidv4();
 		createQuiz({
-			id: uniqueId,
+			quizId: uniqueId,
 			name: name,
 			topicId: topicId,
 			cardIds: cardIds,
-		})();
+		})(dispatch);
 
 		navigate(ROUTES.quizzesRoute());
 	};
@@ -62,8 +72,8 @@ export default function NewQuizForm() {
 				<select
 					id="quiz-topic"
 					onChange={(e) => setTopicId(e.currentTarget.value)}
-					placeholder="Topic">
-					<option value="">Topic</option>
+					placeholder="Choose a Topic">
+					<option value="">Choose a Topic</option>
 					{Object.values(topics).map((topic) => (
 						<option key={topic.id} value={topic.id}>
 							{topic.name}
@@ -99,7 +109,7 @@ export default function NewQuizForm() {
 				))}
 				<div className="actions-container">
 					<button onClick={addCardInputs}>Add a Card</button>
-					<button>Create Quiz</button>
+					<button disabled={topicId ? false : true}>Create Quiz</button>
 				</div>
 			</form>
 		</section>

@@ -3,20 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
 import { ALL_ICONS } from "../data/icons";
+import { addTopic } from "../features/topics/topicsSlice";
+import { useDispatch } from "react-redux/es/exports";
 
 export default function NewTopicForm() {
 	const [name, setName] = useState("");
 	const [icon, setIcon] = useState("");
 	const navigate = useNavigate();
-	const uniqueId = uuidv4();
+	const dispatch = useDispatch();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (name.length === 0) {
 			return;
 		}
-
-		// dispatch your add topic action here
+		const uniqueId = uuidv4();
+		dispatch(addTopic({ id: uniqueId, name: name, icon: icon }));
 		navigate(ROUTES.topicsRoute());
 	};
 

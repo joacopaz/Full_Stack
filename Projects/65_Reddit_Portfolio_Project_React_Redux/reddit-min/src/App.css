@@ -1,0 +1,491 @@
+/* Global styles */
+
+* {
+	padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+}
+html {
+	background-image: url("./logo-nocolor.png");
+	background-repeat: no-repeat;
+	background-position: 50% 40%;
+	min-height: 100vh;
+}
+
+/* Header */
+
+header {
+	height: 5vh;
+	min-height: 50px;
+	display: flex;
+	align-items: center;
+	border: darkgrey 2px solid;
+	justify-content: center;
+	/* position: relative; */
+	background-color: white;
+	caret-color: transparent;
+}
+header h2 {
+	left: 1rem;
+	position: absolute;
+}
+header h3 {
+	right: 1rem;
+	position: absolute;
+}
+.favoritesLink {
+	position: absolute;
+	left: -6rem;
+	color: blue;
+}
+
+.active {
+	color: green;
+	text-decoration: none;
+}
+
+.searchBar {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	gap: 10px;
+	position: relative;
+	color: rgb(73, 42, 17);
+}
+.searchBar .search {
+	max-height: 35px;
+}
+.searchBar button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+.searchBar button:hover img {
+	filter: invert(50%);
+}
+.searchBar input {
+	caret-color: auto;
+	text-align: center;
+	height: 2rem;
+	padding: 1px;
+	width: 20rem;
+	font-size: 1.2rem;
+	/* background: left / contain no-repeat url("./logo.png"),
+		right / contain no-repeat url("./logo.png"); */
+	padding: 0 40px;
+}
+.searchBarLogo {
+	position: absolute;
+	left: -2.9rem;
+	top: -0.4rem;
+	width: 45px;
+	display: none;
+}
+.about {
+	font-size: 1.4rem;
+	text-align: center;
+	margin: 1rem auto;
+	width: fit-content;
+	background-color: white;
+}
+.about.aligned ol {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	text-align: left;
+	width: fit-content;
+	width: 100%;
+	padding-left: 5rem;
+}
+.about.aligned ol li {
+	margin: 0.5rem;
+}
+@media only screen and (max-width: 1210px) {
+	header h3 {
+		display: none;
+	}
+	header {
+		justify-content: right;
+	}
+	.searchBar {
+		margin-right: 1rem;
+	}
+}
+@media only screen and (max-width: 765px) {
+	.searchBar {
+		gap: 0;
+	}
+	header h2 {
+		font-size: 0.8rem;
+	}
+	header input {
+		width: 10rem;
+	}
+}
+@media only screen and (max-width: 627px) {
+	header h2 {
+		display: none;
+	}
+	header {
+		justify-content: center;
+	}
+}
+/* Body - Favorites */
+.about {
+	background-color: white;
+}
+.subReddits.favorites {
+	margin-top: 2rem;
+	width: fit-content;
+	border-radius: 10px;
+}
+.subReddits.favorites li {
+	padding: 0;
+}
+.favHeader {
+	margin: 1rem auto;
+	text-align: center;
+	width: fit-content;
+	background-color: white;
+	border-radius: 10px;
+}
+
+/* Body - Subreddits */
+.subReddits {
+	display: flex;
+	flex-direction: column;
+	width: 665px;
+	margin: 0.5rem auto 0 auto;
+	max-height: 845px;
+	flex-wrap: wrap;
+	align-items: center;
+	background-color: white;
+	border-radius: 10px;
+}
+
+.subReddits ::selection {
+	color: none;
+	background: none;
+}
+
+.subReddits li {
+	list-style: none;
+	margin: 0.2rem auto;
+	width: fit-content;
+	min-width: 320px;
+	padding: 0 0.4rem;
+}
+@media only screen and (max-width: 663px) {
+	.subReddits {
+		width: 100%;
+		max-height: unset;
+	}
+	.subReddits li {
+		list-style: none;
+		margin: 0.2rem auto;
+		width: fit-content;
+		min-width: 320px;
+		padding: 0 0.4rem;
+	}
+}
+.buttonContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+	padding: 0 2rem;
+	width: 300px;
+	background-color: white;
+}
+.next,
+.prev {
+	margin: 1rem auto;
+	width: fit-content;
+	padding: 0.5rem 1rem;
+	border-radius: 10px;
+	background: none;
+	outline: none;
+	border: none;
+	color: white;
+	cursor: pointer;
+	background-color: darkgreen;
+	text-decoration: none;
+	text-align: center;
+	font-size: 16px;
+	transition: background-color 100ms, transform 100ms;
+	caret-color: transparent;
+}
+.next:hover,
+.prev:hover {
+	background-color: #4caf50;
+}
+.next:focus,
+.prev:focus {
+	background-color: rgb(5, 60, 5);
+	transform: scale(1.2);
+}
+.prev {
+	right: unset;
+	left: 2rem;
+}
+.prev:disabled,
+.next:disabled {
+	background-color: grey;
+}
+.subReddits .pageNumber {
+	text-align: center;
+	margin-top: 2rem;
+	background-color: white;
+	border: red solid 1px;
+}
+
+/* Body - Subreddit */
+
+.subReddit {
+	text-align: left;
+	width: 320px;
+	border: rgba(128, 128, 128, 0.566) solid 1px;
+	border-radius: 10px;
+	height: 4rem;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	position: relative;
+	padding: 0.5rem;
+	cursor: pointer;
+	caret-color: transparent;
+	transition: 200ms background-color, 200ms border;
+	background-color: white;
+}
+.clickableSubredditLink {
+	position: absolute;
+	z-index: 4;
+}
+.one {
+	height: 100%;
+	left: 0;
+	width: 53%;
+}
+.clickableSubredditLink.two {
+	top: 0;
+	width: 53%;
+	height: 35%;
+}
+.clickableSubredditLink.three {
+	right: 0;
+	height: 100%;
+	width: 18%;
+}
+.subReddit:hover {
+	background-color: rgb(187, 214, 239);
+	border: rgb(255, 255, 255) solid 1px;
+}
+.subReddit:focus {
+	background-color: rgb(137, 187, 234);
+}
+.subReddit h3 {
+	position: absolute;
+	left: 0.5rem;
+	top: 0.5rem;
+}
+
+.subReddit .icon {
+	max-height: 100%;
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+}
+
+.subReddit .subs {
+	position: absolute;
+	bottom: 0.5rem;
+	left: 0.5rem;
+}
+.subReddit .seeMore {
+	position: relative;
+	top: 25%;
+	right: 1%;
+	font-size: 0.8rem;
+	border-radius: 15px;
+	padding: 0.3rem 0.5rem;
+	color: white;
+	background-color: rgb(4, 179, 4);
+	transition: background-color 200ms, transform 200ms;
+}
+.subReddit .seeMore:hover {
+	background-color: rgb(9, 149, 9);
+	transform: scale(1.05);
+}
+
+.enter {
+	background: none;
+	border: none;
+	padding: 1rem;
+	font-size: 1.34rem;
+	border-radius: 15px;
+	padding: 0.3rem 0.5rem;
+	color: white;
+	background-color: rgb(63, 40, 240);
+	transition: background-color 200ms, transform 200ms;
+	cursor: pointer;
+}
+.subReddit .enter {
+	position: relative;
+	top: 25%;
+	right: 1%;
+	font-size: 0.8rem;
+	border-radius: 15px;
+	padding: 0.3rem 0.5rem;
+	color: white;
+}
+
+.enter:hover,
+.enter:focus {
+	background-color: rgb(31, 8, 234);
+	transform: scale(1.1);
+}
+.enter:active {
+	background-color: rgb(129, 3, 158);
+}
+
+.subReddit .favorite {
+	width: 25px;
+	position: relative;
+	top: 25%;
+	right: 5%;
+}
+
+.favorite {
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: transform 200ms;
+}
+
+.favorite:hover {
+	transform: scale(1.2);
+}
+.favorite.inactive {
+	background-image: url("./assets/star-empty.png");
+}
+.favorite.active {
+	background-image: url("./assets/star.png");
+}
+
+/* Body - popup */
+
+.outerPopup {
+	position: fixed;
+	display: flex;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.578);
+	z-index: 5;
+	align-items: center;
+	justify-content: center;
+}
+
+.popup {
+	position: relative;
+	width: 80%;
+	background-color: white;
+	border: rgb(71, 69, 69) solid 1px;
+	z-index: 5;
+	border-radius: 50px;
+	padding: 1rem;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	caret-color: transparent;
+}
+
+.popup .close {
+	position: absolute;
+	right: 1rem;
+	top: 1rem;
+	background: none;
+	width: 10%;
+	height: 10%;
+	color: red;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	cursor: pointer;
+	background-image: url("./assets/close-black.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.popup .close:hover {
+	filter: opacity(100%);
+	background-image: url("./assets/close.png");
+}
+
+.popup h1 {
+	margin: 1rem;
+	max-width: 84%;
+	align-self: flex-start;
+	overflow-wrap: break-word;
+}
+.popup p {
+	margin: 1rem;
+}
+
+.popup img {
+	width: 20%;
+	height: auto;
+	max-height: 100%;
+	display: block;
+}
+.popup .enter {
+	margin: 1rem;
+}
+
+/* Mobile styles */
+
+@media only screen and (max-width: 590px) {
+	header {
+		height: 80px;
+		align-items: flex-start;
+		padding-top: 0.4rem;
+	}
+	.searchBar {
+		flex-direction: column;
+	}
+	.searchBar input {
+		padding: 0;
+		padding-right: 20px;
+		width: 15rem;
+		font-size: 1rem;
+	}
+	.searchBar .search {
+		max-height: 20px;
+		position: absolute;
+		right: 5px;
+		top: 16px;
+		transform: translateY(-50%);
+	}
+
+	.favoritesLink {
+		color: blue;
+		position: unset;
+		margin-top: 0.5rem;
+	}
+	.subReddits li {
+		padding: 0;
+	}
+	.popup {
+		width: 92%;
+		height: 90%;
+	}
+}

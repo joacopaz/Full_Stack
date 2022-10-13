@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div></div>
+		<script>
+			var decodeHTML = function (html) {
+				var txt = document.createElement("textarea");
+				txt.innerHTML = html;
+				return txt.value;
+			};
+			document.querySelector("div").innerHTML = decodeHTML(
+				'&lt;div class="md"&gt;&lt;p&gt;&lt;a href="/r/mademesmile"&gt;r/mademesmile&lt;/a&gt; muy buena publicacion che. Al fin un poco de buena vibra en las redes.&lt;/p&gt;\n&lt;/div&gt;'
+			);
+		</script>
+	</body>
+</html>

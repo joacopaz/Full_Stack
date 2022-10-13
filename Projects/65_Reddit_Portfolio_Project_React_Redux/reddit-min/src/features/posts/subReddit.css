@@ -1,0 +1,27 @@
+/* Subreddit */
+
+.subRedditHeader {
+	margin: 0 auto;
+	text-align: center;
+	margin: 1rem;
+}
+
+/* Posts */
+
+.post {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	list-style: none;
+	margin: 2rem auto;
+	border: red solid 1px;
+	max-width: 50vw;
+}
+.post .content {
+	border: blue solid 1px;
+	width: 100%;
+}
+.content.body ul {
+	list-style: none;
+}

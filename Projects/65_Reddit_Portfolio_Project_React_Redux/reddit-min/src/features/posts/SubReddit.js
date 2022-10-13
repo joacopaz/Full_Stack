@@ -19,6 +19,7 @@ import "./subReddit.css";
 export function SubReddit() {
 	const params = useParams();
 	const subReddit = params.subReddit;
+	const isLoading = useSelector(selectIsLoading);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(setSubReddit(subReddit));
@@ -34,9 +35,16 @@ export function SubReddit() {
 	return (
 		<>
 			<h1 className="subRedditHeader">r/{subReddit}</h1>
-			{posts.map((post) => (
-				<Posts content={post} key={post.id} />
-			))}
+			<div className="posts">
+				{posts.map((post, i) => (
+					<Posts
+						content={post}
+						key={post.id}
+						isFirst={i === 0 ? true : false}
+					/>
+				))}
+				{isLoading && <p className={"loading"}>Loading posts... </p>}
+			</div>
 		</>
 	);
 }

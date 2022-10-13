@@ -42,9 +42,7 @@ export function Favorites({ favorites }) {
 				</div>
 			)}
 			{favsAreLoading ? (
-				<p style={{ textAlign: "center", margin: "1rem auto" }}>
-					Loading Favorites...
-				</p>
+				<p className={"loading"}>Loading Favorites...</p>
 			) : (
 				favorites.length > 0 && <h1 className="favHeader">Favorites</h1>
 			)}

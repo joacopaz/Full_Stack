@@ -1,48 +1,51 @@
-export function Posts({ content }) {
+export function Posts({ content, isFirst }) {
 	const keys = Object.keys(content);
 	const value = Object.values(content);
+
 	const decodeHTML = function (html) {
-		const txt = document.createElement("textarea");
-		txt.innerHTML = html;
-		return txt.value;
+		const text = document.createElement("textarea");
+		text.innerHTML = html;
+		return text.value;
 	};
+	/*	dealing with msg body
+	if (key === "body") {
 	return (
-		<ul className="post">
+	li key={i} className={"content " + key}>
+	div
+	dangerouslySetInnerHTML={{
+	__html: "Body:" + decodeHTML(value[i]),
+	}}></div>
+	</li>
+	);
+	} */
+
+	if (isFirst) console.log(keys.map((key, i) => `${key}: ${value[i]}`));
+
+	return (
+		<ul
+			className={
+				!content.flair || !content.flair.toLowerCase().match(/sticky/)
+					? "post"
+					: "post sticky"
+			}>
+			<li className="content author">
+				Posted by {content.author} {content.createdAgo}
+			</li>
+			<li className="content">
+				<span className="flair">{content.flair}</span>{" "}
+				<span className="content title">{content.title}</span>
+			</li>
+			<li className="content score">{content.score}</li>
 			{keys.map((key, i) => {
-				if (!value[i]) return;
-				if (key === "video")
-					if (value[i])
-						return (
-							<li key={i} className="content">
-								{key}:{JSON.stringify(value[i])}
-							</li>
-						);
-				if (key === "img")
-					return (
-						<li key={i} className="content">
-							<a href={value[i]}>IMG</a>
-						</li>
-					);
-				if (key === "isMedia") {
-					return (
-						<li key={i} className="content">
-							{key}: {value[i]}
-						</li>
-					);
-				}
-				if (key === "body") {
-					return (
-						<li key={i} className="content body">
-							<div
-								dangerouslySetInnerHTML={{
-									__html: decodeHTML(value[i]),
-								}}></div>
-						</li>
-					);
-				}
+				if (!value[i] || key === "body") return;
+				if (key === "score") return;
+				if (key === "title") return;
+				if (key === "flair") return;
+				if (key === "video") return;
+				if (key === "author") return;
 				return (
-					<li key={i} className="content">
-						{key}: {value[i]}
+					<li key={i} className={"content " + key}>
+						{value[i]}
 					</li>
 				);
 			})}

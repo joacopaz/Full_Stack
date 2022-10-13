@@ -31,9 +31,7 @@ export function Subreddits() {
 
 	return (
 		<>
-			{isLoading && (
-				<p style={{ margin: "2rem auto", textAlign: "center" }}>Loading...</p>
-			)}
+			{isLoading && <p className={"loading"}>Loading...</p>}
 			{hasError ? alert("There was an error connecting to the API") : ""}
 			{!isLoading && (
 				<>

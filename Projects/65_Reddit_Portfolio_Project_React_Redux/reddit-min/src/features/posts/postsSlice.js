@@ -93,12 +93,40 @@ export const fetchPosts = createAsyncThunk(
 					body,
 				};
 			});
-			console.log(posts);
 			return {
 				posts,
 				nextPage: jsonResponse.data.after,
 				prevPage: jsonResponse.data.before,
 				page: 1,
+			};
+		} catch (error) {
+			console.log(error);
+		}
+	}
+);
+
+export const fetchSubredditInfo = createAsyncThunk(
+	"posts/fetchSubredditInfo",
+	async (subReddit) => {
+		try {
+			const endpoint = `https://www.reddit.com/r/${subReddit}/about.json`;
+			const response = await fetch(endpoint);
+			const jsonResponse = await response.json();
+			if (!jsonResponse.data) return console.log("No data, invalid Subreddit");
+			const data = jsonResponse.data;
+			let icon = data.community_icon;
+			if (icon.match(/(.*)(.png|.jpg|.jpeg|.PNG|.JPG|.JPEG)/)) {
+				icon = icon.match(/(.*)(.png|.jpg|.jpeg|.PNG|.JPG|.JPEG)/)[0];
+			}
+			return {
+				title: data.display_name_prefixed,
+				subscribers: data.subscribers,
+				description: data.public_description,
+				createdAgo: calculateTime(data.created * 1000),
+				created: new Date(data.created * 1000).toDateString(),
+				over18: data.over18,
+				url: data.url,
+				icon: icon,
 			};
 		} catch (error) {
 			console.log(error);

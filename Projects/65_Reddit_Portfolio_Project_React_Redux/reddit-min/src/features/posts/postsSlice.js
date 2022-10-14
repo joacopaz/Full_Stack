@@ -26,6 +26,7 @@ export const fetchPosts = createAsyncThunk(
 			const children = jsonResponse.data.children;
 			const posts = children.map((post) => {
 				const { data } = post;
+
 				const body = data.selftext_html;
 				const author = `u/${data.author}`;
 				const thumbnail = data.thumbnail === "self" ? null : data.thumbnail;
@@ -35,10 +36,33 @@ export const fetchPosts = createAsyncThunk(
 				const awards = data.total_awards_received;
 				const flair = data.link_flair_text;
 				const authorFlair = data.author_flair_text;
+				const emojis = [];
+				if (data.author_flair_richtext) {
+					data.author_flair_richtext.forEach((emoji) =>
+						emoji.u
+							? emojis.push({
+									text: emoji.u.match(/.*\/(.*)/)[1],
+									url: emoji.u,
+							  })
+							: ""
+					);
+				}
+				if (data.link_flair_richtext) {
+					data.link_flair_richtext.forEach((emoji) =>
+						emoji.u
+							? emojis.push({
+									text: emoji.u.match(/.*\/(.*)/)[1],
+									url: emoji.u,
+							  })
+							: ""
+					);
+				}
+
 				const createdAgo = calculateTime(data.created * 1000);
 				const created = new Date(data.created * 1000).toDateString();
 				const numComments = data.num_comments;
 				const id = data.id;
+				const stickied = data.stickied;
 				const commentsURL = `https://www.reddit.com/comments/${id}.json`;
 				let isMedia = data.is_reddit_media_domain;
 				let video = null;
@@ -76,6 +100,7 @@ export const fetchPosts = createAsyncThunk(
 					author,
 					thumbnail,
 					title,
+					stickied,
 					ratio,
 					score,
 					awards,
@@ -91,6 +116,7 @@ export const fetchPosts = createAsyncThunk(
 					gallery,
 					img,
 					body,
+					emojis,
 				};
 			});
 			return {

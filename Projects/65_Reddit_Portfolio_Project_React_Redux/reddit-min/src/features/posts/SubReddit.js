@@ -32,6 +32,7 @@ export function SubReddit() {
 		);
 	}, [dispatch, subReddit]);
 	const posts = useSelector(selectPosts);
+	const stickies = posts.filter((post) => post.stickied);
 	return (
 		<>
 			<h1 className="subRedditHeader">r/{subReddit}</h1>
@@ -41,6 +42,8 @@ export function SubReddit() {
 						content={post}
 						key={post.id}
 						isFirst={i === 0 ? true : false}
+						stickies={stickies.length}
+						isThird={i === 2 ? true : false}
 					/>
 				))}
 				{isLoading && <p className={"loading"}>Loading posts... </p>}

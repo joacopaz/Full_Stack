@@ -36,16 +36,7 @@ export function Subreddits() {
 			{!isLoading && (
 				<>
 					{subReddits && subReddits.length > 0 && (
-						<h3
-							style={{
-								textAlign: "center",
-								width: "fit-content",
-								margin: "0 auto",
-								backgroundColor: "white",
-								padding: "0.5rem 0 0 0",
-							}}>
-							Results for {term}
-						</h3>
+						<h3 className="favHeader">Results for "{term}"</h3>
 					)}
 					<ul className="subReddits">
 						{typeof subReddits !== "undefined" &&
@@ -55,13 +46,11 @@ export function Subreddits() {
 								))
 							) : (
 								<>
-									<li style={{ textAlign: "center" }}>
-										No search results for {term}
-									</li>
+									<li className="favHeader">No search results for "{term}"</li>
 									<li
 										style={{
 											textAlign: "center",
-											color: "blue",
+											color: "white",
 											textDecoration: "underline",
 											cursor: "pointer",
 										}}

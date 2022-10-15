@@ -65,7 +65,6 @@
 	align-items: center;
 	list-style: none;
 	margin: 0 auto;
-	min-width: 360px;
 	width: 80vw;
 	max-width: 800px;
 	background-color: #1a1a1b;
@@ -133,7 +132,7 @@
 	transform: translateX(-7px);
 	top: 2rem;
 }
-.score::after {
+.innerScore {
 	content: "";
 	height: 4rem;
 	width: 1.2rem;
@@ -141,6 +140,10 @@
 	position: absolute;
 	left: 10%;
 	z-index: 100;
+	background-image: url("../../assets/score_arrow.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 .content.body ul {
 	list-style: none;
@@ -161,4 +164,13 @@
 	justify-content: center;
 	border-radius: 10px;
 	padding: 0 0.3rem;
+}
+
+@media only screen and (max-width: 500px) {
+	.post {
+		width: 100%;
+	}
+	.posts {
+		margin: 3px;
+	}
 }

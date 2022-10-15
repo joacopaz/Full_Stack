@@ -1,3 +1,6 @@
+import upArrow from "../../assets/score_arrow_upvote.png";
+import downArrow from "../../assets/score_arrow_downvote.png";
+import arrows from "../../assets/score_arrow.png";
 import { decodeHTML, applyEmojis } from "./util";
 export function Posts({ content, isFirst, isThird, stickies }) {
 	const keys = Object.keys(content);
@@ -66,6 +69,17 @@ export function Posts({ content, isFirst, isThird, stickies }) {
 				{content.score > 999
 					? `${Math.round((content.score / 1000) * 10) / 10}k`
 					: content.score}
+				<span
+					className="innerScore"
+					style={
+						content.score === 0
+							? { backgroundImage: arrows }
+							: content.score > 0
+							? { backgroundImage: upArrow }
+							: {
+									backgroundImage: downArrow,
+							  }
+					}></span>
 			</li>
 			<li className="content comments">{content.numComments} comments</li>
 		</ul>

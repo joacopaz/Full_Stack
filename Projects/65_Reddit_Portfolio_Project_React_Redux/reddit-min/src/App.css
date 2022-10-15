@@ -8,20 +8,26 @@
 html {
 	background-image: url("./logo-nocolor.png");
 	background-repeat: no-repeat;
-	background-position: 50% 40%;
+	background-position: 50% 80%;
 	min-height: 100vh;
 	background-color: #030303;
 }
 .loading {
 	text-align: center;
-	background-color: black; color:white;
+	background-color: black;
+	color: white;
 	margin: 1rem auto;
 	padding: 1rem;
 	width: max-content;
 }
 .App {
 	position: relative;
-	top: 10vh;
+	top: 6vh;
+}
+@media only screen and (max-width: 590px) {
+	.App {
+		top: 10vh;
+	}
 }
 /* Header */
 
@@ -104,7 +110,8 @@ header h3 {
 	text-align: center;
 	margin: 1rem auto;
 	width: fit-content;
-	background-color: black; color:white;
+	background-color: black;
+	color: white;
 }
 ol .about {
 	display: flex;
@@ -149,9 +156,7 @@ ol .about {
 	}
 }
 /* Body - Favorites */
-.about {
-	background-color: inherit;
-}
+
 .subReddits.favorites {
 	margin-top: 2rem;
 	width: fit-content;
@@ -164,7 +169,8 @@ ol .about {
 	margin: 1rem auto;
 	text-align: center;
 	width: fit-content;
-	background-color: inherit;
+	color: white;
+	background-color: black;
 	border-radius: 10px;
 }
 
@@ -179,6 +185,7 @@ ol .about {
 	align-items: center;
 	background-color: inherit;
 	border-radius: 10px;
+	background-color: black;
 }
 
 .subReddits ::selection {
@@ -213,7 +220,8 @@ ol .about {
 	margin: 0 auto;
 	padding: 0 2rem;
 	width: 300px;
-	background-color: black; color:white;
+	background-color: black;
+	color: white;
 }
 .next,
 .prev {
@@ -253,7 +261,8 @@ ol .about {
 .subReddits .pageNumber {
 	text-align: center;
 	margin-top: 2rem;
-	background-color: black; color:white;
+	background-color: black;
+	color: white;
 	border: red solid 1px;
 }
 
@@ -262,7 +271,7 @@ ol .about {
 .subReddit {
 	text-align: left;
 	width: 320px;
-	border: rgba(128, 128, 128, 0.566) solid 1px;
+	border: rgb(136, 136, 136) solid 2px;
 	border-radius: 10px;
 	height: 4rem;
 	display: flex;
@@ -273,7 +282,7 @@ ol .about {
 	cursor: pointer;
 	caret-color: transparent;
 	transition: 200ms background-color, 200ms border;
-	background-color: white;
+	background-color: #ffffff;
 }
 .clickableSubredditLink {
 	position: absolute;
@@ -296,7 +305,7 @@ ol .about {
 }
 .subReddit:hover {
 	background-color: rgb(187, 214, 239);
-	border: rgb(255, 255, 255) solid 1px;
+	border: rgb(255, 255, 255) solid 2px;
 }
 .subReddit:focus {
 	background-color: rgb(137, 187, 234);
@@ -304,7 +313,7 @@ ol .about {
 .subReddit h3 {
 	position: absolute;
 	left: 0.5rem;
-	top: 0.5rem;
+	top: 0.3rem;
 }
 
 .subReddit .icon {
@@ -491,7 +500,6 @@ ol .about {
 	}
 
 	.favoritesLink {
-		color: blue;
 		position: unset;
 		margin-top: 0.5rem;
 	}

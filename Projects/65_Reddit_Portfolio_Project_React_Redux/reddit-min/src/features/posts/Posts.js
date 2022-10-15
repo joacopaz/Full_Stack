@@ -20,24 +20,33 @@ export function Posts({ content, isFirst, isThird, stickies }) {
 	);
 	} */
 
-	if (isThird) console.log(keys.map((key, i) => `${key}: ${value[i]}`));
-	if (isThird) console.log(content.authorFlair);
-
 	return (
 		<ul className={stickyPost()}>
+			<span className="pinned">
+				{content.stickied ? "PINNED BY MODERATORS" : ""}
+			</span>
 			<li className="content author">
 				Posted by {content.author}{" "}
-				{content.emojis && (
+				{
 					<span
+						style={{
+							backgroundColor: content.authorFlairBackground,
+							color: content.authorFlairColor === "dark" ? "black" : "white",
+						}}
 						dangerouslySetInnerHTML={{
 							__html: applyEmojis(content.emojis, content.authorFlair),
 						}}></span>
-				)}{" "}
+				}{" "}
 				{content.createdAgo}
 			</li>
 			{content.flair && (
 				<li className="content">
-					<span className="flair">{content.flair}</span>{" "}
+					<span
+						className="flair"
+						style={{ backgroundColor: content.linkFlairBackground }}
+						dangerouslySetInnerHTML={{
+							__html: applyEmojis(content.emojis, content.flair),
+						}}></span>
 					<span className="content title">{content.title}</span>
 				</li>
 			)}

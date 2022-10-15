@@ -35,6 +35,9 @@ export const fetchPosts = createAsyncThunk(
 				const score = data.score;
 				const awards = data.total_awards_received;
 				const flair = data.link_flair_text;
+				const linkFlairBackground = data.link_flair_background_color;
+				const authorFlairBackground = data.author_flair_background_color;
+				const authorFlairColor = data.author_flair_text_color;
 				const authorFlair = data.author_flair_text;
 				const emojis = [];
 				if (data.author_flair_richtext) {
@@ -98,6 +101,7 @@ export const fetchPosts = createAsyncThunk(
 				if (!isMedia) isMedia = "text";
 				return {
 					author,
+					linkFlairBackground,
 					thumbnail,
 					title,
 					stickied,
@@ -106,6 +110,8 @@ export const fetchPosts = createAsyncThunk(
 					awards,
 					flair,
 					authorFlair,
+					authorFlairBackground,
+					authorFlairColor,
 					createdAgo,
 					created,
 					numComments,

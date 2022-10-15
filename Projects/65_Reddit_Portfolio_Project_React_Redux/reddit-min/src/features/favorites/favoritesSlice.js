@@ -5,7 +5,15 @@ if (
 	document.cookie.match(/favorites=(.*)/) &&
 	document.cookie.match(/favorites=(.*)/)[1]
 )
-	favs = JSON.parse(document.cookie.match(/favorites=(.*)/)[1]);
+	try {
+		favs = JSON.parse(document.cookie.match(/favorites=(.*)/)[1]);
+	} catch (error) {
+		console.log(error);
+		document.cookie = `favorites=''; expires=${new Date(
+			new Date().getTime() - 1000 * 60 * 60 * 24 * 365
+		).toGMTString()};`;
+	}
+
 const initialState = {
 	favorites: favs,
 	favoritesFetched: [],
@@ -16,29 +24,40 @@ const initialState = {
 export const fetchFavorites = createAsyncThunk(
 	"favorites/fetchFavorites",
 	async (favorites) => {
-		const fetchedFavorites = Promise.all(
-			favorites.map(async (favorite) => {
-				const endpoint = `https://www.reddit.com/${favorite}/about.json`;
-				const response = await fetch(endpoint);
-				const jsonResponse = await response.json();
-				const data = jsonResponse.data;
-				let icon = data.community_icon;
-				if (icon.match(/(.*)(.png|.jpg|.jpeg|.PNG|.JPG|.JPEG)/)) {
-					icon = icon.match(/(.*)(.png|.jpg|.jpeg|.PNG|.JPG|.JPEG)/)[0];
-				}
-				return {
-					title: data.display_name_prefixed,
-					subscribers: data.subscribers,
-					description: data.public_description,
-					createdAgo: calculateTime(data.created * 1000),
-					created: new Date(data.created * 1000).toDateString(),
-					over18: data.over18,
-					url: data.url,
-					icon: icon,
-				};
-			})
-		);
-		return fetchedFavorites;
+		try {
+			const fetchedFavorites = Promise.all(
+				favorites.map(async (favorite) => {
+					const endpoint = `https://www.reddit.com/${favorite}/about.json`;
+					const response = await fetch(endpoint);
+					if (!response.ok) {
+						alert("There has been an error fetching your favorite Subreddits");
+						document.cookie = `favorites=''; expires=${new Date(
+							new Date().getTime() - 1000 * 60 * 60 * 24 * 365
+						).toGMTString()};`;
+					}
+					const jsonResponse = await response.json();
+					const data = jsonResponse.data;
+					let icon = data.community_icon;
+					if (icon.match(/(.*)(.png|.jpg|.jpeg|.PNG|.JPG|.JPEG)/)) {
+						icon = icon.match(/(.*)(.png|.jpg|.jpeg|.PNG|.JPG|.JPEG)/)[0];
+					}
+					return {
+						title: data.display_name_prefixed,
+						subscribers: data.subscribers,
+						description: data.public_description,
+						createdAgo: calculateTime(data.created * 1000),
+						created: new Date(data.created * 1000).toDateString(),
+						over18: data.over18,
+						url: data.url,
+						icon: icon,
+					};
+				})
+			);
+			return fetchedFavorites;
+		} catch (error) {
+			console.log(error);
+			alert(error);
+		}
 	}
 );
 

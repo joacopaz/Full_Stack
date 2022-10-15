@@ -98,7 +98,7 @@ header h3 {
 	width: fit-content;
 	background-color: white;
 }
-.about.aligned ol {
+ol .about {
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
@@ -107,8 +107,8 @@ header h3 {
 	width: 100%;
 	padding-left: 5rem;
 }
-.about.aligned ol li {
-	margin: 0.5rem;
+.about.aligned li {
+	margin: 1rem;
 }
 @media only screen and (max-width: 1210px) {
 	header h3 {

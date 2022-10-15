@@ -19,9 +19,8 @@ export function Favorites({ favorites }) {
 	return (
 		<>
 			{favsHaveError &&
-				alert(
-					"The Reddit API is not responding, please check your connection or the status of the service."
-				)}
+				alert("Please check your internet connection") &&
+				window.location.reload()}
 			{favorites.length === 0 && (
 				<div>
 					<h1 className="favHeader">
@@ -29,16 +28,14 @@ export function Favorites({ favorites }) {
 						<span style={{ color: "rgb(73, 42, 17)" }}>key</span>
 					</h1>
 					<h2 className="about">Reddit's easy mode</h2>
-					<p className="about aligned">
-						<ol>
-							<li>Search for subreddits up here {String.fromCharCode(8593)}</li>
-							<li>
-								Click the star {String.fromCharCode(9734)} to favorite
-								subreddits
-							</li>
-							<li>Enjoy the memes without hassle</li>
-						</ol>
-					</p>
+
+					<ol className="about aligned">
+						<li>Search for subreddits up here {String.fromCharCode(8593)}</li>
+						<li>
+							Click the star {String.fromCharCode(9734)} to favorite subreddits
+						</li>
+						<li>Enjoy the memes without hassle</li>
+					</ol>
 				</div>
 			)}
 			{favsAreLoading ? (

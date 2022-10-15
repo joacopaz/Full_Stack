@@ -24,13 +24,11 @@
 .post + .post {
 	border-top: none;
 }
-.post.sticky + .post {
-	border-top: 1px solid black;
-	border-radius: 15px 15px 0 0;
-}
 
 /* Stickies */
-
+.post.sticky:first-child {
+	padding-top: 0.3rem;
+}
 .post.sticky.only {
 	margin-top: 0;
 	margin: 2rem auto;
@@ -40,6 +38,24 @@
 	margin-bottom: 2rem;
 	border-radius: 0px 0px 15px 15px;
 	border-top: none;
+}
+.post.sticky + .post {
+	border-top: 1px solid black;
+	border-radius: 15px 15px 0 0;
+}
+.pinned:first-child {
+	letter-spacing: -0.4px;
+	font-size: 0.68rem;
+	position: relative;
+	top: 0;
+	left: 0;
+
+	padding-left: 1rem;
+	background-image: url("../../assets/greenpin.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: left;
+	align-self: flex-start;
 }
 
 /* Post styling */
@@ -55,7 +71,8 @@
 	min-width: 360px;
 	width: 80vw;
 	max-width: 800px;
-	background-color: rgba(255, 255, 255, 0.384);
+	background-color: #1a1a1b;
+	color: white;
 	padding: 1rem;
 	border: grey 1px solid;
 	font-size: 0.75rem;
@@ -63,24 +80,26 @@
 }
 .post .content {
 	width: 100%;
-	margin: 0.3rem;
 }
 
 .title {
 	font-weight: bold;
 	font-size: 1rem;
+	line-height: normal;
 }
 .author {
 	display: inline;
 	width: fit-content;
-	font-size: 0.8rem;
+	font-size: 0.7rem;
 	font-weight: 500;
-	color: rgb(61, 59, 59);
+	color: #818384;
 }
 .flair {
-	background-color: rgb(128, 17, 150);
+	background-color: rgb(10, 140, 21);
+	display: inline-flex;
+	align-items: center;
 	width: max-content;
-	padding: 0.3rem 0.5rem;
+	padding: 0.1rem 0.5rem;
 	border-radius: 15px;
 	color: white;
 	align-self: flex-start;
@@ -92,9 +111,18 @@
 	width: 25px;
 	height: 10px;
 	position: absolute;
-	left: 0.5rem;
+	left: 0.8rem;
 	transform: translateX(-7px);
 	top: 3rem;
+}
+.score::before {
+	content: "";
+	height: 1500px;
+	width: 1000px;
+	color: green;
+	position: absolute;
+	left: 0;
+	z-index: 100;
 }
 .content.body ul {
 	list-style: none;

@@ -19,7 +19,7 @@ export function Posts({ content, isFirst, isThird, stickies }) {
 	</li>
 	);
 	} */
-
+	if (isThird) console.log(content);
 	return (
 		<ul className={stickyPost()}>
 			<span className="pinned">
@@ -27,48 +27,47 @@ export function Posts({ content, isFirst, isThird, stickies }) {
 			</span>
 			<li className="content author">
 				Posted by {content.author}{" "}
-				{
+				{content.authorFlair && (
 					<span
+						className="emojiContainer"
 						style={{
-							backgroundColor: content.authorFlairBackground,
-							color: content.authorFlairColor === "dark" ? "black" : "white",
+							backgroundColor: content.authorFlairBackground
+								? content.authorFlairBackground
+								: "grey",
+							/*? content.authorFlairBackground
+								: content.authorFlairColor === "dark"
+								? "white"
+								: ""*/ color:
+								/*content.authorFlairColor === "dark" ? "black" : "white"*/ "white",
 						}}
 						dangerouslySetInnerHTML={{
 							__html: applyEmojis(content.emojis, content.authorFlair),
 						}}></span>
-				}{" "}
+				)}{" "}
 				{content.createdAgo}
 			</li>
-			{content.flair && (
-				<li className="content">
+
+			<li className="content">
+				{content.flair && (
 					<span
 						className="flair"
-						style={{ backgroundColor: content.linkFlairBackground }}
+						style={{
+							backgroundColor: content.linkFlairBackground,
+							color: content.linkFlairTextColor === "dark" ? "black" : "white",
+						}}
 						dangerouslySetInnerHTML={{
 							__html: applyEmojis(content.emojis, content.flair),
 						}}></span>
-					<span className="content title">{content.title}</span>
-				</li>
-			)}
+				)}
+				<span className="content title">{content.title}</span>
+			</li>
+
 			<li className="content score">
 				{content.score > 999
 					? `${Math.round((content.score / 1000) * 10) / 10}k`
 					: content.score}
 			</li>
-			{keys.map((key, i) => {
-				if (!value[i] || key === "body") return;
-				if (key === "score") return;
-				if (key === "title") return;
-				if (key === "flair") return;
-				if (key === "video") return;
-				if (key === "author") return;
-				if (key === "emojis") return;
-				return (
-					<li key={i} className={"content " + key}>
-						{value[i]}
-					</li>
-				);
-			})}
+			<li className="content comments">{content.numComments} comments</li>
 		</ul>
 	);
 }

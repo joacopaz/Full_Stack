@@ -10,13 +10,18 @@ html {
 	background-repeat: no-repeat;
 	background-position: 50% 40%;
 	min-height: 100vh;
+	background-color: #030303;
 }
 .loading {
 	text-align: center;
-	background-color: white;
+	background-color: black; color:white;
 	margin: 1rem auto;
 	padding: 1rem;
 	width: max-content;
+}
+.App {
+	position: relative;
+	top: 10vh;
 }
 /* Header */
 
@@ -29,7 +34,10 @@ header {
 	justify-content: center;
 	/* position: relative; */
 	background-color: white;
-	caret-color: transparent;
+	position: fixed;
+	width: 100vw;
+	z-index: 100;
+	top: 0;
 }
 header h2 {
 	left: 1rem;
@@ -96,7 +104,7 @@ header h3 {
 	text-align: center;
 	margin: 1rem auto;
 	width: fit-content;
-	background-color: white;
+	background-color: black; color:white;
 }
 ol .about {
 	display: flex;
@@ -142,7 +150,7 @@ ol .about {
 }
 /* Body - Favorites */
 .about {
-	background-color: white;
+	background-color: inherit;
 }
 .subReddits.favorites {
 	margin-top: 2rem;
@@ -156,7 +164,7 @@ ol .about {
 	margin: 1rem auto;
 	text-align: center;
 	width: fit-content;
-	background-color: white;
+	background-color: inherit;
 	border-radius: 10px;
 }
 
@@ -169,7 +177,7 @@ ol .about {
 	max-height: 845px;
 	flex-wrap: wrap;
 	align-items: center;
-	background-color: white;
+	background-color: inherit;
 	border-radius: 10px;
 }
 
@@ -205,7 +213,7 @@ ol .about {
 	margin: 0 auto;
 	padding: 0 2rem;
 	width: 300px;
-	background-color: white;
+	background-color: black; color:white;
 }
 .next,
 .prev {
@@ -245,7 +253,7 @@ ol .about {
 .subReddits .pageNumber {
 	text-align: center;
 	margin-top: 2rem;
-	background-color: white;
+	background-color: black; color:white;
 	border: red solid 1px;
 }
 

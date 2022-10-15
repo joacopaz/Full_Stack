@@ -4,7 +4,8 @@
 	margin: 0 auto;
 	text-align: center;
 	margin: 1rem auto;
-	background-color: white;
+	background-color: inherit;
+	color: white;
 	width: fit-content;
 }
 
@@ -12,44 +13,39 @@
 .posts {
 	margin: 1rem;
 }
-.post:first-child {
-	border-radius: 10px 10px 0 0;
-	border-top: 1px solid black;
-}
 
 .post:last-child {
 	border-radius: 0 0 10px 10px;
 }
 
-.post + .post {
-	border-top: none;
-}
-
 /* Stickies */
 .post.sticky:first-child {
+	border-radius: 5px 5px 0 0;
+	border-top: 1px solid grey;
 	padding-top: 0.3rem;
+	margin: 0 auto;
 }
 .post.sticky.only {
 	margin-top: 0;
-	margin: 2rem auto;
-	border-radius: 15px;
+	margin: 0.5rem auto;
+	border-radius: 5px;
 }
 .post.sticky.duo + .post.sticky.duo {
-	margin-bottom: 2rem;
-	border-radius: 0px 0px 15px 15px;
+	margin: 0 auto;
+	margin-bottom: 0.5rem;
+	border-radius: 0px 0px 5px 5px;
 	border-top: none;
 }
-.post.sticky + .post {
-	border-top: 1px solid black;
-	border-radius: 15px 15px 0 0;
+.post.sticky.duo + .post.sticky.duo .pinned {
+	display: none;
 }
+
 .pinned:first-child {
 	letter-spacing: -0.4px;
 	font-size: 0.68rem;
 	position: relative;
 	top: 0;
 	left: 0;
-
 	padding-left: 1rem;
 	background-image: url("../../assets/greenpin.png");
 	background-size: contain;
@@ -62,6 +58,7 @@
 
 .post {
 	display: flex;
+	cursor: pointer;
 	position: relative;
 	flex-direction: column;
 	justify-content: center;
@@ -73,13 +70,16 @@
 	max-width: 800px;
 	background-color: #1a1a1b;
 	color: white;
-	padding: 1rem;
+	padding: 0.2rem 1rem 0.2rem 1rem;
 	border: grey 1px solid;
 	font-size: 0.75rem;
 	padding-left: 2.5rem;
+	border-radius: 5px;
+	margin: 0.4rem auto;
 }
 .post .content {
 	width: 100%;
+	margin: 0.2rem;
 }
 
 .title {
@@ -87,12 +87,30 @@
 	font-size: 1rem;
 	line-height: normal;
 }
-.author {
-	display: inline;
+
+.author,
+.comments {
 	width: fit-content;
 	font-size: 0.7rem;
 	font-weight: 500;
 	color: #818384;
+}
+.author {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+.content.comments {
+	display: inline;
+	padding: 0.3rem 1rem;
+	padding-left: 1.45rem;
+	width: fit-content;
+	align-self: flex-start;
+	background-image: url("../../assets/bubble.png");
+	background-size: contain;
+	background-position: left;
+	background-repeat: no-repeat;
+	background-size: 15%;
 }
 .flair {
 	background-color: rgb(10, 140, 21);
@@ -113,15 +131,15 @@
 	position: absolute;
 	left: 0.8rem;
 	transform: translateX(-7px);
-	top: 3rem;
+	top: 2rem;
 }
-.score::before {
+.score::after {
 	content: "";
-	height: 1500px;
-	width: 1000px;
-	color: green;
+	height: 4rem;
+	width: 1.2rem;
+	border: red solid 1px;
 	position: absolute;
-	left: 0;
+	left: 10%;
 	z-index: 100;
 }
 .content.body ul {
@@ -133,7 +151,14 @@
 	display: inline-block;
 	width: 16px;
 	height: 16px;
-	background-position: center;
-	background-repeat: none;
-	background-size: contain;
+	background-position: -10% 00%;
+	background-repeat: no-repeat;
+	background-size: 80%;
+}
+.emojiContainer {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	padding: 0 0.3rem;
 }

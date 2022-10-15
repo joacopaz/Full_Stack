@@ -36,6 +36,7 @@ export const fetchPosts = createAsyncThunk(
 				const awards = data.total_awards_received;
 				const flair = data.link_flair_text;
 				const linkFlairBackground = data.link_flair_background_color;
+				const linkFlairTextColor = data.link_flair_text_color;
 				const authorFlairBackground = data.author_flair_background_color;
 				const authorFlairColor = data.author_flair_text_color;
 				const authorFlair = data.author_flair_text;
@@ -102,6 +103,7 @@ export const fetchPosts = createAsyncThunk(
 				return {
 					author,
 					linkFlairBackground,
+					linkFlairTextColor,
 					thumbnail,
 					title,
 					stickied,

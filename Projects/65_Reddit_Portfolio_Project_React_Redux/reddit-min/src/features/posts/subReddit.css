@@ -20,8 +20,6 @@
 
 /* Stickies */
 .post.sticky:first-child {
-	border-radius: 5px 5px 0 0;
-	border-top: 1px solid grey;
 	padding-top: 0.3rem;
 	margin: 0 auto;
 }
@@ -34,10 +32,14 @@
 	margin: 0 auto;
 	margin-bottom: 0.5rem;
 	border-radius: 0px 0px 5px 5px;
-	border-top: none;
+	position: relative;
+	bottom: 1px;
 }
 .post.sticky.duo + .post.sticky.duo .pinned {
 	display: none;
+}
+.post.sticky.duo:hover {
+	z-index: 10;
 }
 
 .pinned:first-child {
@@ -70,12 +72,18 @@
 	background-color: #1a1a1b;
 	color: white;
 	padding: 0.2rem 1rem 0.2rem 1rem;
-	border: grey 1px solid;
+	border: rgb(81, 81, 81) 1px solid;
 	font-size: 0.75rem;
 	padding-left: 2.5rem;
 	border-radius: 5px;
 	margin: 0.4rem auto;
 }
+
+.post:hover,
+.post.sticky:first-child:hover {
+	border: 1px rgb(161, 160, 160) solid;
+}
+
 .post .content {
 	width: 100%;
 	margin: 0.2rem;
@@ -100,16 +108,20 @@
 	gap: 5px;
 }
 .content.comments {
-	display: inline;
-	padding: 0.3rem 1rem;
-	padding-left: 1.45rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 2.3rem;
+	padding: 0.5rem;
 	width: fit-content;
 	align-self: flex-start;
-	background-image: url("../../assets/bubble.png");
-	background-size: contain;
-	background-position: left;
-	background-repeat: no-repeat;
-	background-size: 15%;
+	gap: 4px;
+}
+.comments:hover {
+	background-color: #2d2d2f;
+}
+.comments img {
+	max-height: 100%;
 }
 .flair {
 	background-color: rgb(10, 140, 21);
@@ -136,11 +148,10 @@
 	content: "";
 	height: 4rem;
 	width: 1.2rem;
-	border: red solid 1px;
 	position: absolute;
 	left: 10%;
 	z-index: 100;
-	background-image: url("../../assets/score_arrow.png");
+	/* background-image: url("../../assets/score_arrow.png"); */
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;

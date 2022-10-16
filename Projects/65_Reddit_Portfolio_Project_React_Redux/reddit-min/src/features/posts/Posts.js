@@ -1,6 +1,7 @@
-import upArrow from "../../assets/score_arrow_upvote.png";
-import downArrow from "../../assets/score_arrow_downvote.png";
-import arrows from "../../assets/score_arrow.png";
+import bubble from "../../assets/bubble.png";
+import neutralScore from "../../assets/score_arrow.png";
+import positiveScore from "../../assets/score_arrow_upvote.png";
+import negativeScore from "../../assets/score_arrow_downvote.png";
 import { decodeHTML, applyEmojis } from "./util";
 export function Posts({ content, isFirst, isThird, stickies }) {
 	const keys = Object.keys(content);
@@ -73,15 +74,24 @@ export function Posts({ content, isFirst, isThird, stickies }) {
 					className="innerScore"
 					style={
 						content.score === 0
-							? { backgroundImage: arrows }
+							? { backgroundImage: `url(${neutralScore})` }
 							: content.score > 0
-							? { backgroundImage: upArrow }
+							? {
+									backgroundImage: `url(${positiveScore})`,
+							  }
 							: {
-									backgroundImage: downArrow,
+									backgroundImage: `url(${negativeScore})`,
 							  }
 					}></span>
 			</li>
-			<li className="content comments">{content.numComments} comments</li>
+			{content.isMedia === "image" ||
+				content.isMedia === "video" ||
+				(content.isMedia === "gallery" && <li className="content media"></li>)}
+			<li className="content comments">
+				{" "}
+				<img src={bubble}></img>
+				{content.numComments} comments
+			</li>
 		</ul>
 	);
 }

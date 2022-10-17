@@ -111,12 +111,15 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	margin: 0;
 	height: 2.3rem;
 	padding: 0.5rem;
 	width: fit-content;
 	align-self: flex-start;
 	gap: 4px;
+	font-size: 0.8rem;
 }
+
 .comments:hover {
 	background-color: #2d2d2f;
 }
@@ -132,6 +135,7 @@
 	border-radius: 15px;
 	color: white;
 	align-self: flex-start;
+	margin: 0.25rem;
 }
 .content.score {
 	display: flex;
@@ -160,14 +164,62 @@
 	list-style: none;
 }
 
+/* Media */
+.content.media {
+	margin: 0.2rem;
+}
+.content.media img,
+.content.media video {
+	max-width: 100%;
+	max-height: 512px;
+	display: block;
+	margin: 0 auto;
+}
+.textThumbnail {
+	height: 140px;
+	width: 140px;
+}
+.content.media video {
+	width: 100%;
+}
+.videoContainer {
+	border: red solid 1px;
+	z-index: 2000;
+	width: 100%;
+	height: 100%;
+}
+.textMedia {
+	position: relative;
+	line-height: 21px;
+	font-size: 0.9rem;
+	word-break: break-word;
+	max-height: 17rem;
+	overflow: hidden;
+	caret-color: transparent;
+	user-select: none;
+}
+.textMedia:after {
+	content: "";
+	width: 100%;
+	height: 80px;
+	z-index: 100;
+	position: absolute;
+	bottom: 0;
+}
+.textMedia:after.overflow {
+	background: linear-gradient(to top, #1a1a1b, #1a1a1b00);
+}
+.textMedia p + p {
+	margin: 1rem 0;
+}
 /* Emojis */
 .emoji {
 	display: inline-block;
 	width: 16px;
 	height: 16px;
-	background-position: -10% 00%;
+	background-position: center;
 	background-repeat: no-repeat;
-	background-size: 80%;
+	background-size: 100% 95%;
 }
 .emojiContainer {
 	display: inline-flex;

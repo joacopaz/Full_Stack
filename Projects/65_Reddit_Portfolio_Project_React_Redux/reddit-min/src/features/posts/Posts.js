@@ -3,10 +3,12 @@ import neutralScore from "../../assets/score_arrow.png";
 import positiveScore from "../../assets/score_arrow_upvote.png";
 import negativeScore from "../../assets/score_arrow_downvote.png";
 import { decodeHTML, applyEmojis } from "./util";
+import { Video } from "./Video";
+import { useRef } from "react";
 export function Posts({ content, isFirst, isThird, stickies }) {
 	const keys = Object.keys(content);
 	const value = Object.values(content);
-
+	const ref = useRef(null);
 	const stickyPost = () => {
 		if (!content.stickied) return "post";
 		if (stickies === 1) return "post sticky only";
@@ -23,7 +25,7 @@ export function Posts({ content, isFirst, isThird, stickies }) {
 	</li>
 	);
 	} */
-	if (isThird) console.log(content);
+	// console.log(content);
 	return (
 		<ul className={stickyPost()}>
 			<span className="pinned">
@@ -42,7 +44,11 @@ export function Posts({ content, isFirst, isThird, stickies }) {
 								: content.authorFlairColor === "dark"
 								? "white"
 								: ""*/ color:
-								/*content.authorFlairColor === "dark" ? "black" : "white"*/ "white",
+								content.authorFlairColor === "dark" &&
+								content.authorFlairBackground !== "transparent" &&
+								content.authorFlairBackground
+									? "black"
+									: "white",
 						}}
 						dangerouslySetInnerHTML={{
 							__html: applyEmojis(content.emojis, content.authorFlair),
@@ -84,12 +90,27 @@ export function Posts({ content, isFirst, isThird, stickies }) {
 							  }
 					}></span>
 			</li>
-			{content.isMedia === "image" ||
-				content.isMedia === "video" ||
-				(content.isMedia === "gallery" && <li className="content media"></li>)}
+			<li className="content media">
+				{content.isMedia === "image" && (
+					<img src={content.img} alt={content.title}></img>
+				)}
+				{content.isMedia === "video" && (
+					<Video id={content.id} video={content.video} />
+				)}
+				{content.isMedia === "text" && !content.stickied && (
+					<div
+						ref={ref}
+						className={`textMedia ${
+							ref && ref.current && ref.current.clientHeight > 272 && "overflow"
+						}`}
+						dangerouslySetInnerHTML={{
+							__html: decodeHTML(content.body),
+						}}></div>
+				)}
+			</li>
 			<li className="content comments">
 				{" "}
-				<img src={bubble}></img>
+				<img src={bubble} alt="#"></img>
 				{content.numComments} comments
 			</li>
 		</ul>

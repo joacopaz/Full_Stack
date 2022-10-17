@@ -68,6 +68,7 @@ export const fetchPosts = createAsyncThunk(
 				const id = data.id;
 				const stickied = data.stickied;
 				const commentsURL = `https://www.reddit.com/comments/${id}.json`;
+				const postHint = data.post_hint;
 				let isMedia = data.is_reddit_media_domain;
 				let video = null;
 				let gallery = null;
@@ -95,9 +96,12 @@ export const fetchPosts = createAsyncThunk(
 						});
 					}
 					if (!data.is_video && !data.is_gallery) {
-						isMedia = "image";
 						img = data.url;
 					}
+				}
+				if (postHint === "image") {
+					isMedia = "image";
+					img = data.url;
 				}
 				if (!isMedia) isMedia = "text";
 				return {

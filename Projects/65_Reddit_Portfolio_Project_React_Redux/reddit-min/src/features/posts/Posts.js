@@ -4,10 +4,8 @@ import positiveScore from "../../assets/score_arrow_upvote.png";
 import negativeScore from "../../assets/score_arrow_downvote.png";
 import { decodeHTML, applyEmojis } from "./util";
 import { Video } from "./Video";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 export function Posts({ content, isFirst, isThird, stickies }) {
-	const keys = Object.keys(content);
-	const value = Object.values(content);
 	const ref = useRef(null);
 	const stickyPost = () => {
 		if (!content.stickied) return "post";
@@ -101,7 +99,9 @@ export function Posts({ content, isFirst, isThird, stickies }) {
 					<div
 						ref={ref}
 						className={`textMedia ${
-							ref && ref.current && ref.current.clientHeight > 272 && "overflow"
+							ref && ref.current && ref.current.scrollHeight > 272
+								? " overflow"
+								: ""
 						}`}
 						dangerouslySetInnerHTML={{
 							__html: decodeHTML(content.body),

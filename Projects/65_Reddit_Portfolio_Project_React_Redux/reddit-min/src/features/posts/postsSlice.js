@@ -3,6 +3,7 @@ import { calculateTime } from "../searchbar/searchSlice";
 
 const initialState = {
 	subReddit: "",
+	unmuted: false,
 	isLoading: false,
 	isLoadingPage: false,
 	hasError: false,
@@ -184,6 +185,9 @@ export const postsSlice = createSlice({
 				firstFilter: action.payload.firstFilter,
 				secondFilter: action.payload.secondFilter,
 			}),
+		setUnmuted: (state, action) => {
+			state.unmuted = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -207,7 +211,8 @@ export const postsSlice = createSlice({
 	},
 });
 
-export const { setSubReddit, setFilters } = postsSlice.actions;
+export const { setSubReddit, setFilters, setUnmuted } = postsSlice.actions;
+export const selectUnmuted = (state) => state.posts.unmuted;
 export const selectSubReddit = (state) => state.posts.subReddit;
 export const selectIsLoading = (state) => state.posts.isLoading;
 export const selectIsLoadingPage = (state) => state.posts.isLoadingPage;

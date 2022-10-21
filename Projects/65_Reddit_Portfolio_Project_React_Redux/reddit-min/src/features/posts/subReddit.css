@@ -98,7 +98,8 @@
 }
 
 .author,
-.comments {
+.comments,
+.share {
 	width: fit-content;
 	font-size: 0.7rem;
 	font-weight: 500;
@@ -109,23 +110,37 @@
 	align-items: center;
 	gap: 5px;
 }
-.content.comments {
+.content.buttons {
+	display: flex;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+	gap: 10px;
+}
+.content.comments,
+.content.share {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	margin: 0;
 	height: 2.3rem;
 	padding: 0.5rem;
-	width: fit-content;
+	width: 140px;
 	align-self: flex-start;
 	gap: 4px;
 	font-size: 0.8rem;
 }
+.content.share {
+	width: fit-content;
+	padding: 0.5rem 0.8rem;
+}
 
-.comments:hover {
+.comments:hover,
+.share:hover {
 	background-color: #2d2d2f;
 }
-.comments img {
+.comments img,
+.share img {
 	max-height: 100%;
 }
 .flair {
@@ -177,6 +192,36 @@
 	display: block;
 	margin: 0 auto;
 }
+/* Overflowing images */
+.imgPreview {
+	content: "";
+	width: 99.9%;
+	left: 0;
+	height: 80px;
+	z-index: 100;
+	position: absolute;
+	transform: translateY(-100%);
+	background: linear-gradient(to top, #1a1a1b, #1a1a1b00);
+}
+.txtImgPreview {
+	position: absolute;
+	font-family: "Roboto", sans-serif;
+	width: 50%;
+	color: rgb(255, 255, 255);
+	text-align: center;
+	transform: translateY(-130%) translateX(-50%);
+	left: 50%;
+	z-index: 101;
+	padding: 0.8rem 1rem;
+	border-radius: 15px;
+	border: 1px rgb(71, 69, 69) solid;
+	background-color: rgba(90, 84, 84, 0.651);
+	transition: background-color 200ms;
+}
+.txtImgPreview:hover {
+	background-color: rgba(90, 84, 84, 0.8);
+}
+
 .textThumbnail {
 	height: 140px;
 	width: 140px;
@@ -192,7 +237,7 @@
 	caret-color: transparent;
 	user-select: none;
 }
-.textMedia.overflow:after {
+.overflow:after {
 	content: "";
 	width: 100%;
 	height: 80px;

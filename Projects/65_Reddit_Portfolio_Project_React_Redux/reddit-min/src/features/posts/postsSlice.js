@@ -27,7 +27,7 @@ export const fetchPosts = createAsyncThunk(
 			const children = jsonResponse.data.children;
 			const posts = children.map((post) => {
 				const { data } = post;
-
+				console.log(data);
 				const body = data.selftext_html;
 				const author = `u/${data.author}`;
 				const thumbnail = data.thumbnail === "self" ? null : data.thumbnail;
@@ -41,7 +41,13 @@ export const fetchPosts = createAsyncThunk(
 				const authorFlairBackground = data.author_flair_background_color;
 				const authorFlairColor = data.author_flair_text_color;
 				const authorFlair = data.author_flair_text;
+				const preview = data.preview ? data.preview.enabled : false;
 				const emojis = [];
+				const isTweet =
+					data.media && data.media.type && data.media.type === "twitter.com"
+						? data.media.oembed.url
+						: false;
+				let additionals = false;
 				if (data.author_flair_richtext) {
 					data.author_flair_richtext.forEach((emoji) =>
 						emoji.u
@@ -130,6 +136,7 @@ export const fetchPosts = createAsyncThunk(
 					img,
 					body,
 					emojis,
+					preview,
 				};
 			});
 			return {

@@ -4,14 +4,16 @@ import positiveScore from "../../assets/score_arrow_upvote.png";
 import negativeScore from "../../assets/score_arrow_downvote.png";
 import { decodeHTML, applyEmojis } from "./util";
 import { Video } from "./Video";
-import { useRef, useState } from "react";
-export function Posts({ content, isFirst, isThird, stickies }) {
+import { useRef } from "react";
+export function Posts({ content, stickies }) {
 	const ref = useRef(null);
+	const imgRef = useRef(null);
 	const stickyPost = () => {
 		if (!content.stickied) return "post";
 		if (stickies === 1) return "post sticky only";
 		if (stickies === 2) return "post sticky duo";
 	};
+
 	/*	dealing with msg body
 	if (key === "body") {
 	return (
@@ -23,9 +25,10 @@ export function Posts({ content, isFirst, isThird, stickies }) {
 	</li>
 	);
 	} */
+
 	// console.log(content);
 	return (
-		<ul className={stickyPost()}>
+		<ul className={stickyPost()} id={content.id}>
 			<span className="pinned">
 				{content.stickied ? "PINNED BY MODERATORS" : ""}
 			</span>
@@ -90,7 +93,41 @@ export function Posts({ content, isFirst, isThird, stickies }) {
 			</li>
 			<li className="content media">
 				{content.isMedia === "image" && (
-					<img src={content.img} alt={content.title}></img>
+					<>
+						<img
+							src={content.img}
+							alt={content.title}
+							ref={imgRef}
+							style={
+								content.preview
+									? {
+											objectFit: "cover",
+											objectPosition: "0% 0%",
+											backgroundColor: "green",
+											width: "100%",
+									  }
+									: {}
+							}></img>
+						<div
+							className={
+								content.preview &&
+								imgRef.current &&
+								imgRef.current.clientHeight > 511
+									? "imgPreview"
+									: ""
+							}></div>
+						<p
+							style={
+								content.preview &&
+								imgRef.current &&
+								imgRef.current.clientHeight < 511
+									? {}
+									: { display: "none" }
+							}
+							className="txtImgPreview">
+							See More
+						</p>
+					</>
 				)}
 				{content.isMedia === "video" && (
 					<Video id={content.id} video={content.video} />
@@ -108,10 +145,20 @@ export function Posts({ content, isFirst, isThird, stickies }) {
 						}}></div>
 				)}
 			</li>
-			<li className="content comments">
-				{" "}
-				<img src={bubble} alt="#"></img>
-				{content.numComments} comments
+			<li className="content buttons">
+				<div className="content comments">
+					<img src={bubble} alt="#"></img>
+					{content.numComments} Comments
+				</div>
+				<div
+					className="content share"
+					onClick={() => {
+						navigator.clipboard.writeText(
+							`${window.location.origin}${window.location.pathname}?share=${content.id}`
+						);
+					}}>
+					<img src={"#"} alt="Share"></img> Share
+				</div>
 			</li>
 		</ul>
 	);

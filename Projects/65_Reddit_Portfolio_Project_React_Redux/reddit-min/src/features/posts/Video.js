@@ -81,7 +81,7 @@ export function Video({ id, video }) {
 				<video
 					ref={videoRef}
 					onLoadedData={(e) => {
-						seekRef.current.max = e.target.duration;
+						seekRef.current.max = e.target.duration - 1;
 					}}
 					onTimeUpdate={(e) => (seekRef.current.value = e.target.currentTime)}
 					onPlay={() => {

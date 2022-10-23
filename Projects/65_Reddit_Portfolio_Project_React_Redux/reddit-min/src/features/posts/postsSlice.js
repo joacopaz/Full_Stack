@@ -3,8 +3,9 @@ import { calculateTime } from "../searchbar/searchSlice";
 
 const initialState = {
 	subReddit: "",
-	unmuted: false,
+	muted: true,
 	isLoading: false,
+	loaded: false,
 	isLoadingPage: false,
 	hasError: false,
 	posts: [],
@@ -12,22 +13,30 @@ const initialState = {
 	prevPage: null,
 	page: null,
 	filter: { firstFilter: null, secondFilter: null },
+	interacted: false,
+	vol: 0,
 };
 
 export const fetchPosts = createAsyncThunk(
 	"posts/fetchPosts",
-	async ({ subReddit, filter, secondFilter }) => {
+	async ({ subReddit, filter, secondFilter, page }) => {
 		try {
-			const endpoint = `https://www.reddit.com/r/${subReddit}${
+			let action = null;
+			if (page && page.after) action = "after";
+			if (page && page.before) action = "before";
+			let endpoint = `https://www.reddit.com/r/${subReddit}${
 				filter ? filter : ""
-			}.json${secondFilter ? secondFilter : ""}?q=count=24&limit=24`;
+			}.json${secondFilter ? secondFilter : ""}?q=count=24&limit=24${
+				action ? `&${action}=${page[action]}` : ""
+			}`;
+			console.log(endpoint);
 			const response = await fetch(endpoint);
 			const jsonResponse = await response.json();
 			if (!jsonResponse.data) return { posts: [], page: 1 };
 			const children = jsonResponse.data.children;
 			const posts = children.map((post) => {
 				const { data } = post;
-				console.log(data);
+				// console.log(data);
 				const body = data.selftext_html;
 				const author = `u/${data.author}`;
 				const thumbnail = data.thumbnail === "self" ? null : data.thumbnail;
@@ -192,8 +201,18 @@ export const postsSlice = createSlice({
 				firstFilter: action.payload.firstFilter,
 				secondFilter: action.payload.secondFilter,
 			}),
-		setUnmuted: (state, action) => {
-			state.unmuted = action.payload;
+		setMuted: (state, action) => {
+			state.muted = action.payload;
+		},
+		setVol: (state, action) => {
+			state.vol = action.payload;
+		},
+		setInteracted: (state, action) => {
+			state.interacted = action.payload;
+		},
+		setCleanup: (state) => {
+			state.subReddit = "";
+			state.posts = [];
 		},
 	},
 	extraReducers: (builder) => {
@@ -201,10 +220,12 @@ export const postsSlice = createSlice({
 			.addCase(fetchPosts.pending, (state) => {
 				state.isLoading = true;
 				state.hasError = false;
+				state.loaded = false;
 			})
 			.addCase(fetchPosts.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.hasError = false;
+				state.loaded = true;
 				state.posts = action.payload.posts;
 				state.nextPage = action.payload.nextPage;
 				state.prevPage = action.payload.prevPage;
@@ -213,18 +234,30 @@ export const postsSlice = createSlice({
 			.addCase(fetchPosts.rejected, (state) => {
 				state.isLoading = false;
 				state.hasError = true;
+				state.loaded = false;
 				state.posts = [];
 			});
 	},
 });
 
-export const { setSubReddit, setFilters, setUnmuted } = postsSlice.actions;
-export const selectUnmuted = (state) => state.posts.unmuted;
+export const {
+	setSubReddit,
+	setInteracted,
+	setFilters,
+	setMuted,
+	setCleanup,
+	setVol,
+} = postsSlice.actions;
+export const selectVol = (state) => state.posts.vol;
+export const selectLoaded = (state) => state.posts.loaded;
+export const selectMuted = (state) => state.posts.muted;
+export const selectInteracted = (state) => state.posts.interacted;
 export const selectSubReddit = (state) => state.posts.subReddit;
 export const selectIsLoading = (state) => state.posts.isLoading;
 export const selectIsLoadingPage = (state) => state.posts.isLoadingPage;
 export const selectHasError = (state) => state.posts.hasError;
 export const selectPosts = (state) => state.posts.posts;
 export const selectPage = (state) => state.posts.page;
+export const selectNextPage = (state) => state.posts.nextPage;
 export const selectFilters = (state) => state.posts.filter;
 export default postsSlice.reducer;

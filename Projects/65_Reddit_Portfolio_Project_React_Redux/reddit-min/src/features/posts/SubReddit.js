@@ -1,5 +1,5 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Posts } from "./Posts";
 import {
@@ -13,6 +13,8 @@ import {
 	selectPage,
 	selectFilters,
 	fetchPosts,
+	setCleanup,
+	selectNextPage,
 } from "./postsSlice";
 import "./subReddit.css";
 
@@ -22,7 +24,9 @@ export function SubReddit() {
 	const isLoading = useSelector(selectIsLoading);
 	const dispatch = useDispatch();
 	const [searchParams, setSearchParams] = useSearchParams();
+	const bottomRef = useRef(null);
 	const shared = searchParams.get("share");
+	const nextPage = useSelector(selectNextPage);
 	useEffect(() => {
 		dispatch(setSubReddit(subReddit));
 		dispatch(
@@ -32,6 +36,7 @@ export function SubReddit() {
 				secondFilter: null,
 			})
 		);
+		return () => dispatch(setCleanup());
 	}, [dispatch, subReddit]);
 	useEffect(() => {
 		if (document.getElementById(shared))
@@ -48,8 +53,22 @@ export function SubReddit() {
 				{posts.map((post, i) => (
 					<Posts content={post} key={post.id} stickies={stickies.length} />
 				))}
-				{isLoading && <p className={"loading"}>Loading posts... </p>}
+				{isLoading && <p className="loading">Loading posts... </p>}
 			</div>
+			<div
+				className="nextPosts"
+				onClick={() => {
+					dispatch(setCleanup());
+					dispatch(
+						fetchPosts({
+							subReddit: subReddit,
+							page: { after: nextPage },
+						})
+					);
+				}}>
+				Next Page
+			</div>
+			<div ref={bottomRef} className="bottomDetector"></div>
 		</>
 	);
 }

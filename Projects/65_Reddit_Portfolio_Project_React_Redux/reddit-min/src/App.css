@@ -14,7 +14,7 @@ html {
 }
 .loading {
 	text-align: center;
-	background-color: black;
+	background-color: #030303;
 	color: white;
 	margin: 1rem auto;
 	padding: 1rem;
@@ -23,6 +23,11 @@ html {
 .App {
 	position: relative;
 	top: 6vh;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
 }
 @media only screen and (max-width: 590px) {
 	.App {
@@ -430,6 +435,8 @@ ol .about {
 	align-items: center;
 	flex-direction: column;
 	caret-color: transparent;
+	padding-bottom: 2rem;
+	max-width: 500px;
 }
 
 .popup .close {
@@ -509,6 +516,5 @@ ol .about {
 	}
 	.popup {
 		width: 92%;
-		height: 90%;
 	}
 }

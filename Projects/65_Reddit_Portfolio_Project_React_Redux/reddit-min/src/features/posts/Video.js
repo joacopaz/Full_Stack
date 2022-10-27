@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState, useLayoutEffect } from "react";
+import { formatTime } from "./util";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	selectMuted,
@@ -7,6 +8,8 @@ import {
 	selectInteracted,
 	selectVol,
 	setVol,
+	selectFullScreen,
+	setFullScreen,
 } from "./postsSlice";
 import isMuted from "../../assets/muted.png";
 import isUnmuted from "../../assets/unmuted.png";
@@ -19,7 +22,8 @@ export function Video({ id, video }) {
 	const [ended, setEnded] = useState(false);
 	const [timeoutID, setTimeoutID] = useState(false);
 	const [timeoutVideoID, setTimeoutVideoID] = useState(false);
-	const [fullScreen, setFullScreen] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const fullScreen = useSelector(selectFullScreen);
 	const videoRef = useRef(null);
 	const audioRef = useRef(null);
 	const mutedRef = useRef(null);
@@ -28,7 +32,12 @@ export function Video({ id, video }) {
 	const controlsRef = useRef(null);
 	const videoContainerRef = useRef(null);
 	const play = () => {
-		videoRef.current.play();
+		if (videoRef.current.readyState >= 3) {
+			setLoading(false);
+			videoRef.current.play();
+		} else {
+			setLoading(true);
+		}
 		audioRef.current.currentTime = videoRef.current.currentTime;
 	};
 	const pause = () => {
@@ -46,15 +55,17 @@ export function Video({ id, video }) {
 				/* IE11 */
 				elem.msRequestFullscreen();
 			}
-			setFullScreen(true);
+			dispatch(setFullScreen(true));
 		} else {
 			document.exitFullscreen();
-			setFullScreen(false);
+			dispatch(setFullScreen(false));
 		}
 	};
 	useLayoutEffect(() => {
 		document.onfullscreenchange = () => {
-			document.fullscreenElement ? setFullScreen(true) : setFullScreen(false);
+			document.fullscreenElement
+				? dispatch(setFullScreen(true))
+				: dispatch(setFullScreen(false));
 		};
 		return () => {
 			document.onfullscreenchange = undefined;
@@ -63,8 +74,10 @@ export function Video({ id, video }) {
 	useEffect(() => {
 		const handlePlay = (entries, observer) => {
 			entries.forEach((entry) => {
-				if (entry.isIntersecting && !playing && !interacting) play();
-				if (!entry.isIntersecting && playing && !interacting) pause();
+				if (entry.isIntersecting && !playing && !interacting && !fullScreen)
+					play();
+				if (!entry.isIntersecting && playing && !interacting && !fullScreen)
+					pause();
 			});
 		};
 		const options = {
@@ -75,8 +88,9 @@ export function Video({ id, video }) {
 		let observer = new IntersectionObserver(handlePlay, options);
 
 		observer.observe(videoRef.current);
+
 		return () => observer.disconnect();
-	}, [playing, interacting]);
+	}, [playing, interacting, fullScreen]);
 	useEffect(() => {
 		audioRef.current.volume = vol;
 		volRef.current.value = vol * 100;
@@ -87,18 +101,21 @@ export function Video({ id, video }) {
 				className="videoContainer"
 				ref={videoContainerRef}
 				onMouseMove={() => {
+					if (timeoutID) return;
 					controlsRef.current.style.opacity = "100";
-					if (timeoutID) clearTimeout(timeoutID);
+					videoContainerRef.current.style.cursor = "auto";
 					setTimeoutID(
 						setTimeout(() => {
 							controlsRef.current.style.opacity = "0";
+							videoContainerRef.current.style.cursor = "none";
 							setTimeoutID(false);
-						}, 1000)
+						}, 5000)
 					);
 				}}>
 				<div
 					className="invisibleListener"
 					onClick={(e) => {
+						console.log(videoRef.current);
 						if (!playing) {
 							dispatch(setInteracted(false));
 							e.target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -109,6 +126,19 @@ export function Video({ id, video }) {
 							pause();
 						}
 					}}></div>
+				{loading && !ended && (
+					<div className="lds-ring">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				)}
+				{loading && ended && (
+					<div className="restartContainer">
+						<div className="restart"></div>
+					</div>
+				)}
 				<div className="controls" ref={controlsRef}>
 					<div
 						className={playing ? "pause" : "play"}
@@ -122,6 +152,9 @@ export function Video({ id, video }) {
 								dispatch(setInteracted(true));
 							}
 						}}></div>
+					<span className="duration-left">
+						{videoRef.current && formatTime(videoRef.current.currentTime)}
+					</span>
 					<input
 						ref={seekRef}
 						className="seek"
@@ -130,28 +163,26 @@ export function Video({ id, video }) {
 						max="100"
 						step="0.01"
 						defaultValue="0"
-						onBeforeInput={(e) => {
-							videoRef.current.pause();
+						onMouseDown={(e) => {
+							pause();
 							dispatch(setInteracted(true));
-							console.log(e);
+							videoRef.current.currentTime = parseFloat(seekRef.current.value);
 						}}
-						// onMouseDownCapture={(e) => {
-						// 	dispatch(setInteracted(true));
-						// 	videoRef.current.pause();
-						// 	console.log(e);
-						// }}
-						onMouseUpCapture={() => {
+						onMouseUp={() => {
 							setInteracted(false);
 							videoRef.current.currentTime = parseFloat(seekRef.current.value);
 							play();
 						}}
 					/>
+					<span className="duration-right">
+						{videoRef.current && formatTime(videoRef.current.duration)}
+					</span>
 					<div
 						className="mute"
 						ref={mutedRef}
 						onMouseOver={() => (volRef.current.style.opacity = 100)}
 						onMouseOut={() =>
-							setTimeout(() => (volRef.current.style.opacity = 0), 2000)
+							setTimeout(() => (volRef.current.style.opacity = 0), 5000)
 						}
 						style={
 							!muted || (volRef.current && parseFloat(volRef.current.value)) > 0
@@ -183,10 +214,15 @@ export function Video({ id, video }) {
 							max="100"
 							step="1"
 							defaultValue={vol}
-							onMouseUp={(e) =>
-								dispatch(setVol(parseFloat(e.target.value / 100)))
-							}
+							onMouseUp={(e) => {
+								dispatch(setVol(parseFloat(e.target.value / 100)));
+								if (!muted && e.target.value / 100 > 0 && playing) {
+									audioRef.current.currentTime = videoRef.current.currentTime;
+									audioRef.current.play();
+								}
+							}}
 							onChange={(e) => {
+								e.target.style.opacity = "100";
 								if (!muted && parseFloat(e.target.value) === 0)
 									dispatch(setMuted(true));
 								if (muted && parseFloat(e.target.value) > 0)
@@ -205,25 +241,34 @@ export function Video({ id, video }) {
 				<video
 					ref={videoRef}
 					onLoadedData={(e) => {
-						seekRef.current.max = e.target.duration * 0.98;
+						seekRef.current.max = Math.floor(e.target.duration);
 					}}
 					onTimeUpdate={(e) => {
 						if (timeoutVideoID) return;
 						seekRef.current.value = e.target.currentTime;
-						if (e.target.duration === e.target.currentTime) setEnded(true);
-						setTimeoutVideoID(setTimeout(() => setTimeoutVideoID(false), 200));
+						setTimeoutVideoID(setTimeout(() => setTimeoutVideoID(false), 500));
+					}}
+					onEnded={(e) => {
+						setEnded(true);
+					}}
+					onLoadStart={(e) => setLoading(true)}
+					onCanPlay={(e) => {
+						setLoading(false);
 					}}
 					onPlay={(e) => {
 						setEnded(false);
 						setPlaying(true);
-
 						if (!muted) audioRef.current.play();
+					}}
+					onSeeked={(e) => {
+						play();
 					}}
 					onPause={() => {
 						setPlaying(false);
 						audioRef.current.pause();
 					}}
-					src={video.videoURL}></video>
+					src={video.videoURL}
+					muted={true}></video>
 				<audio src={video.audioURL} ref={audioRef}></audio>
 			</div>
 		</>

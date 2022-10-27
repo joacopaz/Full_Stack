@@ -43,6 +43,18 @@ export function Favorites({ favorites }) {
 			) : (
 				favorites.length > 0 && <h1 className="favHeader">Favorites</h1>
 			)}
+
+			{favsAreLoading && (
+				<div className="center">
+					<div className="lds-ring">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+			)}
+
 			<ul className="subReddits favorites">
 				{fetchedFavorites.map((favorite, i) => (
 					<Subreddit content={favorite} tabIndex={i + 2} key={i} isFav={true} />

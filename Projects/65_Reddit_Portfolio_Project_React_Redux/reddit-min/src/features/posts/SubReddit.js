@@ -5,13 +5,11 @@ import { Posts } from "./Posts";
 import {
 	setSubReddit,
 	setFilters,
-	selectSubReddit,
 	selectIsLoading,
-	selectIsLoadingPage,
 	selectHasError,
 	selectPosts,
-	selectPage,
 	selectFilters,
+	selectFirstPage,
 	fetchPosts,
 	setCleanup,
 	selectNextPage,
@@ -27,6 +25,7 @@ export function SubReddit() {
 	const bottomRef = useRef(null);
 	const shared = searchParams.get("share");
 	const nextPage = useSelector(selectNextPage);
+	const firstPage = useSelector(selectFirstPage);
 	useEffect(() => {
 		dispatch(setSubReddit(subReddit));
 		dispatch(
@@ -37,7 +36,7 @@ export function SubReddit() {
 			})
 		);
 		return () => dispatch(setCleanup());
-	}, [dispatch, subReddit]);
+	}, []);
 	useEffect(() => {
 		if (document.getElementById(shared))
 			document
@@ -46,6 +45,32 @@ export function SubReddit() {
 	});
 	const posts = useSelector(selectPosts);
 	const stickies = posts.filter((post) => post.stickied);
+
+	// Observer for fetching more posts
+	useEffect(() => {
+		const fetchMorePosts = (entries, observer) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting && !isLoading && nextPage)
+					dispatch(
+						fetchPosts({
+							subReddit: subReddit,
+							page: { after: nextPage },
+						})
+					);
+			});
+		};
+		const options = {
+			rootMargin: "0px",
+			threshold: [1],
+		};
+
+		let observer = new IntersectionObserver(fetchMorePosts, options);
+
+		observer.observe(bottomRef.current);
+
+		return () => observer.disconnect();
+	});
+
 	return (
 		<>
 			<h1 className="subRedditHeader">r/{subReddit}</h1>
@@ -55,20 +80,16 @@ export function SubReddit() {
 				))}
 				{isLoading && <p className="loading">Loading posts... </p>}
 			</div>
-			<div
-				className="nextPosts"
-				onClick={() => {
-					dispatch(setCleanup());
-					dispatch(
-						fetchPosts({
-							subReddit: subReddit,
-							page: { after: nextPage },
-						})
-					);
-				}}>
-				Next Page
+			<div ref={bottomRef} className="bottomDetector">
+				{isLoading && (
+					<div className="lds-ring">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				)}
 			</div>
-			<div ref={bottomRef} className="bottomDetector"></div>
 		</>
 	);
 }

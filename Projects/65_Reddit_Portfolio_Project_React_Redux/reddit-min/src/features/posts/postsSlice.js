@@ -4,14 +4,15 @@ import { calculateTime } from "../searchbar/searchSlice";
 const initialState = {
 	subReddit: "",
 	muted: true,
+	fullScreen: false,
 	isLoading: false,
 	loaded: false,
 	isLoadingPage: false,
 	hasError: false,
 	posts: [],
+	firstPage: null,
 	nextPage: null,
 	prevPage: null,
-	page: null,
 	filter: { firstFilter: null, secondFilter: null },
 	interacted: false,
 	vol: 0,
@@ -22,11 +23,13 @@ export const fetchPosts = createAsyncThunk(
 	async ({ subReddit, filter, secondFilter, page }) => {
 		try {
 			let action = null;
+			let append = false;
+			if (page) append = true;
 			if (page && page.after) action = "after";
 			if (page && page.before) action = "before";
 			let endpoint = `https://www.reddit.com/r/${subReddit}${
 				filter ? filter : ""
-			}.json${secondFilter ? secondFilter : ""}?q=count=24&limit=24${
+			}.json${secondFilter ? secondFilter : ""}?count=24&limit=24${
 				action ? `&${action}=${page[action]}` : ""
 			}`;
 			console.log(endpoint);
@@ -54,9 +57,9 @@ export const fetchPosts = createAsyncThunk(
 				const emojis = [];
 				const isTweet =
 					data.media && data.media.type && data.media.type === "twitter.com"
-						? data.media.oembed.url
+						? data.media.oembed.url.match(/\d+$/)[0]
 						: false;
-				let additionals = false;
+
 				if (data.author_flair_richtext) {
 					data.author_flair_richtext.forEach((emoji) =>
 						emoji.u
@@ -88,6 +91,17 @@ export const fetchPosts = createAsyncThunk(
 				let isMedia = data.is_reddit_media_domain;
 				let video = null;
 				let gallery = null;
+				if (data.is_gallery) {
+					for (const img in data.media_metadata) {
+						const media = data.media_metadata[img];
+						const format = media.m.match(/\/(.*)/)[1];
+						const url = `https://i.redd.it/${media.id}.${format}`;
+						isMedia = "gallery";
+						if (!gallery) gallery = [];
+						gallery.push(url);
+					}
+				}
+
 				let img = null;
 				if (isMedia) {
 					if (data.is_video) {
@@ -103,14 +117,6 @@ export const fetchPosts = createAsyncThunk(
 						};
 						isMedia = "video";
 					}
-					if (data.is_gallery) {
-						gallery = data.media_metadata.map((media) => {
-							const format = media.m.match(/\/(.*)/)[1];
-							const url = ` https://i.redd.it/${media.id}.${format}`;
-							isMedia = "gallery";
-							return url;
-						});
-					}
 					if (!data.is_video && !data.is_gallery) {
 						img = data.url;
 					}
@@ -120,6 +126,14 @@ export const fetchPosts = createAsyncThunk(
 					img = data.url;
 				}
 				if (!isMedia) isMedia = "text";
+				let link;
+				if (isMedia === "text" && data.url_overridden_by_dest) isMedia = "link";
+				let isYoutube;
+				if (isMedia === "link") {
+					link = data.url_overridden_by_dest;
+					if (data.domain.match(/youtu/))
+						isYoutube = data.url_overridden_by_dest.match(/(\w+)$/)[0];
+				}
 				return {
 					author,
 					linkFlairBackground,
@@ -146,13 +160,16 @@ export const fetchPosts = createAsyncThunk(
 					body,
 					emojis,
 					preview,
+					isTweet,
+					link,
+					isYoutube,
 				};
 			});
 			return {
 				posts,
+				append: append,
 				nextPage: jsonResponse.data.after,
 				prevPage: jsonResponse.data.before,
-				page: 1,
 			};
 		} catch (error) {
 			console.log(error);
@@ -214,6 +231,9 @@ export const postsSlice = createSlice({
 			state.subReddit = "";
 			state.posts = [];
 		},
+		setFullScreen: (state, action) => {
+			state.fullScreen = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -226,10 +246,16 @@ export const postsSlice = createSlice({
 				state.isLoading = false;
 				state.hasError = false;
 				state.loaded = true;
-				state.posts = action.payload.posts;
+				if (!action.payload.append) {
+					state.posts = action.payload.posts;
+					if (action.payload.prevPage && state.firstPage === null)
+						state.firstPage = action.payload.prevPage;
+				}
+				if (action.payload.append) {
+					action.payload.posts.forEach((post) => state.posts.push(post));
+				}
 				state.nextPage = action.payload.nextPage;
 				state.prevPage = action.payload.prevPage;
-				state.page = action.payload.page;
 			})
 			.addCase(fetchPosts.rejected, (state) => {
 				state.isLoading = false;
@@ -247,8 +273,10 @@ export const {
 	setMuted,
 	setCleanup,
 	setVol,
+	setFullScreen,
 } = postsSlice.actions;
 export const selectVol = (state) => state.posts.vol;
+export const selectFullScreen = (state) => state.posts.fullScreen;
 export const selectLoaded = (state) => state.posts.loaded;
 export const selectMuted = (state) => state.posts.muted;
 export const selectInteracted = (state) => state.posts.interacted;
@@ -257,7 +285,7 @@ export const selectIsLoading = (state) => state.posts.isLoading;
 export const selectIsLoadingPage = (state) => state.posts.isLoadingPage;
 export const selectHasError = (state) => state.posts.hasError;
 export const selectPosts = (state) => state.posts.posts;
-export const selectPage = (state) => state.posts.page;
 export const selectNextPage = (state) => state.posts.nextPage;
 export const selectFilters = (state) => state.posts.filter;
+export const selectFirstPage = (state) => state.posts.firstPage;
 export default postsSlice.reducer;

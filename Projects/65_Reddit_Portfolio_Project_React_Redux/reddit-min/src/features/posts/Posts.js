@@ -2,10 +2,15 @@ import bubble from "../../assets/bubble.png";
 import neutralScore from "../../assets/score_arrow.png";
 import positiveScore from "../../assets/score_arrow_upvote.png";
 import negativeScore from "../../assets/score_arrow_downvote.png";
+import LiteYouTubeEmbed from "react-lite-youtube-embed";
+import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
+import link from "../../assets/link.png";
 import share from "../../assets/share.png";
 import { decodeHTML, applyEmojis } from "./util";
 import { Video } from "./Video";
 import { useRef, useState } from "react";
+import { Tweet, Timeline } from "react-twitter-widgets";
+import { Gallery } from "./Gallery";
 
 export function Posts({ content, stickies }) {
 	const [oversized, setOversized] = useState(false);
@@ -22,7 +27,7 @@ export function Posts({ content, stickies }) {
 			e.target.classList.add("oversized");
 		}
 	};
-
+	// console.log(content);
 	return (
 		<>
 			<ul className={stickyPost()} id={content.id}>
@@ -120,6 +125,37 @@ export function Posts({ content, stickies }) {
 							dangerouslySetInnerHTML={{
 								__html: decodeHTML(content.body),
 							}}></div>
+					)}
+					{content.isTweet && (
+						<Tweet
+							tweetId={content.isTweet}
+							options={{
+								theme: "dark",
+								height: "512px",
+								dnt: true,
+								align: "center",
+							}}
+						/>
+					)}
+					{content.gallery && <Gallery imgs={content.gallery} />}
+					{content.isMedia === "link" &&
+						!content.isTweet &&
+						!content.isYoutube && (
+							<div className="linkContainer">
+								<a href={content.link} rel="noreferrer" target="_blank">
+									{content.link.length > 20
+										? content.link.substring(0, 30) + "..."
+										: content.link}
+								</a>
+								<img src={link} alt="link" className="linkImg" />
+							</div>
+						)}
+					{content.isYoutube && (
+						<LiteYouTubeEmbed
+							id={content.isYoutube}
+							noCookie={true}
+							adNetwork={true}
+						/>
 					)}
 				</li>
 				<li className="content buttons">

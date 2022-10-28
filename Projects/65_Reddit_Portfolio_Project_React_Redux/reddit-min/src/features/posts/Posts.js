@@ -7,6 +7,7 @@ import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 import link from "../../assets/link.png";
 import share from "../../assets/share.png";
 import { decodeHTML, applyEmojis } from "./util";
+import { useNavigate } from "react-router-dom";
 import { Video } from "./Video";
 import { useRef, useState } from "react";
 import { Tweet, Timeline } from "react-twitter-widgets";
@@ -15,6 +16,7 @@ import { Gallery } from "./Gallery";
 export function Posts({ content, stickies }) {
 	const [oversized, setOversized] = useState(false);
 	const ref = useRef(null);
+	const navigate = useNavigate();
 	const promptRef = useRef(null);
 	const stickyPost = () => {
 		if (!content.stickied) return "post";
@@ -30,7 +32,16 @@ export function Posts({ content, stickies }) {
 	// console.log(content);
 	return (
 		<>
-			<ul className={stickyPost()} id={content.id}>
+			<ul
+				className={stickyPost()}
+				id={content.id}
+				onClick={() =>
+					content.isMedia !== "video" &&
+					!content.isYoutube &&
+					content.isMedia !== "gallery"
+						? navigate(`./${content.id}`)
+						: undefined
+				}>
 				<span className="pinned">
 					{content.stickied ? "PINNED BY MODERATORS" : ""}
 				</span>
@@ -53,11 +64,25 @@ export function Posts({ content, stickies }) {
 							dangerouslySetInnerHTML={{
 								__html: applyEmojis(content.emojis, content.authorFlair),
 							}}></span>
-					)}{" "}
-					{content.createdAgo}
+					)}
+					{" · "}
+					{content.createdAgo}{" "}
+					{content.awards
+						? content.awards.map((award) => (
+								<div key={award.id} className="awards">
+									<img
+										src={award.icon}
+										alt={award.name}
+										className="award"
+										title={award.name}
+									/>
+									<span>{award.count > 1 ? award.count : ""}</span>
+								</div>
+						  ))
+						: ""}
 				</li>
 
-				<li className="content">
+				<li className="content" onClick={() => navigate(`./${content.id}`)}>
 					{content.flair && (
 						<span
 							className="flair"
@@ -159,7 +184,9 @@ export function Posts({ content, stickies }) {
 					)}
 				</li>
 				<li className="content buttons">
-					<div className="content comments">
+					<div
+						className="content comments"
+						onClick={() => navigate(`./${content.id}`)}>
 						<img src={bubble} alt="#"></img>
 						{content.numComments} Comments
 					</div>
@@ -167,7 +194,7 @@ export function Posts({ content, stickies }) {
 						className="content share"
 						onClick={() => {
 							navigator.clipboard.writeText(
-								`${window.location.origin}${window.location.pathname}?share=${content.id}`
+								`${window.location.origin}${window.location.pathname}/${content.id}`
 							);
 							if (promptRef && promptRef.current) {
 								promptRef.current.style.opacity = "100";

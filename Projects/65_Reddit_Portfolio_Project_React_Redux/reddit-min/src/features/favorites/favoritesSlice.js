@@ -56,7 +56,6 @@ export const fetchFavorites = createAsyncThunk(
 			return fetchedFavorites;
 		} catch (error) {
 			console.log(error);
-			alert(error);
 		}
 	}
 );

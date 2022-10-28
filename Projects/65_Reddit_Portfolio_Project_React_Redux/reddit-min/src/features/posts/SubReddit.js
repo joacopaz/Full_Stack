@@ -18,6 +18,7 @@ import "./subReddit.css";
 
 export function SubReddit() {
 	const params = useParams();
+	let fetching = false;
 	const subReddit = params.subReddit;
 	const isLoading = useSelector(selectIsLoading);
 	const dispatch = useDispatch();
@@ -48,6 +49,8 @@ export function SubReddit() {
 
 	// Observer for fetching more posts
 	useEffect(() => {
+		if (fetching) return;
+		fetching = true;
 		const fetchMorePosts = (entries, observer) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting && !isLoading && nextPage)
@@ -68,7 +71,10 @@ export function SubReddit() {
 
 		observer.observe(bottomRef.current);
 
-		return () => observer.disconnect();
+		return () => {
+			observer.disconnect();
+			fetching = false;
+		};
 	});
 
 	return (

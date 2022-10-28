@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import searchReducer from "../features/searchbar/searchSlice";
 import favoritesReducer from "../features/favorites/favoritesSlice";
 import postsReducer from "../features/posts/postsSlice";
+import postReducer from "../features/post/postSlice";
 
 const generateFavCookie = (favorites) => {
 	document.cookie = `favorites=${favorites}; expires=${new Date(
@@ -31,6 +32,7 @@ export const store = configureStore({
 		search: searchReducer,
 		favorites: favoritesReducer,
 		posts: postsReducer,
+		post: postReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(cookieMiddleware),

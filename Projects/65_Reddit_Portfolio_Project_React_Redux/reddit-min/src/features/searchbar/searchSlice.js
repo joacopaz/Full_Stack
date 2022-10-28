@@ -28,7 +28,7 @@ const initialState = {
 	isLoading: false,
 	loadingPage: false,
 	hasError: false,
-	results: "",
+	results: {},
 };
 
 export const fetchSubreddits = createAsyncThunk(

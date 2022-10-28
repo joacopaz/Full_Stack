@@ -39,6 +39,18 @@
 	z-index: 500;
 	pointer-events: none;
 }
+.lds-ring.small div {
+	width: 32px;
+	height: 32px;
+	margin: 0;
+}
+.lds-ring.small {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 49px;
+	height: 49px;
+}
 .videoContainer .lds-ring {
 	background: none;
 	position: absolute;
@@ -193,6 +205,13 @@
 	font-size: 0.7rem;
 	font-weight: 500;
 	color: #818384;
+}
+.awards {
+	display: flex;
+	gap: 3px;
+}
+.award {
+	width: 15px;
 }
 .prompt {
 	font-family: sans-serif;

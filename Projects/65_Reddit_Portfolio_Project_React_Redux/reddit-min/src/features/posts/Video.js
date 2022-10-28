@@ -106,16 +106,18 @@ export function Video({ id, video }) {
 					videoContainerRef.current.style.cursor = "auto";
 					setTimeoutID(
 						setTimeout(() => {
-							controlsRef.current.style.opacity = "0";
-							videoContainerRef.current.style.cursor = "none";
+							if (controlsRef.current) controlsRef.current.style.opacity = "0";
+							if (videoContainerRef.current)
+								videoContainerRef.current.style.cursor = "none";
 							setTimeoutID(false);
 						}, 5000)
 					);
-				}}>
+				}}
+				onMouseEnter={() => (controlsRef.current.style.opacity = "100")}
+				onMouseLeave={() => (controlsRef.current.style.opacity = "0")}>
 				<div
 					className="invisibleListener"
 					onClick={(e) => {
-						console.log(videoRef.current);
 						if (!playing) {
 							dispatch(setInteracted(false));
 							e.target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -134,9 +136,15 @@ export function Video({ id, video }) {
 						<div></div>
 					</div>
 				)}
-				{loading && ended && (
+				{ended && (
 					<div className="restartContainer">
-						<div className="restart"></div>
+						<div
+							className="restart"
+							onClick={() => {
+								videoRef.current.loop = "true";
+								videoRef.current.currentTime = 0;
+								play();
+							}}></div>
 					</div>
 				)}
 				<div className="controls" ref={controlsRef}>
@@ -243,13 +251,11 @@ export function Video({ id, video }) {
 					onLoadedData={(e) => {
 						seekRef.current.max = Math.floor(e.target.duration);
 					}}
+					onEnded={() => setEnded(true)}
 					onTimeUpdate={(e) => {
 						if (timeoutVideoID) return;
 						seekRef.current.value = e.target.currentTime;
 						setTimeoutVideoID(setTimeout(() => setTimeoutVideoID(false), 500));
-					}}
-					onEnded={(e) => {
-						setEnded(true);
 					}}
 					onLoadStart={(e) => setLoading(true)}
 					onCanPlay={(e) => {

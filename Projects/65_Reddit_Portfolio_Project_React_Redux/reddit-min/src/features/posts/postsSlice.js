@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { calculateTime } from "../searchbar/searchSlice";
+import { handlePost } from "./util";
 
 const initialState = {
 	subReddit: "",
@@ -32,7 +33,7 @@ export const fetchPosts = createAsyncThunk(
 			}.json${secondFilter ? secondFilter : ""}?count=24&limit=24${
 				action ? `&${action}=${page[action]}` : ""
 			}`;
-			console.log(endpoint);
+			// console.log(endpoint);
 			const response = await fetch(endpoint);
 			const jsonResponse = await response.json();
 			if (!jsonResponse.data) return { posts: [], page: 1 };
@@ -40,100 +41,36 @@ export const fetchPosts = createAsyncThunk(
 			const posts = children.map((post) => {
 				const { data } = post;
 				// console.log(data);
-				const body = data.selftext_html;
-				const author = `u/${data.author}`;
-				const thumbnail = data.thumbnail === "self" ? null : data.thumbnail;
-				const title = data.title;
-				const ratio = data.upvote_ratio;
-				const score = data.score;
-				const awards = data.total_awards_received;
-				const flair = data.link_flair_text;
-				const linkFlairBackground = data.link_flair_background_color;
-				const linkFlairTextColor = data.link_flair_text_color;
-				const authorFlairBackground = data.author_flair_background_color;
-				const authorFlairColor = data.author_flair_text_color;
-				const authorFlair = data.author_flair_text;
-				const preview = data.preview ? data.preview.enabled : false;
-				const emojis = [];
-				const isTweet =
-					data.media && data.media.type && data.media.type === "twitter.com"
-						? data.media.oembed.url.match(/\d+$/)[0]
-						: false;
-
-				if (data.author_flair_richtext) {
-					data.author_flair_richtext.forEach((emoji) =>
-						emoji.u
-							? emojis.push({
-									text: emoji.u.match(/.*\/(.*)/)[1],
-									url: emoji.u,
-							  })
-							: ""
-					);
-				}
-				if (data.link_flair_richtext) {
-					data.link_flair_richtext.forEach((emoji) =>
-						emoji.u
-							? emojis.push({
-									text: emoji.u.match(/.*\/(.*)/)[1],
-									url: emoji.u,
-							  })
-							: ""
-					);
-				}
-
-				const createdAgo = calculateTime(data.created * 1000);
-				const created = new Date(data.created * 1000).toDateString();
-				const numComments = data.num_comments;
-				const id = data.id;
-				const stickied = data.stickied;
-				const commentsURL = `https://www.reddit.com/comments/${id}.json`;
-				const postHint = data.post_hint;
-				let isMedia = data.is_reddit_media_domain;
-				let video = null;
-				let gallery = null;
-				if (data.is_gallery) {
-					for (const img in data.media_metadata) {
-						const media = data.media_metadata[img];
-						const format = media.m.match(/\/(.*)/)[1];
-						const url = `https://i.redd.it/${media.id}.${format}`;
-						isMedia = "gallery";
-						if (!gallery) gallery = [];
-						gallery.push(url);
-					}
-				}
-
-				let img = null;
-				if (isMedia) {
-					if (data.is_video) {
-						video = {
-							videoURL: data.media.reddit_video.fallback_url.match(
-								/(.*)\?source=fallback/
-							)[1],
-							audioURL: (
-								data.media.reddit_video.fallback_url.match(/(.*)DASH_/)[1] +
-								"DASH_audio." +
-								data.media.reddit_video.fallback_url.match(/\.([^.]*)$/)[1]
-							).match(/(.*)\?source=fallback/)[1],
-						};
-						isMedia = "video";
-					}
-					if (!data.is_video && !data.is_gallery) {
-						img = data.url;
-					}
-				}
-				if (postHint === "image") {
-					isMedia = "image";
-					img = data.url;
-				}
-				if (!isMedia) isMedia = "text";
-				let link;
-				if (isMedia === "text" && data.url_overridden_by_dest) isMedia = "link";
-				let isYoutube;
-				if (isMedia === "link") {
-					link = data.url_overridden_by_dest;
-					if (data.domain.match(/youtu/))
-						isYoutube = data.url_overridden_by_dest.match(/(\w+)$/)[0];
-				}
+				const {
+					author,
+					linkFlairBackground,
+					linkFlairTextColor,
+					thumbnail,
+					title,
+					stickied,
+					ratio,
+					score,
+					awards,
+					flair,
+					authorFlair,
+					authorFlairBackground,
+					authorFlairColor,
+					createdAgo,
+					created,
+					numComments,
+					id,
+					commentsURL,
+					isMedia,
+					video,
+					gallery,
+					img,
+					body,
+					emojis,
+					preview,
+					isTweet,
+					link,
+					isYoutube,
+				} = handlePost(data);
 				return {
 					author,
 					linkFlairBackground,

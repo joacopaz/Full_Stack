@@ -9,18 +9,19 @@ import {
 import { Subreddit } from "../subReddits/Subreddit";
 export function Favorites({ favorites }) {
 	const dispatch = useDispatch();
+	let fetching = false;
 	const fetchedFavorites = useSelector(selectFavoritesFetched);
 	const favsAreLoading = useSelector(selectFavIsLoading);
 	const favsHaveError = useSelector(selectFavHasError);
 	useEffect(() => {
+		if (fetching) return;
+		fetching = true;
 		dispatch(fetchFavorites(favorites));
+		return () => (fetching = false);
 	}, [favorites, dispatch]);
 
 	return (
 		<>
-			{favsHaveError &&
-				alert("Please check your internet connection") &&
-				window.location.reload()}
 			{favorites.length === 0 && (
 				<div>
 					<h1 className="favHeader">

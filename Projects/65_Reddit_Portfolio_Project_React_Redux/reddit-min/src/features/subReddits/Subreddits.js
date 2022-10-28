@@ -13,16 +13,21 @@ import { Subreddit } from "./Subreddit";
 import { useNavigate } from "react-router-dom";
 
 export function Subreddits() {
-	const { subReddits, nextPage, prevPage, page } = useSelector(selectResults);
+	let subReddits, nextPage, prevPage, page;
+	const results = useSelector(selectResults);
+	if (results) ({ subReddits, nextPage, prevPage, page } = results);
 	const navigate = useNavigate();
 	const isLoading = useSelector(selectIsLoading);
 	const isLoadingPage = useSelector(selectLoadingPage);
 	const hasError = useSelector(selectHasError);
 	const dispatch = useDispatch();
 	const term = useSelector(selectTerm);
+	let fetching = false;
 	useEffect(() => {
+		if (fetching) return;
 		if (term) dispatch(fetchSubreddits(term));
 		if (!term) navigate("/");
+		return () => (fetching = false);
 	}, [dispatch, term, navigate]);
 	const handleClick = (e) =>
 		e.target.name === "next"
@@ -32,7 +37,16 @@ export function Subreddits() {
 	return (
 		<>
 			{isLoading && <p className={"loading"}>Loading...</p>}
-			{hasError ? alert("There was an error connecting to the API") : ""}
+			{isLoading && (
+				<div className="center">
+					<div className="lds-ring">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+			)}
 			{!isLoading && (
 				<>
 					{subReddits && subReddits.length > 0 && (
@@ -70,9 +84,20 @@ export function Subreddits() {
 								tabIndex={120}>
 								Prev
 							</button>
-							<p className="pageNumber">
-								{isLoadingPage ? "Loading..." : `Page ${page}`}
-							</p>
+							<div>
+								{isLoadingPage ? (
+									<div className="center">
+										<div className="lds-ring small">
+											<div></div>
+											<div></div>
+											<div></div>
+											<div></div>
+										</div>
+									</div>
+								) : (
+									`Page ${page}`
+								)}
+							</div>
 							<button
 								name="next"
 								className="next"

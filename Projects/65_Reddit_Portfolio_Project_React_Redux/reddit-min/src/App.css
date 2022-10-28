@@ -264,14 +264,6 @@ ol .about {
 .next:disabled {
 	background-color: grey;
 }
-.subReddits .pageNumber {
-	text-align: center;
-	margin-top: 2rem;
-	background-color: black;
-	color: white;
-	border: red solid 1px;
-}
-
 /* Body - Subreddit */
 
 .subReddit {

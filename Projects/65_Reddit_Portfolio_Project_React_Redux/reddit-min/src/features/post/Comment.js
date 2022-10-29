@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { decodeHTML, fetchImg } from "../posts/util";
 
 export function Comment({ content }) {
@@ -14,25 +14,32 @@ export function Comment({ content }) {
 		flairBackground,
 		flairText,
 	} = content;
+	const [fetched, setFetched] = useState(false);
 	const iconRef = useRef(null);
 	useEffect(() => {
-		const controller = new AbortController();
-		const signal = controller.signal;
-		signal.onabort = () => console.log("Aborted img fetch");
-		fetchImg(content.author, signal).then((img) => (iconRef.current.src = img));
-		return () => controller.abort();
+		if (fetched) return;
+		fetchImg(content.author).then((img) => {
+			if (img) iconRef.current.src = img;
+			setFetched(true);
+		});
 	});
 	return (
 		<li className="commentItem">
 			<p className="commentAuthor">
-				<img src="" ref={iconRef} alt={`${content.author} icon`} />
-				{author} · <span>{created}</span>
+				<img
+					src="https://www.redditstatic.com/avatars/avatar_default_02_24A0ED.png"
+					ref={iconRef}
+					className="commentIcon"
+					alt={`${content.author} icon`}
+				/>
+				{author} ·&nbsp;<span>{created}</span>
 			</p>
 			<div
 				className="commentBody"
 				dangerouslySetInnerHTML={{
 					__html: decodeHTML(content.body),
 				}}></div>
+			<div className="commentButtons"></div>
 		</li>
 	);
 }

@@ -5,14 +5,12 @@ export const decodeHTML = function (html) {
 	return text.value;
 };
 
-export const fetchImg = async (author, signal) => {
+export const fetchImg = async (author) => {
 	const response = await fetch(
-		`https://www.reddit.com/user/${author}/about.json`,
-		{ signal }
+		`https://www.reddit.com/user/${author}/about.json`
 	);
-
 	const jsonResponse = await response.json();
-	return jsonResponse.data.snoovatar_img;
+	return jsonResponse.data.icon_img.match(/^(.+)\?/)[1];
 };
 
 export const applyEmojis = function (emojis, string) {
@@ -197,5 +195,6 @@ export const handleComment = (data) => {
 		flairColor: data.author_flair_text_color,
 		flairBackground: data.author_flair_background_color,
 		flairText: data.author_flair_text,
+		isOP: data.is_submitter,
 	};
 };

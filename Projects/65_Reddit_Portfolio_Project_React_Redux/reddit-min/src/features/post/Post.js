@@ -157,7 +157,7 @@ export function Post() {
 												? content.link.substring(0, 30) + "..."
 												: content.link}
 										</a>
-										<img src={link} alt="link" className="linkImg" />
+										<img src={link} alt="link" className="linkImg" />cd 
 									</div>
 								)}
 							{content.isYoutube && (

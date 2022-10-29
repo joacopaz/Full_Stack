@@ -5,6 +5,16 @@ export const decodeHTML = function (html) {
 	return text.value;
 };
 
+export const fetchImg = async (author, signal) => {
+	const response = await fetch(
+		`https://www.reddit.com/user/${author}/about.json`,
+		{ signal }
+	);
+
+	const jsonResponse = await response.json();
+	return jsonResponse.data.snoovatar_img;
+};
+
 export const applyEmojis = function (emojis, string) {
 	if (!string) return;
 	let replacedString = string;

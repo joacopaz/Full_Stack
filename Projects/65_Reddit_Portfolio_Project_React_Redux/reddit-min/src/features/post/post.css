@@ -1,6 +1,7 @@
 /* Post styles */
 
-.post.exclusive {
+.post.exclusive,
+.commentItem {
 	max-height: unset;
 	width: 100%;
 	max-width: 80vw;
@@ -54,8 +55,20 @@
 	color: white;
 }
 .commentItem {
-	height: 150px;
-	width: 150px;
+	min-height: 100px;
+	width: 100%;
+	border: red solid;
+	min-width: 60vw;
 	margin: 0 auto;
-	width: max-content;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+	padding: 1rem;
+}
+.commentAuthor {
+	align-self: flex-start;
+}
+.commentBody {
+	align-self: flex-start;
 }

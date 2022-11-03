@@ -4,9 +4,15 @@
 	margin: 0 auto;
 	text-align: center;
 	margin: 1rem auto;
-	background-color: inherit;
-	color: white;
-	width: fit-content;
+	background-color: var(--background);
+	color: var(--titleColor);
+	caret-color: transparent;
+
+	/* width: fit-content; */
+	/* background: none; */
+	position: sticky;
+	top: 3.5rem;
+	z-index: 100;
 }
 .bottomDetector {
 	height: 10rem;
@@ -28,11 +34,10 @@
 	background: radial-gradient(
 		circle,
 		#03030300 0%,
-		#03030300 36%,
-		#030303 36%,
-		#030303,
-		63%,
-		#03030300 50%,
+		#03030300 41%,
+		var(--ldbarBkg) 41%,
+		var(--ldbarBkg) 58%,
+		#03030300 58%,
 		#03030300 100%
 	);
 	border-radius: 50%;
@@ -71,7 +76,7 @@
 	border: 8px solid #fff;
 	border-radius: 50%;
 	animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-	border-color: #fff transparent transparent transparent;
+	border-color: var(--ldbar) transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
 	animation-delay: -0.45s;
@@ -94,14 +99,19 @@
 /* Posts */
 .posts {
 	margin: 1rem;
-	background-color: #030303;
+	background-attachment: fixed;
+	/* background-color: var(--background);
+	background-image: var(--backgroundImg), var(--backgroundImg);
+	background-size: var(--backgroundSize);
+	background-repeat: var(--backgroundRepeat);
+	background-position: 1% 40%, 99% 40%; */
 }
 
 .post:last-child {
 	border-radius: 0 0 10px 10px;
 }
 
-/* Next Page */
+/* Next Page
 
 .nextPosts {
 	position: fixed;
@@ -110,7 +120,7 @@
 	right: 2rem;
 	border: lightgrey solid 2px;
 	padding: 1rem 2rem;
-	background-color: black;
+	background-color: var(--background);
 	z-index: 300;
 	cursor: pointer;
 	transition: background-color 200ms;
@@ -118,7 +128,7 @@
 }
 .nextPosts:hover {
 	background-color: grey;
-}
+} */
 
 /* Stickies */
 .post.sticky:first-child {
@@ -174,7 +184,7 @@
 	color: white;
 	padding: 0.2rem 1rem 0.2rem 1rem;
 	border: rgb(81, 81, 81) 1px solid;
-	background-color: #1a1a1b;
+	background-color: var(--postBackground);
 	font-size: 0.75rem;
 	padding-left: 2.5rem;
 	border-radius: 5px;
@@ -221,7 +231,7 @@
 	z-index: 300;
 	padding: 0.2rem 1rem 0.2rem 1rem;
 	border: rgb(81, 81, 81) 1px solid;
-	background-color: #1a1a1b;
+	background-color: var(--postBackground);
 	display: block;
 	transition: opacity 500ms;
 	pointer-events: none;
@@ -334,7 +344,7 @@
 	z-index: 100;
 	position: absolute;
 	transform: translateY(-100%);
-	background: linear-gradient(to top, #1a1a1b, #1a1a1b00);
+	background: linear-gradient(to top, var(--postBackground), #1a1a1b00);
 }
 .content.media img.oversized {
 	object-fit: cover;
@@ -383,7 +393,7 @@
 	z-index: 100;
 	position: absolute;
 	bottom: 0;
-	background: linear-gradient(to top, #1a1a1b, #1a1a1b00);
+	background: linear-gradient(to top, var(--postBackground), #1a1a1b00);
 }
 .textMedia p + p {
 	margin: 1rem 0;

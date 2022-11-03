@@ -14,8 +14,8 @@ export const fetchPost = createAsyncThunk("post/fetchPost", async (post) => {
 		const response = await fetch(endpoint);
 		const jsonResponse = await response.json();
 		// Handle the post information logic
-		const data = jsonResponse[0]?.data.children[0].data;
-		if (!data) return console.error("Invalid post");
+		if (!jsonResponse[0]?.data) return console.error("Invalid post");
+		const data = jsonResponse[0]?.data?.children[0].data;
 		const {
 			author,
 			linkFlairBackground,
@@ -49,9 +49,10 @@ export const fetchPost = createAsyncThunk("post/fetchPost", async (post) => {
 			sort,
 		} = handlePost(data);
 		// Handle the comments information logic
-		const comments = jsonResponse[1].data.children.map(({ data }) =>
-			handleComment(data)
-		);
+		const comments = jsonResponse[1].data.children.map(({ data, kind }) => {
+			const comment = handleComment(data, kind);
+			return comment;
+		});
 		return {
 			post: {
 				author,

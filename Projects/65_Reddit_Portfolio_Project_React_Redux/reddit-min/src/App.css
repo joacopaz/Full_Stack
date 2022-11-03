@@ -1,21 +1,39 @@
 /* Global styles */
 
+:root {
+	--background: rgb(169, 215, 255);
+	/* --background: white; */
+	--headerBackground: #2b2b2b;
+	--headerColor: white;
+	--postBackground: #2b2b2b;
+	--backgroundImg: url("./logo-nocolor.png");
+	--backgroundSize: 20%;
+	--backgroundRepeat: no-repeat;
+	--backgroundPosition: 50% 80%;
+	--navbarColor: white;
+	--navbarActive: rgba(250, 249, 249, 0.875);
+	--titleColor: rgb(0, 0, 0);
+	--ldbar: white;
+	--ldbarBkg: lightblue;
+}
 * {
 	padding: 0;
 	box-sizing: border-box;
 	margin: 0;
 }
 html {
-	background-image: url("./logo-nocolor.png");
 	background-repeat: no-repeat;
-	background-position: 50% 80%;
 	min-height: 100vh;
-	background-color: #030303;
+	background-position: var(--backgroundPosition);
+	background-color: var(--background);
+	background-image: var(--backgroundImg);
+	background-size: var(--backgroundSize);
+	background-repeat: var(--backgroundRepeat);
 }
 .loading {
 	text-align: center;
-	background-color: #030303;
-	color: white;
+	background-color: var(--background);
+	color: var(--titleColor);
 	margin: 1rem auto;
 	padding: 1rem;
 	width: max-content;
@@ -37,14 +55,15 @@ html {
 /* Header */
 
 header {
-	height: 5vh;
+	height: 6vh;
 	min-height: 50px;
+	color: var(--headerColor);
 	display: flex;
 	align-items: center;
-	border: darkgrey 2px solid;
 	justify-content: center;
 	/* position: relative; */
-	background-color: white;
+	border-bottom: #fffdfd 1px groove;
+	background-color: var(--headerBackground);
 	position: fixed;
 	width: 100vw;
 	z-index: 1000;
@@ -61,11 +80,12 @@ header h3 {
 .favoritesLink {
 	position: absolute;
 	left: -6rem;
-	color: blue;
+	color: var(--navbarColor);
+	text-decoration: underline;
 }
 
 .active {
-	color: green;
+	color: var(--navbarActive);
 	text-decoration: none;
 }
 
@@ -89,8 +109,12 @@ header h3 {
 	cursor: pointer;
 	outline: inherit;
 }
+.searchBar button img {
+	transition: 100ms filter linear;
+	filter: invert(0%);
+}
 .searchBar button:hover img {
-	filter: invert(50%);
+	filter: invert(40%);
 }
 .searchBar input {
 	caret-color: auto;
@@ -99,9 +123,13 @@ header h3 {
 	padding: 1px;
 	width: 20rem;
 	font-size: 1.2rem;
-	/* background: left / contain no-repeat url("./logo.png"),
-		right / contain no-repeat url("./logo.png"); */
+	border-radius: 15px;
+	border: solid black 1px;
 	padding: 0 40px;
+}
+.searchBar input::placeholder {
+	/* color: rgb(94, 34, 149); */
+	background-color: unset; /* filler for empty rule warn */
 }
 .searchBarLogo {
 	position: absolute;
@@ -115,7 +143,7 @@ header h3 {
 	text-align: center;
 	margin: 1rem auto;
 	width: fit-content;
-	background-color: black;
+	background-color: var(--background);
 	color: white;
 }
 ol .about {
@@ -174,8 +202,8 @@ ol .about {
 	margin: 1rem auto;
 	text-align: center;
 	width: fit-content;
-	color: white;
-	background-color: black;
+	color: var(--titleColor);
+	background-color: var(--background);
 	border-radius: 10px;
 	caret-color: transparent;
 }
@@ -189,9 +217,8 @@ ol .about {
 	max-height: 845px;
 	flex-wrap: wrap;
 	align-items: center;
-	background-color: inherit;
+	background-color: var(--background);
 	border-radius: 10px;
-	background-color: black;
 }
 
 .subReddits ::selection {
@@ -226,7 +253,7 @@ ol .about {
 	margin: 0 auto;
 	padding: 0 2rem;
 	width: 300px;
-	background-color: black;
+	background-color: var(--background);
 	color: white;
 }
 .next,
@@ -269,7 +296,7 @@ ol .about {
 .subReddit {
 	text-align: left;
 	width: 320px;
-	border: rgb(136, 136, 136) solid 2px;
+	outline: rgba(255, 255, 255, 0) solid 2px;
 	border-radius: 10px;
 	height: 4rem;
 	display: flex;
@@ -279,8 +306,18 @@ ol .about {
 	padding: 0.5rem;
 	cursor: pointer;
 	caret-color: transparent;
-	transition: 200ms background-color, 200ms border;
+	transition: 200ms background-color, 200ms outline, 200ms color;
 	background-color: #ffffff;
+}
+.subReddit:hover {
+	background-color: #ffffff;
+	outline: rgb(11, 79, 225) solid 2px;
+	color: black;
+}
+.subReddit:focus {
+	background-color: rgb(97, 176, 249);
+	color: white;
+	border-color: white;
 }
 .clickableSubredditLink {
 	position: absolute;
@@ -301,13 +338,7 @@ ol .about {
 	height: 100%;
 	width: 18%;
 }
-.subReddit:hover {
-	background-color: rgb(187, 214, 239);
-	border: rgb(255, 255, 255) solid 2px;
-}
-.subReddit:focus {
-	background-color: rgb(137, 187, 234);
-}
+
 .subReddit h3 {
 	position: absolute;
 	left: 0.5rem;
@@ -390,14 +421,14 @@ ol .about {
 	transition: transform 200ms;
 }
 
-.favorite:hover {
-	transform: scale(1.2);
-}
-.favorite.inactive {
-	background-image: url("./assets/star-empty.png");
+.favorite.inactive:hover {
+	background-image: url("./assets/star-hover.png");
 }
 .favorite.active {
 	background-image: url("./assets/star.png");
+}
+.favorite.inactive {
+	background-image: url("./assets/star-empty.png");
 }
 
 /* Body - popup */
@@ -429,6 +460,7 @@ ol .about {
 	caret-color: transparent;
 	padding-bottom: 2rem;
 	max-width: 500px;
+	bottom: 5rem;
 }
 
 .popup .close {

@@ -25,7 +25,7 @@ export const fetchFavorites = createAsyncThunk(
 	"favorites/fetchFavorites",
 	async (favorites) => {
 		try {
-			const fetchedFavorites = Promise.all(
+			const fetchedFavorites = await Promise.all(
 				favorites.map(async (favorite) => {
 					const endpoint = `https://www.reddit.com/${favorite}/about.json`;
 					const response = await fetch(endpoint);

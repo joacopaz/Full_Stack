@@ -36,7 +36,7 @@ export function Post() {
 		<>
 			{isLoading && (
 				<>
-					<p className={"loading"}>Loading Comments...</p>
+					<p className={"loading"}>Loading...</p>
 					<div className="center">
 						<div className="lds-ring">
 							<div></div>
@@ -54,7 +54,10 @@ export function Post() {
 					<h1 className="subRedditHeader">Invalid Post</h1>
 					<p
 						className="link"
-						onClick={() => navigate(`./${content.subReddit}`)}>
+						onClick={() => {
+							if (content) navigate(`./${content.subReddit}`);
+							if (!content) navigate(-1);
+						}}>
 						Go back
 					</p>
 				</>
@@ -86,19 +89,24 @@ export function Post() {
 						</li>
 
 						<li className="content">
-							{content.flair && (
-								<span
-									className="flair"
-									style={{
-										backgroundColor: content.linkFlairBackground,
-										color:
-											content.linkFlairTextColor === "dark" ? "black" : "white",
-									}}
-									dangerouslySetInnerHTML={{
-										__html: applyEmojis(content.emojis, content.flair),
-									}}></span>
-							)}
 							<span className="content title">{content.title}</span>
+							{content.flair && (
+								<>
+									{<br></br>}
+									<span
+										className="flair"
+										style={{
+											backgroundColor: content.linkFlairBackground,
+											color:
+												content.linkFlairTextColor === "dark"
+													? "black"
+													: "white",
+										}}
+										dangerouslySetInnerHTML={{
+											__html: applyEmojis(content.emojis, content.flair),
+										}}></span>
+								</>
+							)}
 						</li>
 
 						<li className="content score">
@@ -122,7 +130,10 @@ export function Post() {
 						<li className="content media">
 							{content.isMedia === "image" && (
 								<>
-									<img src={content.img} alt={content.title}></img>
+									<img
+										src={content.img}
+										alt={content.title}
+										onClick={() => window.open(content.img, "_blank")}></img>
 								</>
 							)}
 							{content.isMedia === "video" && (
@@ -157,7 +168,8 @@ export function Post() {
 												? content.link.substring(0, 30) + "..."
 												: content.link}
 										</a>
-										<img src={link} alt="link" className="linkImg" />cd 
+										<img src={link} alt="link" className="linkImg" />
+										cd
 									</div>
 								)}
 							{content.isYoutube && (
@@ -194,11 +206,18 @@ export function Post() {
 							</div>
 						</li>
 					</ul>
-					<ul className="commentList">
-						{postData.comments.map((comment) => (
-							<Comment content={comment} key={comment.id} />
-						))}
-					</ul>
+					<div className="commentsAll">
+						<ul className="commentList">
+							{postData.comments.map((comment) => (
+								<Comment
+									content={comment}
+									key={comment.id}
+									nesting={0}
+									parentId={content.id}
+								/>
+							))}
+						</ul>
+					</div>
 				</>
 			)}
 		</>

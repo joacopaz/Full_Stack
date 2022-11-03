@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const calculateTime = (date) => {
+export const calculateTime = (date, abbreviate) => {
 	const now = new Date();
 	let diffInMilliseconds = Math.abs(now - date) / 1000;
 	const days = Math.floor(diffInMilliseconds / 86400);
@@ -8,13 +8,19 @@ export const calculateTime = (date) => {
 	const hours = Math.floor(diffInMilliseconds / 60 / 60);
 	let difference = "";
 	if (days > 365) {
-		difference += `${Math.floor(days / 365)} years`;
+		abbreviate
+			? (difference += `${Math.floor(days / 365)} yrs`)
+			: (difference += `${Math.floor(days / 365)} years`);
 	} else if (days > 0 && days < 365) {
 		difference += days + " days";
 	} else if (days === 0 && hours > 0) {
-		difference = hours + " hours";
+		abbreviate
+			? (difference = hours + " hr.")
+			: (difference = hours + " hours");
 	} else if (hours === 0) {
-		difference = Math.floor(diffInMilliseconds / 60) + " minutes";
+		abbreviate
+			? (difference = Math.floor(diffInMilliseconds / 60) + " min.")
+			: (difference = Math.floor(diffInMilliseconds / 60) + " minutes");
 	}
 	return difference + " ago";
 };

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
 	fetchFavorites,
 	selectFavHasError,
@@ -9,16 +9,15 @@ import {
 import { Subreddit } from "../subReddits/Subreddit";
 export function Favorites({ favorites }) {
 	const dispatch = useDispatch();
-	let fetching = false;
+	const [fetched, setFetched] = useState(false);
 	const fetchedFavorites = useSelector(selectFavoritesFetched);
 	const favsAreLoading = useSelector(selectFavIsLoading);
 	const favsHaveError = useSelector(selectFavHasError);
 	useEffect(() => {
-		if (fetching) return;
-		fetching = true;
+		if (fetched) return;
+		setFetched(true);
 		dispatch(fetchFavorites(favorites));
-		return () => (fetching = false);
-	}, [favorites, dispatch]);
+	});
 
 	return (
 		<>
@@ -40,7 +39,7 @@ export function Favorites({ favorites }) {
 				</div>
 			)}
 			{favsAreLoading ? (
-				<p className={"loading"}>Loading Favorites...</p>
+				<p className={"loading"}>Loading...</p>
 			) : (
 				favorites.length > 0 && <h1 className="favHeader">Favorites</h1>
 			)}

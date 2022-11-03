@@ -28,7 +28,7 @@ export function SearchBar() {
 					<input
 						type="text"
 						onChange={handleChange}
-						placeholder="Search for subreddits!"
+						placeholder="Search for subreddits"
 						value={searchInputValue}
 						tabIndex={2}
 					/>

@@ -1,10 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./gallery.css";
 
 export function Gallery({ imgs }) {
 	const [active, setActive] = useState(0);
 	const [animating, setAnimating] = useState(false);
 	const [loaded, setLoaded] = useState(0);
+	const [adjustedHeight, setAdjustedHeight] = useState(false);
 	const prevRef = useRef(null);
 	const activeRef = useRef(null);
 	const nextRef = useRef(null);
@@ -61,7 +62,13 @@ export function Gallery({ imgs }) {
 						src={imgs[active]}
 						alt="Gallery"
 						ref={activeRef}
-						onLoad={() => loaded < 3 && setLoaded((prev) => prev + 1)}
+						onLoad={() => {
+							loaded < 3 && setLoaded((prev) => prev + 1);
+							if (adjustedHeight) return;
+							activeRef.current.style.minHeight =
+								activeRef.current.clientHeight + "px";
+							setAdjustedHeight(true);
+						}}
 						className="active"></img>
 					<img
 						src={imgs[nextActive]}

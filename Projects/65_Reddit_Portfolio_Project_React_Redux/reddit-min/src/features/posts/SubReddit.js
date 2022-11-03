@@ -1,5 +1,5 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Posts } from "./Posts";
 import {
@@ -23,11 +23,13 @@ export function SubReddit() {
 	const isLoading = useSelector(selectIsLoading);
 	const dispatch = useDispatch();
 	const [searchParams, setSearchParams] = useSearchParams();
+	const [fetched, setFetched] = useState(false);
 	const bottomRef = useRef(null);
 	const shared = searchParams.get("share");
 	const nextPage = useSelector(selectNextPage);
 	const firstPage = useSelector(selectFirstPage);
 	useEffect(() => {
+		if (fetched) return;
 		dispatch(setSubReddit(subReddit));
 		dispatch(
 			fetchPosts({
@@ -36,7 +38,11 @@ export function SubReddit() {
 				secondFilter: null,
 			})
 		);
-		return () => dispatch(setCleanup());
+		setFetched(true);
+		return () => {
+			dispatch(setCleanup());
+			setFetched(false);
+		};
 	}, []);
 	useEffect(() => {
 		if (document.getElementById(shared))
@@ -84,7 +90,7 @@ export function SubReddit() {
 				{posts.map((post, i) => (
 					<Posts content={post} key={post.id} stickies={stickies.length} />
 				))}
-				{isLoading && <p className="loading">Loading posts... </p>}
+				{isLoading && <p className="loading">Loading... </p>}
 			</div>
 			<div ref={bottomRef} className="bottomDetector">
 				{isLoading && (

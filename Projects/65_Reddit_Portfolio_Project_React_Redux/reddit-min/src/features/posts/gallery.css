@@ -31,17 +31,20 @@
 	background-color: rgb(93, 23, 23);
 }
 .alignLeft {
-	left: 20%;
+	left: 5%;
 }
 .alignRight {
-	right: 20%;
+	right: 5%;
 }
 .content.media .carrousel img {
 	position: absolute;
+	display: block;
+	max-width: 100%;
 	animation-duration: 200ms;
 }
 .content.media .carrousel .active {
 	position: relative;
+	object-fit: contain;
 }
 .content.media img.inactive.imgLeft {
 	left: -100%;

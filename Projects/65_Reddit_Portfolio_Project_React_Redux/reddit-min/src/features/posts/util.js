@@ -6,11 +6,13 @@ export const decodeHTML = function (html) {
 };
 
 export const fetchImg = async (author) => {
+	if (author === "[deleted]") return null;
 	const response = await fetch(
 		`https://www.reddit.com/user/${author}/about.json`
 	);
 	const jsonResponse = await response.json();
-	return jsonResponse.data.icon_img.match(/^(.+)\?/)[1];
+
+	return jsonResponse.data.icon_img.match(/^(.+)\?/)?.[1];
 };
 
 export const applyEmojis = function (emojis, string) {
@@ -107,7 +109,7 @@ export const handlePost = (data) => {
 	if (data.is_gallery) {
 		for (const img in data.media_metadata) {
 			const media = data.media_metadata[img];
-			const format = media.m.match(/\/(.*)/)[1];
+			const format = media.m?.match(/\/(.*)/)[1];
 			const url = `https://i.redd.it/${media.id}.${format}`;
 			isMedia = "gallery";
 			if (!gallery) gallery = [];
@@ -181,10 +183,14 @@ export const handlePost = (data) => {
 	};
 };
 
-export const handleComment = (data) => {
+export const handleComment = (data, kind) => {
+	if (kind === "more" || (!data.author && data.id)) {
+		const hasMore = data.children.map((id) => id);
+		return { hasMore };
+	}
 	return {
 		author: data.author,
-		created: calculateTime(data.created * 1000),
+		created: calculateTime(data.created * 1000, true),
 		score: data.score,
 		body: data.body,
 		edited: data.edited,
@@ -197,4 +203,18 @@ export const handleComment = (data) => {
 		flairText: data.author_flair_text,
 		isOP: data.is_submitter,
 	};
+};
+
+export const getMoreComments = async (parentId, id) => {
+	try {
+		const endpoint = `https://www.reddit.com/comments/${parentId}/comment/${id}.json`;
+		const comment = await fetch(endpoint);
+		const jsonData = await comment.json();
+		return jsonData[1].data.children.map((child) => {
+			const data = handleComment(child.data);
+			return data;
+		});
+	} catch (error) {
+		console.log(error);
+	}
 };

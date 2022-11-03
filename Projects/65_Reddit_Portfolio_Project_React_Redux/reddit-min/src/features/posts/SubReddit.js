@@ -13,6 +13,7 @@ import {
 	fetchPosts,
 	setCleanup,
 	selectNextPage,
+	setSticked,
 } from "./postsSlice";
 import "./subReddit.css";
 
@@ -25,6 +26,7 @@ export function SubReddit() {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [fetched, setFetched] = useState(false);
 	const bottomRef = useRef(null);
+	const stickyRef = useRef(null);
 	const shared = searchParams.get("share");
 	const nextPage = useSelector(selectNextPage);
 	const firstPage = useSelector(selectFirstPage);
@@ -39,20 +41,24 @@ export function SubReddit() {
 			})
 		);
 		setFetched(true);
+		// Observe if object sticks for animation
+		const observer = new IntersectionObserver(
+			(entry) =>
+				entry[0].isIntersecting
+					? dispatch(setSticked(false))
+					: dispatch(setSticked(true)),
+			{
+				rootMargin: "-45px 0px 0px 0px",
+				threshold: [1],
+			}
+		);
+		observer.observe(stickyRef.current);
 		return () => {
 			dispatch(setCleanup());
 			setFetched(false);
+			observer.disconnect();
 		};
 	}, []);
-	useEffect(() => {
-		if (document.getElementById(shared))
-			document
-				.getElementById(shared)
-				.scrollIntoView({ behavior: "smooth", block: "center" });
-	});
-	const posts = useSelector(selectPosts);
-	const stickies = posts.filter((post) => post.stickied);
-
 	// Observer for fetching more posts
 	useEffect(() => {
 		if (fetching) return;
@@ -82,24 +88,36 @@ export function SubReddit() {
 			fetching = false;
 		};
 	});
+	useEffect(() => {
+		if (document.getElementById(shared))
+			document
+				.getElementById(shared)
+				.scrollIntoView({ behavior: "smooth", block: "center" });
+	});
+	const posts = useSelector(selectPosts);
+	const stickies = posts.filter((post) => post.stickied);
 
 	return (
 		<>
-			<h1 className="subRedditHeader">r/{subReddit}</h1>
+			<h1 className="subRedditHeader" ref={stickyRef}>
+				r/{subReddit}
+			</h1>
 			<div className="posts">
 				{posts.map((post, i) => (
 					<Posts content={post} key={post.id} stickies={stickies.length} />
 				))}
-				{isLoading && <p className="loading">Loading... </p>}
 			</div>
 			<div ref={bottomRef} className="bottomDetector">
 				{isLoading && (
-					<div className="lds-ring">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-					</div>
+					<>
+						<p className="loading">Loading...</p>
+						<div className="lds-ring">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
+					</>
 				)}
 			</div>
 		</>

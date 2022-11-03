@@ -7,14 +7,17 @@
 	--headerColor: white;
 	--postBackground: #2b2b2b;
 	--backgroundImg: url("./logo-nocolor.png");
-	--backgroundSize: 20%;
+	--backgroundSize: 300px 300px;
 	--backgroundRepeat: no-repeat;
 	--backgroundPosition: 50% 80%;
+	--introColor: rgb(0, 0, 0);
 	--navbarColor: white;
 	--navbarActive: rgba(250, 249, 249, 0.875);
 	--titleColor: rgb(0, 0, 0);
 	--ldbar: white;
-	--ldbarBkg: lightblue;
+	/* --ldbarBkg: rgb(96, 120, 129); */
+	--postButtonsHover: #3a3939;
+	--postHoverBorder: rgb(255, 131, 16) solid 1px;
 }
 * {
 	padding: 0;
@@ -144,7 +147,7 @@ header h3 {
 	margin: 1rem auto;
 	width: fit-content;
 	background-color: var(--background);
-	color: white;
+	color: var(--introColor);
 }
 ol .about {
 	display: flex;

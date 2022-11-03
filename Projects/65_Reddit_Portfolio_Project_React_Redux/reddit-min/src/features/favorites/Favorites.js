@@ -9,15 +9,12 @@ import {
 import { Subreddit } from "../subReddits/Subreddit";
 export function Favorites({ favorites }) {
 	const dispatch = useDispatch();
-	const [fetched, setFetched] = useState(false);
 	const fetchedFavorites = useSelector(selectFavoritesFetched);
 	const favsAreLoading = useSelector(selectFavIsLoading);
 	const favsHaveError = useSelector(selectFavHasError);
 	useEffect(() => {
-		if (fetched) return;
-		setFetched(true);
 		dispatch(fetchFavorites(favorites));
-	});
+	}, [dispatch, favorites]);
 
 	return (
 		<>

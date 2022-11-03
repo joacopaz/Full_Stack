@@ -183,7 +183,10 @@ export function Video({ id, video }) {
 						}}
 					/>
 					<span className="duration-right">
-						{videoRef.current && formatTime(videoRef.current.duration)}
+						{videoRef.current &&
+							formatTime(
+								videoRef.current.duration ? videoRef.current.duration : "00:00"
+							)}
 					</span>
 					<div
 						className="mute"

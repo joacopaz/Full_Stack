@@ -14,6 +14,7 @@ const initialState = {
 	firstPage: null,
 	nextPage: null,
 	prevPage: null,
+	sticked: false,
 	filter: { firstFilter: null, secondFilter: null },
 	interacted: false,
 	vol: 0,
@@ -171,6 +172,9 @@ export const postsSlice = createSlice({
 		setFullScreen: (state, action) => {
 			state.fullScreen = action.payload;
 		},
+		setSticked: (state, action) => {
+			state.sticked = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -211,6 +215,7 @@ export const {
 	setCleanup,
 	setVol,
 	setFullScreen,
+	setSticked,
 } = postsSlice.actions;
 export const selectVol = (state) => state.posts.vol;
 export const selectFullScreen = (state) => state.posts.fullScreen;
@@ -225,4 +230,5 @@ export const selectPosts = (state) => state.posts.posts;
 export const selectNextPage = (state) => state.posts.nextPage;
 export const selectFilters = (state) => state.posts.filter;
 export const selectFirstPage = (state) => state.posts.firstPage;
+export const selectSticked = (state) => state.posts.sticked;
 export default postsSlice.reducer;

@@ -7,11 +7,10 @@
 	background-color: var(--background);
 	color: var(--titleColor);
 	caret-color: transparent;
-
 	/* width: fit-content; */
 	/* background: none; */
 	position: sticky;
-	top: 3.5rem;
+	top: 2.8rem;
 	z-index: 100;
 }
 .bottomDetector {
@@ -19,6 +18,7 @@
 	position: relative;
 	bottom: 1rem;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	pointer-events: none;
@@ -34,10 +34,10 @@
 	background: radial-gradient(
 		circle,
 		#03030300 0%,
-		#03030300 41%,
-		var(--ldbarBkg) 41%,
-		var(--ldbarBkg) 58%,
-		#03030300 58%,
+		#03030300 39%,
+		var(--ldbarBkg) 39%,
+		var(--ldbarBkg) 61%,
+		#03030300 61%,
 		#03030300 100%
 	);
 	border-radius: 50%;
@@ -134,11 +134,19 @@
 .post.sticky:first-child {
 	padding-top: 0.3rem;
 	margin: 0 auto;
+	border-radius: 5px 5px 0px 0px;
+}
+.post.sticky.duo {
+	transition: border 100ms;
 }
 .post.sticky.only {
 	margin-top: 0;
 	margin: 0.5rem auto;
 	border-radius: 5px;
+}
+.post.sticky:first-child:hover {
+	border: var(--postHoverBorder);
+	z-index: 5;
 }
 .post.sticky.duo + .post.sticky.duo {
 	margin: 0 auto;
@@ -146,12 +154,15 @@
 	border-radius: 0px 0px 5px 5px;
 	position: relative;
 	bottom: 1px;
+	border-top: none;
+	border: rgb(81, 81, 81) 1px solid;
+}
+.post.sticky.duo + .post.sticky.duo:hover {
+	border: var(--postHoverBorder);
+	z-index: 6;
 }
 .post.sticky.duo + .post.sticky.duo .pinned {
 	display: none;
-}
-.post.sticky.duo:hover {
-	z-index: 10;
 }
 
 .pinned:first-child {
@@ -190,11 +201,11 @@
 	border-radius: 5px;
 	margin: 0.4rem auto;
 	caret-color: transparent;
+	transition: border 200ms;
 }
 
-.post:hover,
-.post.sticky:first-child:hover {
-	border: 1px rgb(161, 160, 160) solid;
+.post:not(.sticky, .exclusive):hover {
+	border: var(--postHoverBorder);
 }
 
 .post .content {
@@ -263,6 +274,7 @@
 	align-self: flex-start;
 	gap: 4px;
 	font-size: 0.8rem;
+	transition: background-color 100ms;
 }
 .content.share {
 	width: fit-content;
@@ -271,7 +283,7 @@
 
 .comments:hover,
 .share:hover {
-	background-color: #2d2d2f;
+	background-color: var(--postButtonsHover);
 }
 .comments img,
 .share img {

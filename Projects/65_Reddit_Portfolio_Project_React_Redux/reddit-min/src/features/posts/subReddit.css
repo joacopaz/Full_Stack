@@ -10,7 +10,7 @@
 	/* width: fit-content; */
 	/* background: none; */
 	position: sticky;
-	top: 2.8rem;
+	top: 3.7rem;
 	z-index: 100;
 }
 .bottomDetector {
@@ -98,13 +98,8 @@
 
 /* Posts */
 .posts {
-	margin: 1rem;
-	background-attachment: fixed;
-	/* background-color: var(--background);
-	background-image: var(--backgroundImg), var(--backgroundImg);
-	background-size: var(--backgroundSize);
-	background-repeat: var(--backgroundRepeat);
-	background-position: 1% 40%, 99% 40%; */
+	width: 100%;
+	background-color: var(--background);
 }
 
 .post:last-child {
@@ -615,9 +610,6 @@
 @media only screen and (max-width: 500px) {
 	.post {
 		width: 100%;
-	}
-	.posts {
-		margin: 3px;
 	}
 }
 @media (min-width: 960px) {

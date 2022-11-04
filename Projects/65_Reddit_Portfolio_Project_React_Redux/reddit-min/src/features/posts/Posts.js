@@ -10,7 +10,7 @@ import { decodeHTML, applyEmojis } from "./util";
 import { useNavigate } from "react-router-dom";
 import { Video } from "./Video";
 import { useRef, useState } from "react";
-import { Tweet, Timeline } from "react-twitter-widgets";
+import { Tweet } from "react-twitter-widgets";
 import { Gallery } from "./Gallery";
 
 export function Posts({ content, stickies }) {
@@ -53,7 +53,7 @@ export function Posts({ content, stickies }) {
 							style={{
 								backgroundColor: content.authorFlairBackground
 									? content.authorFlairBackground
-									: "grey",
+									: "rgb(77, 77, 77)",
 								color:
 									content.authorFlairColor === "dark" &&
 									content.authorFlairBackground !== "transparent" &&

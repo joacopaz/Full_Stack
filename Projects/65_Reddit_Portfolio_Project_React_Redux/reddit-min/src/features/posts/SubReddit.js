@@ -48,7 +48,7 @@ export function SubReddit() {
 					? dispatch(setSticked(false))
 					: dispatch(setSticked(true)),
 			{
-				rootMargin: "-45px 0px 0px 0px",
+				rootMargin: "-60px 0px 0px 0px",
 				threshold: [1],
 			}
 		);
@@ -56,6 +56,7 @@ export function SubReddit() {
 		return () => {
 			dispatch(setCleanup());
 			setFetched(false);
+			dispatch(setSticked(false));
 			observer.disconnect();
 		};
 	}, []);

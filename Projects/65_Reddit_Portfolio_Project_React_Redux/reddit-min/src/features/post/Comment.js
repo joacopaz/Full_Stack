@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { decodeHTML, fetchImg, getMoreComments } from "../posts/util";
+import {
+	applyEmojis,
+	decodeHTML,
+	fetchImg,
+	generateRandomBackground,
+	getMoreComments,
+} from "../posts/util";
+import defaultIcon from "../../assets/default_avatar.png";
 
 export function Comment({ content, nesting, parentId, isNew }) {
 	const {
@@ -13,14 +20,27 @@ export function Comment({ content, nesting, parentId, isNew }) {
 		flairColor,
 		flairBackground,
 		flairText,
+		awards,
+		emojis,
+		isOP,
 	} = content;
 	const [fetched, setFetched] = useState(false);
 	const [expanded, setExpanded] = useState(false);
+	const [loadingMore, setLoadingMore] = useState(false);
+	const [moreComments, setMoreComments] = useState(null);
+	const [hidden, setHidden] = useState(false);
 	const iconRef = useRef(null);
+	const toggleDisplayRef = useRef(null);
+	const toggleDisplayListener = useRef(null);
+	const parentRef = useRef(null);
+	const threadRef = useRef(null);
 	useEffect(() => {
 		if (fetched) return;
 		fetchImg(content.author).then((img) => {
 			if (img && iconRef) iconRef.current.src = img;
+			if (!img && iconRef) {
+				generateRandomBackground("50%", iconRef);
+			}
 			setFetched(true);
 		});
 		// if (!author && id)
@@ -28,34 +48,42 @@ export function Comment({ content, nesting, parentId, isNew }) {
 		// 		setSeeMore(comments);
 		// 	});
 	});
+	if (!body && !author && !id && !content.hasMore) return;
 	if (content.hasMore) {
-		// console.log(content);
+		if (content.hasMore.length === 0) return;
 		return (
 			<>
 				{!expanded ? (
 					<div
-						className={`seeMore ${nesting === 2 ? "nested" : ""}`}
-						disabled={content.hasMore.length === 0}
-						onClick={() => {
-							console.log(
-								`https://www.reddit.com/comments/${parentId}/comment/${id}.json`
+						key={id}
+						className="seeMore"
+						onClick={async () => {
+							setLoadingMore(true);
+							const moreComments = await Promise.all(
+								content.hasMore.map(async (id) => {
+									const comment = await getMoreComments(parentId, id);
+									return comment;
+								})
 							);
+							setMoreComments(...moreComments);
+							setLoadingMore(false);
 							setExpanded(true);
-							// Do async stuff to retrieve data and transform commentId.doStuff to a reply comment
 						}}>
-						See {content.hasMore ? content.hasMore.length : ""} more{" "}
-						{content.hasMore.length === 1 ? "reply" : "replies"}
+						{loadingMore
+							? "Loading..."
+							: `See ${content.hasMore ? content.count : ""} more ${
+									content.count.length === 1 ? "reply" : "replies"
+							  }`}
 					</div>
 				) : null}
 				{expanded
-					? content.hasMore.map((commentId, i) => {
-							const reply = commentId.doStuff;
+					? moreComments.map((comment) => {
 							return (
 								<Comment
 									isNew={true}
-									key={reply.id}
-									content={reply ? reply : null}
-									nesting={nesting}
+									key={comment.id}
+									content={comment ? comment : null}
+									nesting={nesting + 1}
 									parentId={parentId}
 								/>
 							);
@@ -64,7 +92,6 @@ export function Comment({ content, nesting, parentId, isNew }) {
 			</>
 		);
 	}
-
 	return (
 		<li
 			className={`commentItem ${nesting === 0 ? "topLevel" : ""} ${
@@ -73,23 +100,57 @@ export function Comment({ content, nesting, parentId, isNew }) {
 			style={{
 				marginLeft: nesting ? "1rem" : 0,
 				width: `calc(100% - ${nesting * 5}px)`,
-			}}>
+			}}
+			ref={parentRef}>
+			{hidden ? "" : <div className="thread" ref={threadRef}></div>}
+			<div
+				className="toggleDisplayListener"
+				ref={toggleDisplayListener}
+				onMouseOver={() => (threadRef.current.style.backgroundColor = "white")}
+				onMouseLeave={() => (threadRef.current.style.backgroundColor = "")}
+				onClick={() => setHidden((prev) => !prev)}></div>
+			<div
+				className={`toggleDisplay ${hidden ? "contracted" : "expanded"}`}
+				ref={toggleDisplayRef}></div>
 			<p className="commentAuthor">
 				<img
-					src="https://www.redditstatic.com/avatars/avatar_default_02_24A0ED.png"
+					src={defaultIcon}
 					ref={iconRef}
 					className="commentIcon"
 					alt={`${content.author} icon`}
 				/>
-				{author} ·&nbsp;<span>{created}</span>
+				{author}&nbsp;{isOP ? <span className="op">OP</span> : ""} ·&nbsp;
+				<span>{created}</span>
 			</p>
-			<div
-				className="commentBody"
-				dangerouslySetInnerHTML={{
-					__html: decodeHTML(content.body),
-				}}></div>{" "}
+			{flairText ? (
+				<span
+					className="emojiContainer"
+					style={{
+						backgroundColor: flairBackground
+							? flairBackground
+							: "rgb(77, 77, 77)",
+						color:
+							flairColor === "dark" &&
+							flairBackground !== "transparent" &&
+							flairBackground
+								? "black"
+								: "white",
+					}}
+					dangerouslySetInnerHTML={{
+						__html: applyEmojis(emojis, flairText),
+					}}></span>
+			) : null}
+			{hidden ? (
+				""
+			) : (
+				<div
+					className="commentBody"
+					dangerouslySetInnerHTML={{
+						__html: decodeHTML(content.body),
+					}}></div>
+			)}
 			<div className="commentButtons"></div>
-			{replies ? (
+			{replies && !hidden ? (
 				<ul className="commentList">
 					{replies.map((reply, i) => (
 						<Comment

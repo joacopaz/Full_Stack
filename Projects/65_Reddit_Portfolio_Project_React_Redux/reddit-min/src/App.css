@@ -6,10 +6,10 @@
 	--headerBackground: #2b2b2b;
 	--headerColor: white;
 	--postBackground: #2b2b2b;
-	--backgroundImg: url("./logo-nocolor.png");
-	--backgroundSize: 300px 300px;
+	--backgroundImg: url("./logo-nocolor.png"), url("./assets/logo-upscale.png");
+	--backgroundSize: 300px 300px, 140px 40px;
 	--backgroundRepeat: no-repeat;
-	--backgroundPosition: 50% 80%;
+	--backgroundPosition: 50% 80%, 99% 99%, 1% 1%;
 	--introColor: rgb(0, 0, 0);
 	--navbarColor: white;
 	--navbarActive: rgba(250, 249, 249, 0.875);
@@ -17,7 +17,11 @@
 	--ldbar: white;
 	/* --ldbarBkg: rgb(96, 120, 129); */
 	--postButtonsHover: #3a3939;
-	--postHoverBorder: rgb(255, 131, 16) solid 1px;
+	/* --postHoverBorder: rgb(255, 131, 16) solid 1px; */
+	--postBorderWidth: 1px;
+	--postHoverBorder: rgb(227, 176, 10) solid var(--postBorderWidth);
+	--commentHoverBkg: rgba(118, 118, 118, 0.327);
+	--backgroundAttachment: fixed;
 }
 * {
 	padding: 0;
@@ -32,6 +36,7 @@ html {
 	background-image: var(--backgroundImg);
 	background-size: var(--backgroundSize);
 	background-repeat: var(--backgroundRepeat);
+	background-attachment: var(--backgroundAttachment);
 }
 .loading {
 	text-align: center;
@@ -52,17 +57,17 @@ html {
 }
 @media only screen and (max-width: 590px) {
 	.App {
-		top: 10vh;
+		top: 7vh;
 	}
 }
 /* Header */
 
 header {
-	height: 6vh;
+	height: 59px;
 	min-height: 50px;
 	color: var(--headerColor);
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	/* position: relative; */
 	border-bottom: #fffdfd 1px groove;
@@ -70,8 +75,34 @@ header {
 	position: fixed;
 	width: 100vw;
 	z-index: 1000;
+	padding-top: 0.65rem;
 	top: 0;
+	transition: height 1s;
 }
+.headerContent {
+	display: flex;
+	align-items: center;
+}
+.subRedditInHeader {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 3.5rem;
+	transition-delay: 1000ms;
+	transition: opacity 500ms ease-in-out;
+	font-size: 2rem;
+	font-weight: bold;
+}
+.show {
+	opacity: 100;
+}
+.hide {
+	opacity: 0;
+}
+header.stucked {
+	height: 96px;
+}
+
 header h2 {
 	left: 1rem;
 	position: absolute;
@@ -189,6 +220,12 @@ ol .about {
 	}
 	header {
 		justify-content: center;
+	}
+	header.stucked {
+		height: 110px;
+	}
+	.subRedditInHeader {
+		top: 4rem;
 	}
 }
 /* Body - Favorites */

@@ -61,22 +61,79 @@
 	width: 100%;
 	list-style: none;
 	color: white;
-	margin: 0 !important;
-	padding: 0 !important;
 }
 .commentsAll {
 	display: flex;
 	justify-content: center;
-	padding-bottom: 2rem;
 }
 .commentsAll > .commentList {
 	position: relative;
 	width: fit-content;
 	overflow: hidden;
 	background-color: var(--postBackground);
+	padding-bottom: 2rem;
 }
 
 /* Individual comment style */
+
+.md {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+.md ul {
+	padding-left: 1rem;
+}
+.md p + p {
+	margin: 0.2rem 0;
+}
+.md ol {
+	padding-left: 1rem;
+}
+.op {
+	color: rgb(255, 123, 0);
+	font-weight: bold;
+}
+.toggleDisplayListener {
+	position: absolute;
+	top: 3.2rem;
+	left: 1.3rem;
+	z-index: 22;
+	width: 12px;
+	height: calc(100% - 25px);
+	cursor: pointer;
+}
+.toggleDisplay {
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	top: 3.2rem;
+	left: 1.3rem;
+	border: grey solid 1px;
+	background-color: var(--postBackground);
+	z-index: 21;
+	filter: grayscale(0%);
+	background-size: 60%;
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	transition: filter 200ms, border-color 200ms;
+}
+.toggleDisplay.expanded {
+	background-image: url("../../assets/contract.png");
+}
+.toggleDisplay.contracted {
+	background-image: url("../../assets/expand.png");
+}
+.toggleDisplay:hover {
+	filter: grayscale(50%);
+	border-color: white;
+}
+.toggleDisplayListener:hover + .toggleDisplay {
+	filter: grayscale(50%);
+	border-color: white;
+}
 
 .commentItem {
 	width: 100%;
@@ -98,16 +155,21 @@
 	background-color: var(--postBackground);
 }
 
-.commentItem.topLevel::after {
-	z-index: 5;
+.commentItem .emojiContainer {
+	font-size: 0.68rem;
+	border-radius: 0;
+	align-self: flex-start;
+	position: relative;
+	left: 2.7rem;
+	bottom: 0.52rem;
+	z-index: 20;
 }
 
 .commentItem.topLevel > .commentAuthor {
 	z-index: 6;
 }
 
-.commentItem::after {
-	content: "";
+.commentItem .thread {
 	width: 2px;
 	height: calc(100%);
 	background-color: #454545;
@@ -115,6 +177,7 @@
 	top: 2.5rem;
 	left: 1.6rem;
 	z-index: 1;
+	transition: background-color 200ms;
 }
 
 .commentBody {
@@ -122,6 +185,7 @@
 	padding-left: 28px;
 	font-size: 0.8rem;
 }
+
 .commentIcon {
 	width: 40px;
 	height: 40px;
@@ -137,11 +201,14 @@
 	align-items: flex-start;
 	justify-content: center;
 }
-.commentItem.topLevel:last-child:after {
+.commentItem a {
+	color: white;
+}
+.commentItem.topLevel:last-child .thread {
 	display: none;
 }
 
-.commentsAll > .commentList > li:nth-last-child(2)::after {
+.commentsAll > .commentList > li:nth-last-child(2) .thread {
 	height: 90%;
 }
 
@@ -162,6 +229,7 @@
 	border: solid gray 1px;
 	font-size: 0.7rem;
 	padding: 5px;
+	min-width: 7rem;
 }
 .seeMore:hover {
 	color: grey;
@@ -170,7 +238,6 @@
 .new * {
 	animation-duration: 2s;
 	animation-name: new;
-	animation-fill-mode: forwards;
 	animation-iteration-count: 1;
 }
 @keyframes new {

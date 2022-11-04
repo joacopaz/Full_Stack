@@ -5,6 +5,16 @@ export const decodeHTML = function (html) {
 	return text.value;
 };
 
+export const generateRandomBackground = (percentage, ref) => {
+	const randomColor =
+		"#" +
+		Math.floor(Math.random() * 16777215)
+			.toString(16)
+			.padStart(6, "0")
+			.toUpperCase();
+	ref.current.style.background = `radial-gradient(circle, ${randomColor} ${percentage}, ${randomColor} ${percentage}, #00000000 ${percentage}, #00000000 ${percentage})`;
+};
+
 export const fetchImg = async (author) => {
 	if (author === "[deleted]") return null;
 	const response = await fetch(
@@ -60,7 +70,10 @@ export const handlePost = (data) => {
 	const authorFlairColor = data.author_flair_text_color;
 	const authorFlair = data.author_flair_text;
 	const preview = data.preview ? data.preview.enabled : false;
-	const emojis = [];
+	const isTweet =
+		data.media && data.media.type && data.media.type === "twitter.com"
+			? data.media.oembed.url.match(/\d+$/)[0]
+			: false;
 	let awards = data.all_awardings.map((award) => ({
 		id: award.id,
 		icon: award.icon_url,
@@ -68,11 +81,7 @@ export const handlePost = (data) => {
 		count: award.count,
 	}));
 	if (!awards.length) awards = 0;
-	const isTweet =
-		data.media && data.media.type && data.media.type === "twitter.com"
-			? data.media.oembed.url.match(/\d+$/)[0]
-			: false;
-
+	const emojis = [];
 	if (data.author_flair_richtext) {
 		data.author_flair_richtext.forEach((emoji) =>
 			emoji.u
@@ -186,13 +195,34 @@ export const handlePost = (data) => {
 export const handleComment = (data, kind) => {
 	if (kind === "more" || (!data.author && data.id)) {
 		const hasMore = data.children.map((id) => id);
-		return { hasMore };
+		const { count } = data;
+		return { hasMore, kind, count };
 	}
+
+	let awards = data.all_awardings.map((award) => ({
+		id: award.id,
+		icon: award.icon_url,
+		name: award.name,
+		count: award.count,
+	}));
+	if (!awards.length) awards = 0;
+	const emojis = [];
+	if (data.author_flair_richtext) {
+		data.author_flair_richtext.forEach((emoji) =>
+			emoji.u
+				? emojis.push({
+						text: emoji.u.match(/.*\/(.*)/)[1],
+						url: emoji.u,
+				  })
+				: ""
+		);
+	}
+
 	return {
 		author: data.author,
 		created: calculateTime(data.created * 1000, true),
 		score: data.score,
-		body: data.body,
+		body: data.body_html,
 		edited: data.edited,
 		replies: data.replies?.data?.children.map((reply) =>
 			handleComment(reply.data)
@@ -202,6 +232,8 @@ export const handleComment = (data, kind) => {
 		flairBackground: data.author_flair_background_color,
 		flairText: data.author_flair_text,
 		isOP: data.is_submitter,
+		awards,
+		emojis,
 	};
 };
 

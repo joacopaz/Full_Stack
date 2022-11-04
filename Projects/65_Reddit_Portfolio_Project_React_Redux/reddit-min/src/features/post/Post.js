@@ -73,7 +73,7 @@ export function Post() {
 									style={{
 										backgroundColor: content.authorFlairBackground
 											? content.authorFlairBackground
-											: "grey",
+											: "rgb(77, 77, 77)",
 										color:
 											content.authorFlairColor === "dark" &&
 											content.authorFlairBackground !== "transparent" &&

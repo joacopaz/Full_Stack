@@ -47,7 +47,7 @@ export const fetchFavorites = createAsyncThunk(
 						description: data.public_description,
 						createdAgo: calculateTime(data.created * 1000),
 						created: new Date(data.created * 1000).toDateString(),
-						over18: data.over18,
+						nsfw: data.over18,
 						url: data.url,
 						icon: icon,
 					};

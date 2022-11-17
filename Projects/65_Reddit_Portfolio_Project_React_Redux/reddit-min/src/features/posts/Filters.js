@@ -23,16 +23,7 @@ export function Filters() {
 	const isStuck = useSelector(selectSticked);
 	const subInfo = useSelector(selectSubredditInfo);
 	const favorites = useSelector(selectFavorites);
-	const isFav = useRef(false);
-	useEffect(() => {
-		if (favorites && subInfo.title)
-			isFav.current = favorites.find((favorite) => favorite === subInfo.title);
-	}, [favorites, subInfo.title]);
-	useEffect(() => {
-		console.log("change in favs");
-		console.log(favorites);
-		isFav.current = favorites.find((favorite) => favorite === subInfo.title);
-	}, [favorites]);
+	const isFav = favorites.find((favorite) => favorite === subInfo.title);
 
 	return (
 		<>
@@ -41,8 +32,8 @@ export function Filters() {
 					content={subInfo}
 					info={true}
 					setSelected={setPopup}
-					isFav={isFav.current}
-					isFavorite={isFav.current}
+					isFav={isFav}
+					isFavorite={isFav}
 					dispatch={dispatch}
 					removeFavorite={removeFavorite}
 					addFavorite={addFavorite}

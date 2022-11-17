@@ -96,30 +96,37 @@ export function SubReddit() {
 
 	return (
 		<>
-			<h1
-				className={`subRedditHeader ${isStuck ? "hidden" : ""}`}
-				ref={stickyRef}>
-				r/{subReddit}
-			</h1>
-			<Filters />
-			<div className="posts">
-				{posts.map((post, i) => (
-					<Posts content={post} key={post.id} stickies={stickies.length} />
-				))}
-			</div>
-			<div ref={bottomRef} className="bottomDetector">
-				{isLoading && (
-					<>
-						<p className="loading">Loading...</p>
-						<div className="lds-ring">
-							<div></div>
-							<div></div>
-							<div></div>
-							<div></div>
-						</div>
-					</>
-				)}
-			</div>
+			{" "}
+			{!info?.nsfw || confirmed ? (
+				<>
+					<h1
+						className={`subRedditHeader ${isStuck ? "hidden" : ""}`}
+						ref={stickyRef}>
+						r/{subReddit}
+					</h1>
+					<Filters />
+					<div className="posts">
+						{posts.map((post, i) => (
+							<Posts content={post} key={post.id} stickies={stickies.length} />
+						))}
+					</div>
+					<div ref={bottomRef} className="bottomDetector">
+						{isLoading && (
+							<>
+								<p className="loading">Loading...</p>
+								<div className="lds-ring">
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+								</div>
+							</>
+						)}
+					</div>
+				</>
+			) : (
+				""
+			)}
 		</>
 	);
 }

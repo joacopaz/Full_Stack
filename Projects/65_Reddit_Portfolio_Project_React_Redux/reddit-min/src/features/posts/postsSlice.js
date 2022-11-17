@@ -133,10 +133,11 @@ export const fetchSubredditInfo = createAsyncThunk(
 			if (icon.match(/(.*)(.png|.jpg|.jpeg|.PNG|.JPG|.JPEG)/)) {
 				icon = icon.match(/(.*)(.png|.jpg|.jpeg|.PNG|.JPG|.JPEG)/)[0];
 			}
+			// console.log(data);
 			return {
 				title: data.display_name_prefixed,
 				subscribers: data.subscribers,
-				description: data.description_html,
+				description: data.public_description,
 				createdAgo: calculateTime(data.created * 1000),
 				created: new Date(data.created * 1000).toDateString(),
 				nsfw: data.over18,

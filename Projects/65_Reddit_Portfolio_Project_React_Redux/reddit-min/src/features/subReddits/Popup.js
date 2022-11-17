@@ -1,7 +1,6 @@
 import noIcon from "../../assets/reddit-logo-2436.png";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { decodeHTML } from "../posts/util";
 export function Popup({
 	setSelected,
 	content,
@@ -25,7 +24,7 @@ export function Popup({
 	const navigate = useNavigate();
 	return (
 		<div className="outerPopup">
-			<div className="popup">
+			<div className={`popup ${info && "info"}`}>
 				<div
 					className="close"
 					tabIndex={101}
@@ -35,11 +34,9 @@ export function Popup({
 					}></div>
 				<h1>{content.title}</h1>
 				<h2>Description</h2>
-				<p>
-					{content.description && !info
-						? content.description
-						: "No description"}
-				</p>
+
+				<p>{content.description ? content.description : "No description"}</p>
+
 				<img
 					src={content.icon ? content.icon : noIcon}
 					alt="Subreddit's icon"

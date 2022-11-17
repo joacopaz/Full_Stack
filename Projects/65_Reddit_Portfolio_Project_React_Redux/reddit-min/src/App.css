@@ -12,14 +12,14 @@
 	--backgroundPosition: 50% 80%, 99% 99%, 1% 1%;
 	--introColor: rgb(0, 0, 0);
 	--navbarColor: white;
-	--navbarActive: rgba(250, 249, 249, 0.875);
+	--navbarActive: rgba(197, 194, 194, 0.875);
 	--titleColor: rgb(0, 0, 0);
 	--ldbar: white;
 	/* --ldbarBkg: rgb(96, 120, 129); */
 	--postButtonsHover: #3a3939;
 	/* --postHoverBorder: rgb(255, 131, 16) solid 1px; */
 	--postBorderWidth: 1px;
-	--postHoverBorder: rgb(227, 176, 10) solid var(--postBorderWidth);
+	--postHoverBorder: rgb(255, 131, 16) solid var(--postBorderWidth);
 	--commentHoverBkg: rgba(118, 118, 118, 0.327);
 	--backgroundAttachment: fixed;
 }
@@ -55,11 +55,7 @@ html {
 	display: flex;
 	justify-content: center;
 }
-@media only screen and (max-width: 590px) {
-	.App {
-		top: 7vh;
-	}
-}
+
 /* Header */
 
 header {
@@ -100,7 +96,7 @@ header {
 	opacity: 0;
 }
 header.stucked {
-	height: 96px;
+	height: 100px;
 }
 
 header h2 {
@@ -111,11 +107,25 @@ header h3 {
 	right: 1rem;
 	position: absolute;
 }
-.favoritesLink {
+.favoritesLink,
+.recommendedLink {
 	position: absolute;
 	left: -6rem;
 	color: var(--navbarColor);
 	text-decoration: underline;
+	transition: color 200ms;
+}
+.favoritesLink:hover,
+.recommendedLink:hover {
+	color: rgb(192, 192, 192);
+}
+.recommendedLink {
+	left: -14rem;
+}
+.navbar {
+	display: flex;
+	position: relative;
+	align-items: center;
 }
 
 .active {
@@ -203,29 +213,28 @@ ol .about {
 		margin-right: 1rem;
 	}
 }
-@media only screen and (max-width: 765px) {
-	.searchBar {
-		gap: 0;
-	}
-	header h2 {
-		font-size: 0.8rem;
-	}
-	header input {
-		width: 10rem;
-	}
-}
-@media only screen and (max-width: 627px) {
+@media only screen and (max-width: 850px) {
 	header h2 {
 		display: none;
 	}
 	header {
-		justify-content: center;
+		justify-content: flex-end;
 	}
 	header.stucked {
 		height: 110px;
 	}
 	.subRedditInHeader {
 		top: 4rem;
+	}
+}
+@media only screen and (max-width: 635px) {
+	.favoritesLink {
+		left: -4rem;
+		font-size: 0.9rem;
+	}
+	.recommendedLink {
+		left: -11.2rem;
+		font-size: 0.9rem;
 	}
 }
 /* Body - Favorites */
@@ -555,8 +564,19 @@ ol .about {
 	header {
 		height: 80px;
 		align-items: flex-start;
+		justify-content: center;
 		padding-top: 0.4rem;
 	}
+	.App {
+		top: 7vh;
+	}
+
+	.navbar {
+		position: relative;
+		bottom: -1.5rem;
+		left: 5rem;
+	}
+
 	.searchBar {
 		flex-direction: column;
 	}
@@ -569,8 +589,8 @@ ol .about {
 	.searchBar .search {
 		max-height: 20px;
 		position: absolute;
-		right: 5px;
-		top: 16px;
+		right: -25px;
+		top: 25px;
 		transform: translateY(-50%);
 	}
 

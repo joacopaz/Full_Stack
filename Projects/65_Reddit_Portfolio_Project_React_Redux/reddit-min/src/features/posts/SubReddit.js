@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Posts } from "./Posts";
@@ -14,11 +14,14 @@ import {
 	selectSticked,
 	selectSubredditInfo,
 	fetchSubredditInfo,
+	selectinfoHasError,
 } from "./postsSlice";
 import "./subReddit.css";
 import { Filters } from "./Filters";
+import { Warning } from "./Warning";
 
 export function SubReddit() {
+	const [confirmed, setConfirmed] = useState(false);
 	const params = useParams();
 	const subReddit = params.subReddit;
 	const { firstFilter } = useSelector(selectFilters);
@@ -76,7 +79,7 @@ export function SubReddit() {
 
 		let observer = new IntersectionObserver(fetchMorePosts, options);
 
-		observer.observe(bottomRef.current);
+		if (bottomRef.current) observer.observe(bottomRef.current);
 
 		return () => {
 			observer.disconnect();
@@ -86,17 +89,27 @@ export function SubReddit() {
 	const bottomRef = useRef(null);
 	const stickyRef = useRef(null);
 	const isLoading = useSelector(selectIsLoading);
-
 	const nextPage = useSelector(selectNextPage);
 	const isStuck = useSelector(selectSticked);
 	const posts = useSelector(selectPosts);
 	let fetching = false;
 	const stickies = posts.filter((post) => post.stickied);
 	const info = useSelector(selectSubredditInfo);
-
+	const infoHasError = useSelector(selectinfoHasError);
+	const navigate = useNavigate();
+	// console.log(infoHasError);
+	if (infoHasError)
+		return (
+			<>
+				<h1 className="subRedditHeader">Oops, something went wrong </h1>
+				<p className="link" onClick={() => navigate(-1)}>
+					Go back
+				</p>
+			</>
+		);
 	return (
 		<>
-			{" "}
+			{info?.nsfw && !confirmed ? <Warning authorize={setConfirmed} /> : ""}
 			{!info?.nsfw || confirmed ? (
 				<>
 					<h1

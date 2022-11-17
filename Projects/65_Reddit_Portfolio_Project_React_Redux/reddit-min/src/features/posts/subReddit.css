@@ -87,6 +87,60 @@
 	pointer-events: none;
 }
 
+/* NSFW Management */
+
+.nsfw-popup {
+	z-index: 999;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
+	font-size: 2rem;
+	padding: 20%;
+	flex-direction: column;
+	gap: 20px;
+}
+.nsfw-popup span {
+	max-width: 350px;
+	text-align: center;
+}
+.nsfw-buttons {
+	display: flex;
+	gap: 30px;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: column;
+}
+.go-back,
+.confirm-age {
+	background: var(--postBackground);
+	color: rgb(255, 255, 255);
+	padding: 1rem 2rem;
+	border-radius: 15px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	transition: background-color 200ms;
+	font-weight: bold;
+}
+.go-back:hover {
+	background-color: rgb(115, 115, 241);
+}
+.confirm-age {
+	background: none;
+	color: rgba(0, 0, 0, 0.507);
+	border: rgba(0, 0, 0, 0.507) solid 1px;
+	transition: background-color 200ms, color 200ms;
+}
+.confirm-age:hover {
+	background-color: red;
+	color: white;
+}
 /* Loader */
 
 .lds-ring {
@@ -194,14 +248,16 @@
 	padding-top: 0.3rem;
 	margin: 0 auto;
 	border-radius: 5px 5px 0px 0px;
+	transition: border 200ms;
 }
 .post.sticky.duo {
-	transition: border 100ms;
+	transition: border 200ms;
 }
 .post.sticky.only {
 	margin-top: 0;
 	margin: 0.5rem auto;
 	border-radius: 5px;
+	transition: border 200ms;
 }
 .post.sticky:first-child:hover {
 	border: var(--postHoverBorder);
@@ -215,10 +271,12 @@
 	bottom: 1px;
 	border-top: none;
 	border: rgb(81, 81, 81) 1px solid;
+	transition: border 200ms;
 }
 .post.sticky.duo + .post.sticky.duo:hover {
 	border: var(--postHoverBorder);
 	z-index: 6;
+	transition: border 200ms;
 }
 .post.sticky.duo + .post.sticky.duo .pinned {
 	display: none;

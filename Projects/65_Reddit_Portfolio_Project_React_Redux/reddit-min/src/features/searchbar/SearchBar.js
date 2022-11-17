@@ -18,6 +18,27 @@ export function SearchBar() {
 	};
 	return (
 		<>
+			{" "}
+			<div className="navbar">
+				<NavLink
+					to="/recommended"
+					end
+					tabIndex={1}
+					className={(e) =>
+						e.isActive ? "recommendedLink active" : "recommendedLink"
+					}>
+					Recommended
+				</NavLink>
+				<NavLink
+					to="/"
+					end
+					tabIndex={1}
+					className={(e) =>
+						e.isActive ? "favoritesLink active" : "favoritesLink"
+					}>
+					Favorites
+				</NavLink>
+			</div>
 			<form onSubmit={handleSubmit}>
 				<div className="searchBar">
 					<div
@@ -35,15 +56,6 @@ export function SearchBar() {
 					<button type="submit">
 						<img src={searchIcon} alt="Search Icon" className="search" />
 					</button>
-					<NavLink
-						to="/"
-						end
-						tabIndex={1}
-						className={(e) =>
-							e.isActive ? "favoritesLink active" : "favoritesLink"
-						}>
-						Favorites
-					</NavLink>
 				</div>
 			</form>
 		</>

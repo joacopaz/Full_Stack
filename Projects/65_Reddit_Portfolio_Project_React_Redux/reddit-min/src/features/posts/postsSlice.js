@@ -126,7 +126,9 @@ export const fetchSubredditInfo = createAsyncThunk(
 			const endpoint = `https://www.reddit.com/r/${subReddit}/about.json`;
 			const response = await fetch(endpoint);
 			const jsonResponse = await response.json();
-			if (!jsonResponse.data) return console.log("No data, invalid Subreddit");
+			if (!jsonResponse.data) {
+				return "Invalid data";
+			}
 			const data = jsonResponse.data;
 			// console.log(data);
 			let icon = data.community_icon;
@@ -220,12 +222,20 @@ export const postsSlice = createSlice({
 				state.infoLoaded = false;
 			})
 			.addCase(fetchSubredditInfo.fulfilled, (state, action) => {
+				if (action.payload === "Invalid data") {
+					state.infoHasError = true;
+					return;
+				}
 				state.infoIsLoading = false;
 				state.infoHasError = false;
 				state.infoLoaded = true;
 				state.subRedditInfo = action.payload;
 			})
 			.addCase(fetchSubredditInfo.rejected, (state, action) => {
+				if (action.payload === "Invalid data") {
+					state.infoHasError = true;
+					return;
+				}
 				state.infoIsLoading = false;
 				state.infoHasError = true;
 				state.infoLoaded = false;
@@ -259,4 +269,5 @@ export const selectFilters = (state) => state.posts.filter;
 export const selectFirstPage = (state) => state.posts.firstPage;
 export const selectSticked = (state) => state.posts.sticked;
 export const selectSubredditInfo = (state) => state.posts.subRedditInfo;
+export const selectinfoHasError = (state) => state.posts.infoHasError;
 export default postsSlice.reducer;

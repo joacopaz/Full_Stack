@@ -12,6 +12,69 @@
 	position: sticky;
 	top: 3.7rem;
 	z-index: 100;
+	transition-delay: 1000ms;
+	transition: opacity 500ms linear;
+}
+.filters {
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	bottom: 0.5rem;
+	transition: opacity 500ms;
+}
+.filterChoice {
+	padding: 0.3rem 0.5rem;
+	padding-left: 2rem;
+	margin: 0 0.2rem;
+	width: fit-content;
+	background-color: var(--postBackground);
+	color: white;
+	border-radius: 15px;
+	caret-color: transparent;
+	background-size: 15px 20px;
+	background-repeat: no-repeat;
+	background-position: 20%;
+	transition: background-color 300ms;
+}
+.filterChoice.info {
+	padding: 0.3rem 0.5rem;
+	background-color: rgb(76, 44, 192);
+}
+.filterChoice.info:hover {
+	background-color: rgb(108, 86, 189);
+}
+.hot {
+	background-image: url("../../assets/hot.png");
+}
+.new {
+	background-image: url("../../assets/new.png");
+	background-size: 25px;
+	background-position: 11%;
+}
+.top {
+	background-image: url("../../assets/top.png");
+	background-size: 15px;
+	background-position: 22%;
+}
+.rising {
+	background-image: url("../../assets/rising.png");
+	background-size: 20px;
+	background-position: 12%;
+}
+.filterChoice::selection {
+	background-color: transparent;
+}
+.filterChoice:hover {
+	background-color: rgb(70, 70, 70);
+	cursor: pointer;
+}
+.filterChoice.selected {
+	background-color: rgb(94, 92, 92);
+}
+.hidden {
+	opacity: 0;
 }
 .bottomDetector {
 	height: 10rem;
@@ -98,7 +161,8 @@
 
 /* Posts */
 .posts {
-	width: 100%;
+	width: fit-content;
+	margin: 0 auto;
 	background-color: var(--background);
 }
 
@@ -160,7 +224,7 @@
 	display: none;
 }
 
-.pinned:first-child {
+.pinned {
 	letter-spacing: -0.4px;
 	font-size: 0.68rem;
 	position: relative;
@@ -607,13 +671,9 @@
 	padding: 0 0.3rem;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 700px) {
 	.post {
 		width: 100%;
-	}
-}
-@media (min-width: 960px) {
-	.post {
-		width: 640px;
+		max-width: 100vw;
 	}
 }

@@ -59,13 +59,9 @@ export function Subreddit({ content, tabIndex, isFav }) {
 						className={`favorite ${isFavorite ? "active" : "inactive"}`}
 						onClick={() => {
 							if (isFav) {
-								const confirmed = window.confirm(
-									`Are you sure you want to remove ${content.title} from favorites?`
-								);
-								if (confirmed)
-									isFavorite
-										? dispatch(removeFavorite(content))
-										: dispatch(addFavorite(content));
+								isFavorite
+									? dispatch(removeFavorite(content))
+									: dispatch(addFavorite(content));
 								return;
 							}
 							isFavorite

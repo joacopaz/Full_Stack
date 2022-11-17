@@ -106,8 +106,13 @@ export function Comment({ content, nesting, parentId, isNew }) {
 			<div
 				className="toggleDisplayListener"
 				ref={toggleDisplayListener}
-				onMouseOver={() => (threadRef.current.style.backgroundColor = "white")}
-				onMouseLeave={() => (threadRef.current.style.backgroundColor = "")}
+				onMouseOver={() => {
+					if (threadRef?.current)
+						threadRef.current.style.backgroundColor = "white";
+				}}
+				onMouseLeave={() => {
+					if (threadRef?.current) threadRef.current.style.backgroundColor = "";
+				}}
 				onClick={() => setHidden((prev) => !prev)}></div>
 			<div
 				className={`toggleDisplay ${hidden ? "contracted" : "expanded"}`}
@@ -119,7 +124,8 @@ export function Comment({ content, nesting, parentId, isNew }) {
 					className="commentIcon"
 					alt={`${content.author} icon`}
 				/>
-				{author}&nbsp;{isOP ? <span className="op">OP</span> : ""} ·&nbsp;
+				{author}&nbsp;
+				{isOP ? <span className="op">OP&nbsp;</span> : ""} ·&nbsp;
 				<span>{created}</span>
 			</p>
 			{flairText ? (

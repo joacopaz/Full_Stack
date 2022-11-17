@@ -15,9 +15,13 @@ const initialState = {
 	nextPage: null,
 	prevPage: null,
 	sticked: false,
-	filter: { firstFilter: null, secondFilter: null },
+	filter: { firstFilter: "hot", secondFilter: null },
 	interacted: false,
 	vol: 0,
+	infoIsLoading: false,
+	infoHasError: false,
+	infoLoaded: false,
+	subRedditInfo: [],
 };
 
 export const fetchPosts = createAsyncThunk(
@@ -30,7 +34,7 @@ export const fetchPosts = createAsyncThunk(
 			if (page && page.after) action = "after";
 			if (page && page.before) action = "before";
 			let endpoint = `https://www.reddit.com/r/${subReddit}${
-				filter ? filter : ""
+				filter ? `/${filter}` : ""
 			}.json${secondFilter ? secondFilter : ""}?count=24&limit=24${
 				action ? `&${action}=${page[action]}` : ""
 			}`;
@@ -124,6 +128,7 @@ export const fetchSubredditInfo = createAsyncThunk(
 			const jsonResponse = await response.json();
 			if (!jsonResponse.data) return console.log("No data, invalid Subreddit");
 			const data = jsonResponse.data;
+			// console.log(data);
 			let icon = data.community_icon;
 			if (icon.match(/(.*)(.png|.jpg|.jpeg|.PNG|.JPG|.JPEG)/)) {
 				icon = icon.match(/(.*)(.png|.jpg|.jpeg|.PNG|.JPG|.JPEG)/)[0];
@@ -131,10 +136,10 @@ export const fetchSubredditInfo = createAsyncThunk(
 			return {
 				title: data.display_name_prefixed,
 				subscribers: data.subscribers,
-				description: data.public_description,
+				description: data.description_html,
 				createdAgo: calculateTime(data.created * 1000),
 				created: new Date(data.created * 1000).toDateString(),
-				over18: data.over18,
+				nsfw: data.over18,
 				url: data.url,
 				icon: icon,
 			};
@@ -151,11 +156,12 @@ export const postsSlice = createSlice({
 		setSubReddit: (state, action) => {
 			state.subReddit = action.payload;
 		},
-		setFilters: (state, action) =>
-			(state.filter = {
+		setFilters: (state, action) => {
+			state.filter = {
 				firstFilter: action.payload.firstFilter,
 				secondFilter: action.payload.secondFilter,
-			}),
+			};
+		},
 		setMuted: (state, action) => {
 			state.muted = action.payload;
 		},
@@ -174,6 +180,9 @@ export const postsSlice = createSlice({
 		},
 		setSticked: (state, action) => {
 			state.sticked = action.payload;
+		},
+		setSubInfo: (state, action) => {
+			state.subInfo = action;
 		},
 	},
 	extraReducers: (builder) => {
@@ -203,6 +212,23 @@ export const postsSlice = createSlice({
 				state.hasError = true;
 				state.loaded = false;
 				state.posts = [];
+			})
+			.addCase(fetchSubredditInfo.pending, (state) => {
+				state.infoIsLoading = true;
+				state.infoHasError = false;
+				state.infoLoaded = false;
+			})
+			.addCase(fetchSubredditInfo.fulfilled, (state, action) => {
+				state.infoIsLoading = false;
+				state.infoHasError = false;
+				state.infoLoaded = true;
+				state.subRedditInfo = action.payload;
+			})
+			.addCase(fetchSubredditInfo.rejected, (state, action) => {
+				state.infoIsLoading = false;
+				state.infoHasError = true;
+				state.infoLoaded = false;
+				state.subRedditInfo = [];
 			});
 	},
 });
@@ -231,4 +257,5 @@ export const selectNextPage = (state) => state.posts.nextPage;
 export const selectFilters = (state) => state.posts.filter;
 export const selectFirstPage = (state) => state.posts.firstPage;
 export const selectSticked = (state) => state.posts.sticked;
+export const selectSubredditInfo = (state) => state.posts.subRedditInfo;
 export default postsSlice.reducer;

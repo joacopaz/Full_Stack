@@ -1,6 +1,7 @@
 import noIcon from "../../assets/reddit-logo-2436.png";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { decodeHTML } from "../posts/util";
 export function Popup({
 	setSelected,
 	content,
@@ -9,6 +10,7 @@ export function Popup({
 	isFavorite,
 	removeFavorite,
 	isFav,
+	info,
 }) {
 	useEffect(() => {
 		document.addEventListener("keydown", ({ code }) =>
@@ -33,7 +35,11 @@ export function Popup({
 					}></div>
 				<h1>{content.title}</h1>
 				<h2>Description</h2>
-				<p>{content.description ? content.description : "No description"}</p>
+				<p>
+					{content.description && !info
+						? content.description
+						: "No description"}
+				</p>
 				<img
 					src={content.icon ? content.icon : noIcon}
 					alt="Subreddit's icon"
@@ -48,14 +54,16 @@ export function Popup({
 					onFocus={() => {
 						document.querySelector(".close").focus();
 					}}></div>
-				<button
-					className="enter"
-					id="enterPopup"
-					autoFocus={true}
-					tabIndex={100}
-					onClick={() => navigate("../" + content.title)}>
-					Visit
-				</button>
+				{!info && (
+					<button
+						className="enter"
+						id="enterPopup"
+						autoFocus={true}
+						tabIndex={100}
+						onClick={() => navigate("../" + content.title)}>
+						Visit
+					</button>
+				)}
 				<div
 					tabIndex={102}
 					onFocus={() => document.querySelector("#enterPopup").focus()}></div>
@@ -64,14 +72,10 @@ export function Popup({
 					tabIndex={100}
 					className={`favorite ${isFavorite ? "active" : "inactive"}`}
 					onClick={() => {
-						if (isFav) {
-							const confirmed = window.confirm(
-								`Are you sure you want to remove ${content.title} from favorites?`
-							);
-							if (confirmed)
-								isFavorite
-									? dispatch(removeFavorite(content))
-									: dispatch(addFavorite(content));
+						if (isFavorite) {
+							isFavorite
+								? dispatch(removeFavorite(content))
+								: dispatch(addFavorite(content));
 							return;
 						}
 						isFavorite
@@ -80,16 +84,11 @@ export function Popup({
 					}}
 					onKeyDown={({ code }) => {
 						if (code === "Enter" || code === "Space") {
-							if (isFav) {
-								const confirmed = window.confirm(
-									`Are you sure you want to remove ${content.title} from favorites?`
-								);
-								if (confirmed) {
-									setSelected(false);
-									isFavorite
-										? dispatch(removeFavorite(content))
-										: dispatch(addFavorite(content));
-								}
+							if (isFavorite) {
+								isFavorite
+									? dispatch(removeFavorite(content))
+									: dispatch(addFavorite(content));
+
 								return;
 							}
 							isFavorite

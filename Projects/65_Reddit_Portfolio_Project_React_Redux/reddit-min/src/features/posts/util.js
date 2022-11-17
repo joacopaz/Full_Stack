@@ -57,12 +57,17 @@ export const formatTime = (time) => {
 };
 
 export const handlePost = (data) => {
-	const body = data.selftext_html;
+	let body = data.selftext_html;
+	if (!body) {
+		body = "";
+		// console.log(data);
+	}
 	const author = `u/${data.author}`;
 	const thumbnail = data.thumbnail === "self" ? null : data.thumbnail;
 	const title = data.title;
 	const ratio = data.upvote_ratio;
 	const score = data.score;
+	const nsfw = data.over_18;
 	const flair = data.link_flair_text;
 	const linkFlairBackground = data.link_flair_background_color;
 	const linkFlairTextColor = data.link_flair_text_color;
@@ -157,6 +162,12 @@ export const handlePost = (data) => {
 		link = data.url_overridden_by_dest;
 		if (data.domain.match(/youtu/))
 			isYoutube = data.url_overridden_by_dest.match(/(\w+)$/)[0];
+	}
+	if (isMedia === "text" && body.match(/https:\/\/preview.redd.it/)) {
+		isMedia = "image";
+		img = `https://i.redd.it/${
+			body.match(/https:\/\/preview.redd.it\/(.+)\?/)[1]
+		}`;
 	}
 	return {
 		author,

@@ -1,46 +1,39 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Posts } from "./Posts";
 import {
 	setSubReddit,
-	setFilters,
 	selectIsLoading,
-	selectHasError,
 	selectPosts,
 	selectFilters,
-	selectFirstPage,
 	fetchPosts,
 	setCleanup,
 	selectNextPage,
 	setSticked,
+	selectSticked,
+	selectSubredditInfo,
+	fetchSubredditInfo,
 } from "./postsSlice";
 import "./subReddit.css";
+import { Filters } from "./Filters";
 
 export function SubReddit() {
 	const params = useParams();
-	let fetching = false;
 	const subReddit = params.subReddit;
-	const isLoading = useSelector(selectIsLoading);
+	const { firstFilter } = useSelector(selectFilters);
+	const { secondFilter } = useSelector(selectFilters);
 	const dispatch = useDispatch();
-	const [searchParams, setSearchParams] = useSearchParams();
-	const [fetched, setFetched] = useState(false);
-	const bottomRef = useRef(null);
-	const stickyRef = useRef(null);
-	const shared = searchParams.get("share");
-	const nextPage = useSelector(selectNextPage);
-	const firstPage = useSelector(selectFirstPage);
 	useEffect(() => {
-		if (fetched) return;
+		dispatch(fetchSubredditInfo(subReddit));
 		dispatch(setSubReddit(subReddit));
 		dispatch(
 			fetchPosts({
 				subReddit: subReddit,
-				filter: null,
-				secondFilter: null,
+				filter: firstFilter,
+				secondFilter: secondFilter,
 			})
 		);
-		setFetched(true);
 		// Observe if object sticks for animation
 		const observer = new IntersectionObserver(
 			(entry) =>
@@ -55,11 +48,10 @@ export function SubReddit() {
 		observer.observe(stickyRef.current);
 		return () => {
 			dispatch(setCleanup());
-			setFetched(false);
 			dispatch(setSticked(false));
 			observer.disconnect();
 		};
-	}, []);
+	}, [firstFilter, secondFilter, dispatch, subReddit]);
 	// Observer for fetching more posts
 	useEffect(() => {
 		if (fetching) return;
@@ -70,6 +62,8 @@ export function SubReddit() {
 					dispatch(
 						fetchPosts({
 							subReddit: subReddit,
+							filter: firstFilter,
+							secondFilter: secondFilter,
 							page: { after: nextPage },
 						})
 					);
@@ -89,20 +83,25 @@ export function SubReddit() {
 			fetching = false;
 		};
 	});
-	useEffect(() => {
-		if (document.getElementById(shared))
-			document
-				.getElementById(shared)
-				.scrollIntoView({ behavior: "smooth", block: "center" });
-	});
+	const bottomRef = useRef(null);
+	const stickyRef = useRef(null);
+	const isLoading = useSelector(selectIsLoading);
+
+	const nextPage = useSelector(selectNextPage);
+	const isStuck = useSelector(selectSticked);
 	const posts = useSelector(selectPosts);
+	let fetching = false;
 	const stickies = posts.filter((post) => post.stickied);
+	const info = useSelector(selectSubredditInfo);
 
 	return (
 		<>
-			<h1 className="subRedditHeader" ref={stickyRef}>
+			<h1
+				className={`subRedditHeader ${isStuck ? "hidden" : ""}`}
+				ref={stickyRef}>
 				r/{subReddit}
 			</h1>
+			<Filters />
 			<div className="posts">
 				{posts.map((post, i) => (
 					<Posts content={post} key={post.id} stickies={stickies.length} />

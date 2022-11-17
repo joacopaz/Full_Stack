@@ -11,7 +11,7 @@ import { decodeHTML, applyEmojis } from "../posts/util";
 import { Video } from "../posts/Video";
 import { Tweet } from "react-twitter-widgets";
 import { Gallery } from "../posts/Gallery";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchPost, resetPost, selectPost } from "./postSlice";
@@ -24,12 +24,12 @@ export function Post() {
 	const postData = useSelector(selectPost);
 	const isLoading = postData.isLoading;
 	const content = postData.post;
+	const [width, setWidth] = useState(null);
 	useEffect(() => {
 		window.scrollTo({ top: 0 });
 		dispatch(fetchPost(post));
 		return () => dispatch(resetPost());
 	}, [post, dispatch]);
-
 	const ref = useRef(null);
 	const promptRef = useRef(null);
 	return (
@@ -64,7 +64,10 @@ export function Post() {
 			)}
 			{!isLoading && content && (
 				<>
-					<ul id={content.id} className="post exclusive">
+					<ul
+						id={content.id}
+						className="post exclusive"
+						onLoad={(e) => setWidth(e.currentTarget.offsetWidth)}>
 						<li className="content author">
 							Posted by {content.author}{" "}
 							{content.authorFlair && (
@@ -169,7 +172,6 @@ export function Post() {
 												: content.link}
 										</a>
 										<img src={link} alt="link" className="linkImg" />
-										cd
 									</div>
 								)}
 							{content.isYoutube && (
@@ -207,16 +209,20 @@ export function Post() {
 						</li>
 					</ul>
 					<div className="commentsAll">
-						<ul className="commentList">
-							{postData.comments.map((comment) => (
-								<Comment
-									content={comment}
-									key={comment.id}
-									nesting={0}
-									parentId={content.id}
-								/>
-							))}
-						</ul>
+						{postData.comments.length > 0 ? (
+							<ul className="commentList" style={{ width: width }}>
+								{postData.comments.map((comment) => (
+									<Comment
+										content={comment}
+										key={comment.id}
+										nesting={0}
+										parentId={content.id}
+									/>
+								))}
+							</ul>
+						) : (
+							""
+						)}
 					</div>
 				</>
 			)}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./gallery.css";
 
 export function Gallery({ imgs }) {

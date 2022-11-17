@@ -32,16 +32,16 @@ export function Posts({ content, stickies }) {
 	// console.log(content);
 	return (
 		<>
-			<ul
-				className={stickyPost()}
-				id={content.id}
-				onClick={() =>
-					content.isMedia !== "video" &&
-					!content.isYoutube &&
-					content.isMedia !== "gallery"
-						? navigate(`./${content.id}`)
-						: undefined
-				}>
+			<ul className={stickyPost()} id={content.id}>
+				<div
+					className={
+						content.isMedia !== "video" &&
+						!content.isYoutube &&
+						content.isMedia !== "gallery"
+							? "postClickListen"
+							: ""
+					}
+					onClick={() => navigate(`./${content.id}`)}></div>
 				<span className="pinned">
 					{content.stickied ? "PINNED BY MODERATORS" : ""}
 				</span>
@@ -104,6 +104,7 @@ export function Posts({ content, stickies }) {
 						: content.score}
 					<span
 						className="innerScore"
+						onClick={() => navigate(`./${content.id}`)}
 						style={
 							content.score === 0
 								? { backgroundImage: `url(${neutralScore})` }

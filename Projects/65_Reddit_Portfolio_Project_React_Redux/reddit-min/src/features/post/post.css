@@ -38,17 +38,25 @@
 .boundryLeft {
 	position: absolute;
 	left: 0;
-	height: 100%;
+	height: 100vh;
 	width: 20vw;
 }
 .boundryRight {
 	position: absolute;
 	right: 0;
-	height: 100%;
+	height: 100vh;
 	width: 20vw;
 }
 .post.exclusive .flair {
 	border-radius: 0;
+}
+.postClickListen {
+	position: absolute;
+	width: 100%;
+	height: calc(100% - 43px);
+	left: 0;
+	top: 0;
+	z-index: 500;
 }
 
 /* Comment list style */

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
 	fetchFavorites,
 	selectFavHasError,
@@ -14,11 +14,13 @@ export function Favorites({ favorites }) {
 	const favsHaveError = useSelector(selectFavHasError);
 	useEffect(() => {
 		dispatch(fetchFavorites(favorites));
-	}, [dispatch, favorites]);
+	}, []);
+	const resultsRef = useRef(null);
 
 	return (
 		<>
-			{favorites.length === 0 && (
+			{" "}
+			{favorites.length === 0 && resultsRef.current?.childNodes.length === 1 && (
 				<div>
 					<h1 className="favHeader">
 						Welcome to <span style={{ color: "rgb(97, 48, 8)" }}>Man</span>
@@ -38,9 +40,10 @@ export function Favorites({ favorites }) {
 			{favsAreLoading ? (
 				<p className={"loading"}>Loading...</p>
 			) : (
-				favorites.length > 0 && <h1 className="favHeader">Favorites</h1>
+				resultsRef.current?.childNodes.length !== 1 && (
+					<h1 className="favHeader">Favorites</h1>
+				)
 			)}
-
 			{favsAreLoading && (
 				<div className="center">
 					<div className="lds-ring">
@@ -51,8 +54,7 @@ export function Favorites({ favorites }) {
 					</div>
 				</div>
 			)}
-
-			<ul className="subReddits favorites">
+			<ul className="subReddits favorites" ref={resultsRef}>
 				{fetchedFavorites.map((favorite, i) => (
 					<Subreddit content={favorite} tabIndex={i + 2} key={i} isFav={true} />
 				))}

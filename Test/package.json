@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "image-blob-reduce": "^4.1.0",
+    "pica": "^9.0.1"
+  }
+}
